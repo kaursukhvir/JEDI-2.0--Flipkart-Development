@@ -1,11 +1,12 @@
 package com.flipkart.client;
+import com.flipkart.bean.Role;
 import com.flipkart.business.UserService;
 
 import java.util.Scanner;
 
 public class MainApplicationClient {
 
-    private static Scanner scan = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
     private static UserService userService = new UserService();
     private static AdminClient admin = new AdminClient();
     private static CustomerClient customer = new CustomerClient();
@@ -13,15 +14,15 @@ public class MainApplicationClient {
 
 
 
-    private static void redirect(String role){
+    private static void redirect(Role role){
         switch (role){
-            case "Admin":
+            case ADMIN:
                 admin.adminMainPage();
                 break;
-            case "GymOwner":
+            case GYMOWNER:
                 gymOwner.gymOwnerMainPage();
                 break;
-            case "Customer":
+            case CUSTOMER:
                 customer.customerClientMainPage();
                 break;
 
@@ -31,15 +32,15 @@ public class MainApplicationClient {
     private static void login(){
 
         System.out.println("Enter your UserName");
-        String userName = scan.next();
+        String userName = scanner.next();
 
         System.out.println("Enter your Passkey");
-        String password = scan.next();
+        String password = scanner.next();
 
         if (userService.login()){
 //   we will extract the user role and call the respective mainPage right now we don't have DB we use default
-            String role = "Customer";
-            redirect(role);
+
+            redirect(Role.CUSTOMER);
         }
 
 
@@ -48,13 +49,13 @@ public class MainApplicationClient {
     private static void registration(){
 
         System.out.println("Enter your UserName");
-        String userName = scan.next();
+        String userName = scanner.next();
 
         System.out.println("Enter your Passkey");
-        String password = scan.next();
+        String password = scanner.next();
 
         System.out.println("Enter your role");
-        String role = scan.next();
+        Role role = Role.valueOf(scanner.next().toUpperCase());
 
         userService.register();
         redirect(role);
@@ -64,7 +65,7 @@ public class MainApplicationClient {
     public static void main(String[] args) {
 
         System.out.println("Login (1) and Registration (2)");
-        int choice = scan.nextInt();
+        int choice = scanner.nextInt();
 
         switch (choice){
             case 1:
