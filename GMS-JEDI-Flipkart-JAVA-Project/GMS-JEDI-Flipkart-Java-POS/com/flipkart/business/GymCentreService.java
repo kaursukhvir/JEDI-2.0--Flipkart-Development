@@ -11,7 +11,8 @@ public class GymCentreService {
         return new ArrayList<String>();
     }
 
-    public void requestCentreApproval(GymCentre gym){
+    public void requestCentreApproval(){
         // sends request to Admin for approval of a new centre
+        System.out.println("Successfully Sent Gym Centre Approval Request to Admin");
     }
 }
