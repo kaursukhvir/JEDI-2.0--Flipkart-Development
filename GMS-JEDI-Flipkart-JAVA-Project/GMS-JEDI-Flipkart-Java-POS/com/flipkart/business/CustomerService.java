@@ -27,18 +27,6 @@ public class CustomerService {
         return new Object();
     }
 
-    public Object register(){
-        //takes customer Object and returns true and redirects to customer home
-        System.out.println("customer registered successfully");
-        return new Object();
-    }
-
-    public Object login(){
-        //takes username and password, verifies role and redirects to customer home
-        System.out.println("customer logged in successfully");
-        return new Object();
-    }
-
     public Object bookSlot(){
         //book a slot if available
         System.out.println("slot booked successfully");

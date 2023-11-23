@@ -10,8 +10,6 @@ public class CustomerClient {
 
         CustomerService customerService  =  new CustomerService();
 
-        customerService.register();
-
         System.out.println("Get List of Gym Centres for a location -------");
         List<Object> gymCentreList = customerService.getAllGymCenterDetails();
 

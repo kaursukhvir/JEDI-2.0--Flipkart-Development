@@ -12,12 +12,6 @@ public class GymOwnerClient {
         GymOwnerService gymOwnerService = new GymOwnerService();
         GymCentreService gymCentre = new GymCentreService();
 
-        System.out.println("Registering Gym Owner -------");
-        gymOwnerService.register();
-
-        System.out.println("Logging in the Gym Owner -------");
-        gymOwnerService.login();
-
         System.out.println("Sending Gym Owner Approval Request -------");
         gymOwnerService.requestGymOwnerApproval();
 

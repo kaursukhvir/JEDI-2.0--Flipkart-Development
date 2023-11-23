@@ -1,6 +1,8 @@
 package com.flipkart.business;
 
 public class AdminService {
+
+
     public Object approveGymCenter(){
         //takes GymCenter Object as input and return boolean
         System.out.println("Approved/Rejected Gym Center: ");
@@ -25,9 +27,9 @@ public class AdminService {
         return new Object();
     }
 
-    public Object login(){
-        //takes username and password, verifies role and redirects to admin home
-        System.out.println("Successful login for Admin");
-        return new Object();
-    }
+//    public Object login(){
+//        //takes username and password, verifies role and redirects to admin home
+//        System.out.println("Successful login for Admin");
+//        return new Object();
+//    }
 }

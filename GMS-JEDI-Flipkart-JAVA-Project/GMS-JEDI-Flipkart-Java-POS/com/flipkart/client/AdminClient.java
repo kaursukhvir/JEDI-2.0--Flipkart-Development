@@ -7,17 +7,17 @@ public class AdminClient {
 
         AdminService adminService = new AdminService();
 
-        System.out.println("Admin logging in -------");
-        adminService.login();
-
         System.out.println("View Pending GymOwner approval requests --------");
         adminService.approveGymOwner();
 
         System.out.println("Admin Approval for a Gym Owner ----------");
         adminService.approveGymOwner();
 
-        System.out.println("View Pending GymCenter approval requests --------");
+        System.out.println("View Pending GymOwner's approval requests --------");
         adminService.viewPendingGymOwners();
+
+        System.out.println("View Pending GymCenter's approval requests --------");
+        adminService.viewPendingGymCenters();
 
         System.out.println("Admin Approval for a Gym Center ----------");
         adminService.approveGymCenter();
