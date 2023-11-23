@@ -1,29 +1,46 @@
 package com.flipkart.client;
-import java.time.LocalTime;
 
-import com.flipkart.bean.Slot;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
+import com.flipkart.business.SlotService;
+
+import static com.flipkart.client.MainApplicationClient.scanner;
+import static com.flipkart.constant.Constants.*;
 
 public class GymOwnerClient {
 
+    private GymOwnerService gymOwnerService = new GymOwnerService();
+    private SlotService slotService = new SlotService();
+    private GymCentreService gymCentre = new GymCentreService();
+
+
+
     public void gymOwnerMainPage() {
 
-        GymOwnerService gymOwnerService = new GymOwnerService();
-        GymCentreService gymCentre = new GymCentreService();
-
-        System.out.println("Sending Gym Owner Approval Request -------");
-        gymOwnerService.requestGymOwnerApproval();
-
-        System.out.println("Adding a new Gym Center -------");
-        gymOwnerService.addCenter();
-
-        System.out.println("Sending a Gym Centre Approval Request to Admin ------");
-        gymCentre.requestCentreApproval();
-
-        System.out.println("Adding a Slot to a Gym Centre ------");
-        Slot slots = new Slot("1", LocalTime.parse("03:18:23"));
-
+        while(true){
+            System.out.println("1. Sending Gym Owner Approval Request\n2. Add a new Gym Center\n3. Send a Gym Centre Approval Request to Admin\n4. Add Slots to a Gym Centre\n5. Go Back to Previous Menu");
+            int choice = scanner.nextInt();
+            switch (choice){
+                case 1:
+                    gymOwnerService.requestGymOwnerApproval();
+                    break;
+                case 2:
+                    gymOwnerService.addCenter();
+                    break;
+                case 3:
+                    gymCentre.requestCentreApproval();
+                    break;
+                case 4:
+                    slotService.addSlot();
+                    break;
+                case 5:
+                    System.out.println(PREVIOUS_MENU);
+                    return;
+                default:
+                    System.out.println(INVALID_CHOICE_ERROR);
+                    break;
+            }
+        }
     }
 
 }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerService {
-    public List<Object> getAllGymCenterDetails(){
+    public List<String> getAllGymCenterDetailsByLocation(String location){
         //takes City (Location) as input and returns List<GymCenter>
         System.out.println("Gym center details successfully sent");
-        return new ArrayList<Object>();
+        return new ArrayList<String>();
     }
 
     public List<Object> getAvailableSlots(){

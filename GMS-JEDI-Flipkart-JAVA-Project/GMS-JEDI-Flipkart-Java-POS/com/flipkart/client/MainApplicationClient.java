@@ -4,9 +4,11 @@ import com.flipkart.business.UserService;
 
 import java.util.Scanner;
 
+import static com.flipkart.constant.Constants.*;
+
 public class MainApplicationClient {
 
-    private static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     private static UserService userService = new UserService();
     private static AdminClient admin = new AdminClient();
     private static CustomerClient customer = new CustomerClient();
@@ -34,12 +36,14 @@ public class MainApplicationClient {
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
+        System.out.println("Enter your Email");
+        String email = scanner.next();
+
         System.out.println("Enter your Passkey");
         String password = scanner.next();
 
         if (userService.login(userName,password)){
 //   we will extract the user role and call the respective mainPage right now we don't have DB we use default
-
             redirect(Role.CUSTOMER);
         }
 
@@ -54,6 +58,9 @@ public class MainApplicationClient {
         System.out.println("Enter your Passkey");
         String password = scanner.next();
 
+        System.out.println("Enter your Email");
+        String email = scanner.next();
+
         System.out.println("Enter your role");
         Role role = Role.valueOf(scanner.next().toUpperCase());
 
@@ -63,33 +70,26 @@ public class MainApplicationClient {
     }
     
     public static void main(String[] args) {
+        System.out.println(WELCOME);
+        while(true) {
+            System.out.println("1. Login\n2. Registration\n3. Exit");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    login();
+                    break;
+                case 2:
+                    registration();
+                    break;
+                case 3:
+                    System.out.println(EXIT);
+                    return;
+                default:
+                    System.out.println(INVALID_CHOICE_ERROR);
+                    break;
+            }
 
-        System.out.println("Login (1) and Registration (2)");
-        int choice = scanner.nextInt();
-
-        switch (choice){
-            case 1:
-                login();
-                break;
-
-            case 2:
-                registration();
-                break;
         }
-//
-//        //ADMIN
-//        System.out.println("====================ADMIN====================");
-//
-//        admin.adminMainPage();
-//
-//        //CUSTOMER
-//        System.out.println("====================CUSTOMER====================");
-//        customer.customerClientMainPage();
-//
-//        //GYMOWNER
-//        System.out.println("====================GYMOWNER====================");
-//        gymOwner.gymOwnerMainPage();
-
 
     }
 }
