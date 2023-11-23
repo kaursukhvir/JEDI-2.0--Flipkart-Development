@@ -41,7 +41,7 @@ public class AdminClient {
     }
 
     public void adminMainPage(){
-
+        System.out.println("Welcome to the Admin Interface. Please select a choice: ");
         while(true){
             System.out.println("(1) View Pending GymOwner approval requests\n(2) View Pending GymCenter's approval requests\n(3) Exit Interface");
             int pendingChoice = scan.nextInt();
