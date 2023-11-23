@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Customer;
+
 public class CustomerService {
     public Object getAllGymCenterDetails(){
         //takes City (Location) as input and returns List<GymCenter>
