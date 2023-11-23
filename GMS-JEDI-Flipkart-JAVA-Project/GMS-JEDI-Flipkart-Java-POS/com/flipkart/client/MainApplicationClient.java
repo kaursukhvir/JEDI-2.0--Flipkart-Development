@@ -37,7 +37,7 @@ public class MainApplicationClient {
         System.out.println("Enter your Passkey");
         String password = scanner.next();
 
-        if (userService.login()){
+        if (userService.login(userName,password)){
 //   we will extract the user role and call the respective mainPage right now we don't have DB we use default
 
             redirect(Role.CUSTOMER);
