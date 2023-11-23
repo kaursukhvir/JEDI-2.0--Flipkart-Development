@@ -21,7 +21,7 @@ public class GymOwnerClient {
         System.out.println("Sending Gym Owner Approval Request -------");
         gymOwnerService.requestGymOwnerApproval();
 
-        System.out.println("Adding a new Gym Center");
+        System.out.println("Adding a new Gym Center -------");
         gymOwnerService.addCenter();
 
         System.out.println("Sending a Gym Centre Approval Request to Admin ------");
