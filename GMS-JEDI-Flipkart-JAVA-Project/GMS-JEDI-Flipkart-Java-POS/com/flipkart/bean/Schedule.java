@@ -5,16 +5,15 @@ import java.util.Date;
 public class Schedule {
 
     private String scheduleID;
-
     private Date date;
     private String slotID;
-    private int availablilty;
+    private int availability;
 
-    public Schedule(String scheduleID, Date date, String slotID, int availablilty) {
+    public Schedule(String scheduleID, Date date, String slotID, int availability) {
         this.scheduleID = scheduleID;
         this.date = date;
         this.slotID = slotID;
-        this.availablilty = availablilty;
+        this.availability = availability;
     }
 
     public String getScheduleID() {
@@ -41,12 +40,12 @@ public class Schedule {
         this.slotID = slotID;
     }
 
-    public int getAvailablilty() {
-        return availablilty;
+    public int getAvailability() {
+        return availability;
     }
 
-    public void setAvailablilty(int availablilty) {
-        this.availablilty = availablilty;
+    public void setAvailability(int availability) {
+        this.availability = availability;
     }
 
 
