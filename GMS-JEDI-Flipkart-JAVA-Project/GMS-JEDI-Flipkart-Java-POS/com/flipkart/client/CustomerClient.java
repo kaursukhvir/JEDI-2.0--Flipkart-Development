@@ -18,7 +18,9 @@ public class CustomerClient {
         List<GymCentre> ListgymCentre = (List<GymCentre>) customerService.getAllGymCenterDetails();
 
         System.out.println("Get All available slots");
-        List<Slot> Slot = (List<GymCentre>) customerService.getAllGymCenterDetails();
+        List<Slot> Slot = (List<Slot>) customerService.getAvailableSlots();
+
+
 
 
         customerService.getAllGymCenterDetails();
