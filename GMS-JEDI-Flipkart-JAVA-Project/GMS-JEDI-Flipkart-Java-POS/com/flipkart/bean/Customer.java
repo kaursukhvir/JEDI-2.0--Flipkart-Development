@@ -3,12 +3,12 @@ package com.flipkart.bean;
 public class Customer extends User{
 
     private String customerPhone;
-    private String customerEmail;
+    private String cardDetails;
 
-    public Customer(String userName,String customerPhone, String customerEmail) {
+    public Customer(String userName,String customerPhone, String cardDetails) {
         super(userName);
         this.customerPhone = customerPhone;
-        this.customerEmail = customerEmail;
+        this.cardDetails = cardDetails;
     }
 
     public String getCustomerPhone() {
@@ -19,14 +19,7 @@ public class Customer extends User{
         this.customerPhone = customerPhone;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
+    public String getCardDetails() { return cardDetails; }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-
-
+    public void setCardDetails(String cardDetails) { this.cardDetails = cardDetails; }
 }

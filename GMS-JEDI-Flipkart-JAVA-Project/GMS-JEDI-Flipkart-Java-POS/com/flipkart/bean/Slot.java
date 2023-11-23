@@ -1,14 +1,13 @@
 package com.flipkart.bean;
 
 import java.time.LocalTime;
-import java.util.Date;
 
-public class Slots {
+public class Slot {
     private String slotId;
     private String centreID;
     private LocalTime time;
 
-    public Slots( String centreID, LocalTime time) {
+    public Slot(String centreID, LocalTime time) {
         this.centreID = centreID;
         this.time = time;
     }

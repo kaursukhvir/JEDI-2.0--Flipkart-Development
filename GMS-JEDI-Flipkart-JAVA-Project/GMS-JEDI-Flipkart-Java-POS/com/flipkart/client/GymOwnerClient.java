@@ -1,7 +1,7 @@
 package com.flipkart.client;
 import java.time.LocalTime;
-import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.Slots;
+
+import com.flipkart.bean.Slot;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
 
@@ -28,7 +28,7 @@ public class GymOwnerClient {
         gymCentre.requestCentreApproval();
 
         System.out.println("Adding a Slot to a Gym Centre ------");
-        Slots slots = new Slots("1", LocalTime.parse("03:18:23"));
+        Slot slots = new Slot("1", LocalTime.parse("03:18:23"));
 
     }
 

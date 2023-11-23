@@ -2,14 +2,16 @@ package com.flipkart.bean;
 
 import java.util.List;
 
-public class GymOwner extends User{
+public class GymOwner extends User {
     private String panNumber;
-    private List<String> gymCeterIDs;
+    private List<String> gymCentreIDs;
+    private String cardDetails;
 
-    public GymOwner(String userName, String panNumber, List<String> gymCeterIDs) {
+    public GymOwner(String userName, String panNumber, List<String> gymCentreIDs, String cardDetails) {
         super(userName);
         this.panNumber = panNumber;
-        this.gymCeterIDs = gymCeterIDs;
+        this.gymCentreIDs = gymCentreIDs;
+        this.cardDetails = cardDetails;
     }
 
     public String getPanNumber() {
@@ -20,14 +22,15 @@ public class GymOwner extends User{
         this.panNumber = panNumber;
     }
 
-    public List<String> getGymCeterIDs() {
-        return gymCeterIDs;
+    public List<String> getGymCentreIDs() {
+        return gymCentreIDs;
     }
 
-    public void setGymCeterIDs(List<String> gymCeterIDs) {
-        this.gymCeterIDs = gymCeterIDs;
+    public void setGymCentreIDs(List<String> gymCentreIDs) {
+        this.gymCentreIDs = gymCentreIDs;
     }
 
+    public String getCardDetails() { return cardDetails; }
 
-
+    public void setCardDetails(String cardDetails) { this.cardDetails = cardDetails; }
 }

@@ -10,16 +10,16 @@ public class MainApplicationClient {
         CustomerClient customer = new CustomerClient();
         GymOwnerClient gymOwner = new GymOwnerClient();
 
-//        ADMIN
+        //ADMIN
         System.out.println("====================ADMIN====================");
 
         admin.adminMainPage();
 
-        //        CUSTOMER
+        //CUSTOMER
         System.out.println("====================CUSTOMER====================");
         customer.customerClientMainPage();
 
-//        GYMOWNER
+        //GYMOWNER
         System.out.println("====================GYMOWNER====================");
         gymOwner.gymOwnerMainPage();
 

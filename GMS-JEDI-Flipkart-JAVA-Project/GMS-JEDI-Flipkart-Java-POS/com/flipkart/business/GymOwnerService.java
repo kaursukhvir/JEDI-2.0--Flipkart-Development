@@ -9,7 +9,7 @@ public class GymOwnerService {
     public GymOwner register(){
         //takes gymowner Object and returns true and redirects to gymowner home
         System.out.println("Gym Owner successfully registered");
-        return new GymOwner("John Doe", "1234", new ArrayList<>());
+        return new GymOwner("John Doe", "1234", new ArrayList<>(),"1234");
     }
 
     public Object login(){

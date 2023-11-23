@@ -1,8 +1,5 @@
 package com.flipkart.business;
 
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Slots;
-
 import java.util.ArrayList;
 import java.util.List;
 
