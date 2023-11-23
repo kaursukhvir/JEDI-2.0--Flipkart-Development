@@ -1,5 +1,7 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Role;
+
 public class AdminService {
 
 
@@ -27,9 +29,9 @@ public class AdminService {
         return new Object();
     }
 
-//    public Object login(){
-//        //takes username and password, verifies role and redirects to admin home
-//        System.out.println("Successful login for Admin");
-//        return new Object();
-//    }
+    public Object addAdmin(String userName, String email, String password, Role role){
+        //takes username and password, verifies role and redirects to admin home
+        System.out.println("Successful login for Admin");
+        return new Object();
+    }
 }
