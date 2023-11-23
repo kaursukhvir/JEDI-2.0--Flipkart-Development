@@ -7,8 +7,8 @@ public class GymOwner extends User {
     private List<String> gymCentreIDs;
     private String cardDetails;
 
-    public GymOwner(String userName, String panNumber, List<String> gymCentreIDs, String cardDetails) {
-        super(userName);
+    public GymOwner(String userName, String email, String password, Role role, String panNumber, List<String> gymCentreIDs, String cardDetails) {
+        super(userName, email, password, role);
         this.panNumber = panNumber;
         this.gymCentreIDs = gymCentreIDs;
         this.cardDetails = cardDetails;
