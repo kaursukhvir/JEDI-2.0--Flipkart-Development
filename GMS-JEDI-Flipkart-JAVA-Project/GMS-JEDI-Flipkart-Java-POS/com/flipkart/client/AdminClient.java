@@ -3,7 +3,7 @@ package com.flipkart.client;
 import com.flipkart.business.AdminService;
 
 public class AdminClient {
-    public static void mainPage(){
+    public void adminMainPage(){
 
         AdminService adminService = new AdminService();
 

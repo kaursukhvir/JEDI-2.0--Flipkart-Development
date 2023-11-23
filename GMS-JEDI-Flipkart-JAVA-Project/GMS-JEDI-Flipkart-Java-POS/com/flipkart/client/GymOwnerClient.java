@@ -7,7 +7,7 @@ import com.flipkart.business.GymOwnerService;
 
 public class GymOwnerClient {
 
-    public static void main(String[] args) {
+    public void gymOwnerMainPage() {
 
         GymOwnerService gymOwnerService = new GymOwnerService();
         GymCentreService gymCentre = new GymCentreService();

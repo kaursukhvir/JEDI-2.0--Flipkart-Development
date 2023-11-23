@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CustomerClient {
 
-    public static void main(String[] args) {
+    public void customerClientMainPage() {
 
         CustomerService customerService  =  new CustomerService();
 
