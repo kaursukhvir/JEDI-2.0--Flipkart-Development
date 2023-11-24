@@ -9,12 +9,15 @@ public class GymCentre {
     private String ownerID;
     private String city;
     private int capacity;
+    private boolean isApproved;
+    public GymCentre() {}
 
     public GymCentre( String gymCenterName, String ownerID, String city, int capacity) {
         this.gymCenterName = gymCenterName;
         this.ownerID = ownerID;
         this.city = city;
         this.capacity = capacity;
+        this.isApproved = false;
     }
 
     public String getGymCentreID() {
@@ -41,4 +44,27 @@ public class GymCentre {
         this.capacity = capacity;
     }
 
+    public String getGymCenterName() {
+        return gymCenterName;
+    }
+
+    public void setGymCenterName(String gymCenterName) {
+        this.gymCenterName = gymCenterName;
+    }
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    public void setOwnerID(String ownerID) {
+        this.ownerID = ownerID;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }
