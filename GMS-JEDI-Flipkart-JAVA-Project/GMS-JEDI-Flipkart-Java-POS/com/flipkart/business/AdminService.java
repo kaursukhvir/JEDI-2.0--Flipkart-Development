@@ -1,9 +1,18 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.AdminDAO;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Role;
+
+import java.util.List;
 
 public class AdminService {
 
+    AdminDAO adminDAO  = new AdminDAO();
+
+    private List<GymOwner> pendinGymOwnerList = adminDAO.getPendingGymOwners();
+    private List<GymCentre> pendinGymCentreList = adminDAO.getPendingGymCentres();
 
     public Object approveGymCenter(){
         //takes GymCenter Object as input and return boolean
@@ -17,24 +26,24 @@ public class AdminService {
         return new Object();
     }
 
-    public Object viewPendingGymCenters(){
+    public List<GymCentre> viewPendingGymCentres(){
         //views all pending requests
-        System.out.println("Viewing pending Gym Center Approvals: ");
-        return new Object();
+        //System.out.println("Viewing pending Gym Center Approvals: ");
+        return pendinGymCentreList;
     }
 
-    public Object viewPendingGymOwners(){
+    public List<GymOwner> viewPendingGymOwners(){
         //views all pending requests
         System.out.println("Viewing pending Gym Owner Approvals: ");
-        return new Object();
+        return pendinGymOwnerList;
     }
 
-    public Object addAdmin(String userName, String email, String password, Role role){
-        //takes username and password, verifies role and redirects to admin home
-        System.out.println("Successful login for Admin");
-        return new Object();
-    }
+//    public Object addAdmin(String userName, String email, String password, Role role){
+//        //takes username and password, verifies role and redirects to admin home
+//        System.out.println("Successful login for Admin");
+//        return new Object();
+//    }
 
-    public void registerAdmin(String userName, String password, String email) {
-    }
+//    public void registerAdmin(String userName, String password, String email) {
+//    }
 }
