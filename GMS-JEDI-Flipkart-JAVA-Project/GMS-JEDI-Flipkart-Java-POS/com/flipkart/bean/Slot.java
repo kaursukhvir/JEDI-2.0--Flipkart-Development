@@ -7,9 +7,17 @@ public class Slot {
     private String centreID;
     private LocalTime time;
 
-    public Slot(String centreID, LocalTime time) {
+    public Slot(String slotId, String centreID, LocalTime time) {
         this.centreID = centreID;
         this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Slot{" +
+                "slotId='" + slotId + '\'' +
+                ", time=" + time +
+                '}';
     }
 
     public String getSlotId() {

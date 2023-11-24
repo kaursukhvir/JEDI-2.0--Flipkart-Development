@@ -1,24 +1,26 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CustomerService {
 
     private CustomerDAO customerDAO = new CustomerDAO();
+    private GymCentreService gymCentreService = new GymCentreService();
 
-    public List<String> getAllGymCenterDetailsByLocation(String location){
+    public List<GymCentre> getAllGymCenterDetailsByLocation(String city){
         //takes City (Location) as input and returns List<GymCenter>
-        System.out.println("Gym center details successfully sent");
-        return new ArrayList<String>();
+        return gymCentreService.getCentresByCity(city);
     }
 
-    public List<Object> getAvailableSlots(){
+    public List<Slot> getAvailableSlots(String centreID, Date date){
         //takes centerID and date for input and returns List<Slot>
-        System.out.println("Available slots successfully sent");
-        return new ArrayList<Object>();
+        return gymCentreService.getAvailableSlotsByCentreAndDate(centreID,date);
     }
 
     public List<Object> getCustomerBookings(){
@@ -32,9 +34,9 @@ public class CustomerService {
         return new Object();
     }
 
-    public Object bookSlot(){
+    public Object bookSlot(String SlotId){
         //book a slot if available
-        System.out.println("slot booked successfully");
+
         return new Object();
     }
 

@@ -1,6 +1,5 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
@@ -42,7 +41,7 @@ public class GymOwnerClient {
                     System.out.println("Enter Gym Centre capacity: ");
                     int capacity = scanner.nextInt();
 
-                    gymCentreService.addCenter(new GymCentre(gymCentreName, gymOwnerId, city, capacity));
+//                    gymCentreService.addCenter(new GymCentre(gymCentreName, gymOwnerId, city, capacity));
                     break;
 
                 case 3:
@@ -60,7 +59,7 @@ public class GymOwnerClient {
                     System.out.println("Enter time in 24h format (hh:mm:ss) : ");
                     String time = scanner.next();
 
-                    slotService.addSlot(new Slot(centreId, LocalTime.parse(time)));
+                    slotService.addSlot(new Slot(, centreId, LocalTime.parse(time)));
                     break;
                 case 5:
                     System.out.println(PREVIOUS_MENU_MESSAGE);

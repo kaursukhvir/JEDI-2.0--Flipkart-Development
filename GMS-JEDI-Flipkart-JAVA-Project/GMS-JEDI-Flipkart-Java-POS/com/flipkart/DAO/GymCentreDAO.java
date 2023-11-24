@@ -8,16 +8,16 @@ import java.util.List;
 
 public class GymCentreDAO {
 
-    List<GymCentre> gymCentreList = new ArrayList<>();
-    List<GymCentre> pendingGymCentreList = new ArrayList<>();
+    private static List<GymCentre>  gymCentreList = new ArrayList<>();
+    private static List<GymCentre>  pendingGymCentreList = new ArrayList<>();
 
     public GymCentreDAO() {
 
-        GymCentre gym1 = new GymCentre("cultfit", "1", "Bangalore", 10);
-        GymCentre gym2 = new GymCentre("gold's", "1", "Bangalore", 10);
-        GymCentre gym3 = new GymCentre("jimmy", "2", "Delhi", 12);
-        GymCentre gym4 = new GymCentre("shimmy", "2", "Delhi", 12);
-        GymCentre gym5 = new GymCentre("brimmy", "3", "Pune", 15);
+        GymCentre gym1 = new GymCentre("gym1","cultfit", "1", "Bangalore", 10);
+        GymCentre gym2 = new GymCentre("gym2","gold's", "1", "Bangalore", 10);
+        GymCentre gym3 = new GymCentre("gym3","jimmy", "2", "Delhi", 12);
+        GymCentre gym4 = new GymCentre("gym4","shimmy", "2", "Delhi", 12);
+        GymCentre gym5 = new GymCentre("gym5","brimmy", "3", "Pune", 15);
 
         gymCentreList.add(gym1);
         gymCentreList.add(gym2);
@@ -74,5 +74,15 @@ public class GymCentreDAO {
                 break;
             }
         }
+    }
+
+    public List<GymCentre> getGymCentreListByCity(String city) {
+        List<GymCentre> allCentreByCity = new ArrayList<>();
+        for(GymCentre gymCentre: gymCentreList){
+            if(gymCentre.getCity().equals(city)){
+                allCentreByCity.add(gymCentre);
+            }
+        }
+        return allCentreByCity;
     }
 }

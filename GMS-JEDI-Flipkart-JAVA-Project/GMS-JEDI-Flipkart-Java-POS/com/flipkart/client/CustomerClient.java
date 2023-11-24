@@ -1,6 +1,14 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
+import com.flipkart.utils.util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
 import static com.flipkart.constant.Constants.INVALID_CHOICE_ERROR;
@@ -32,8 +40,29 @@ public class CustomerClient {
     private void bookSlotSubMenu(){
         System.out.println("Provide Location to search :");
         String location = scanner.next();
-        customerService.getAllGymCenterDetailsByLocation(location);
-//        User Screen will have all the centres listed
+        List<GymCentre> centreListByLocation = customerService.getAllGymCenterDetailsByLocation(location);
+
+        util.printList(centreListByLocation);
+        System.out.print("Choose a gymCentre ID to proceed:");
+        String chosenGym = scanner.next();
+
+        System.out.print("Enter Date (dd/MM/yyyy): ");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = sdf.parse(scanner.next());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("Choose from the Below Slots");
+        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,date);
+        util.printList(availableSlots);
+        System.out.println("Enter SlotID");
+        String slotID = scanner.next();
+
+        customerService.bookSlot(slotID);
+
     }
 
     private void bookingsSubMenu(){

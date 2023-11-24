@@ -1,11 +1,18 @@
 package com.flipkart.business;
 
-import java.time.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Schedule;
+import com.flipkart.bean.Slot;
 
 public class ScheduleService {
+
+    private GymCentreService gymCentreService = new GymCentreService();
+    private SlotService slotService = new SlotService();
+    private ScheduleDAO scheduleDAO = new ScheduleDAO();
 
     public void createSchedule(){
         //creates a new schedule
@@ -25,8 +32,22 @@ public class ScheduleService {
         // increment or decrement availability based on action
     }
 
-    public boolean checkAvailability(){
-        //check whether there is a seat or not in current schedule
-        return true;
+    public boolean checkAvailability(String centreID, Date date){
+        return  true;
+    }
+
+    public List<Slot> getAllAvailableSlotsByDate(String centreID, Date date) {
+        List<Slot> allSlotsOfThatCentre = slotService.getAllSlotsByCentre(centreID);
+        List<Slot> response = slotService.getAllSlotsByCentre(centreID);
+        for(Slot slot: allSlotsOfThatCentre){
+            for(Schedule schedule: scheduleDAO.getAllScheduleByDate(date)){
+                if (slotService.getSlotByID(schedule.getSlotID()).getCentreID().equals(centreID)){
+                    if(schedule.getAvailability() <= 0){
+                        response.remove(slot);
+                    }
+                }
+            }
+        }
+        return response;
     }
 }

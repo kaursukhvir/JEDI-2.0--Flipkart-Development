@@ -12,7 +12,18 @@ public class GymCentre {
     private boolean isApproved;
     public GymCentre() {}
 
-    public GymCentre( String gymCenterName, String ownerID, String city, int capacity) {
+    @Override
+    public String toString() {
+        return "GymCentre{" +
+                "gymCentreID='" + gymCentreID + '\'' +
+                ", gymCenterName='" + gymCenterName + '\'' +
+                ", ownerID='" + ownerID + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+
+    public GymCentre(String gymCentreID, String gymCenterName, String ownerID, String city, int capacity) {
+        this.gymCentreID = gymCentreID;
         this.gymCenterName = gymCenterName;
         this.ownerID = ownerID;
         this.city = city;

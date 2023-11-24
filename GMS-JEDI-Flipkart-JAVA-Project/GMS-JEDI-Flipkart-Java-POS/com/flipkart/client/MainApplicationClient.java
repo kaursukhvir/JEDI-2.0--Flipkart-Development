@@ -10,23 +10,22 @@ public class MainApplicationClient {
 
     public static Scanner scanner = new Scanner(System.in);
     private static UserService userService = new UserService();
-    private static AdminClient admin = new AdminClient();
-    private static CustomerClient customer = new CustomerClient();
-    private static GymOwnerClient gymOwner = new GymOwnerClient();
+    private static AdminClient adminClient = new AdminClient();
+    private static CustomerClient customerClient = new CustomerClient();
+    private static GymOwnerClient gymOwnerClient = new GymOwnerClient();
 
 
 
     private static void redirect(Role role){
         switch (role){
             case ADMIN:
-                admin.adminMainPage();
+                adminClient.adminMainPage();
                 break;
             case GYMOWNER:
-                // populate with real id later
-                gymOwner.gymOwnerMainPage("dummy id");
+//                gymOwnerClient.gymOwnerMainPage();
                 break;
             case CUSTOMER:
-                customer.customerClientMainPage();
+                customerClient.customerClientMainPage();
                 break;
 
         }
@@ -55,13 +54,13 @@ public class MainApplicationClient {
 
         switch (role){
             case ADMIN:
-                admin.register();
+                adminClient.register();
                 break;
             case CUSTOMER:
-                customer.register();
+                customerClient.register();
                 break;
             case GYMOWNER:
-                gymOwner.register();
+                gymOwnerClient.register();
                 break;
             default:
                 System.out.println(INVALID_CHOICE_ERROR);
