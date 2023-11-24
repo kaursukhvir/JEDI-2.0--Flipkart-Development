@@ -21,7 +21,9 @@ public class GymOwnerDAO {
         gymOwnerList.add(owner1);
         gymOwnerList.add(owner2);
         gymOwnerList.add(owner3);
-
+        pendingGymOwnerList.add(owner1);
+        pendingGymOwnerList.add(owner2);
+        pendingGymOwnerList.add(owner3);
     }
     public List<GymOwner> getGymOwnerList() {
         return gymOwnerList;
@@ -31,7 +33,7 @@ public class GymOwnerDAO {
         this.gymOwnerList = gymOwnerList;
     }
 
-    public void addGymOwner(GymOwner gymOwner){
+    public void registerGymOwner(GymOwner gymOwner){
         this.gymOwnerList.add(gymOwner);
     }
 

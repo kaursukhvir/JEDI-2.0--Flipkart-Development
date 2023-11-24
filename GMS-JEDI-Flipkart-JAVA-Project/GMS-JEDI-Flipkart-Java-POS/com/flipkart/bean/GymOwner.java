@@ -6,7 +6,6 @@ public class GymOwner extends User {
     private String panNumber;
     private List<String> gymCentreIDs;
     private String cardDetails;
-
     private boolean isApproved;
 
     public GymOwner(String userName, String email, String password, Role role, String panNumber, String cardDetails) {
