@@ -1,13 +1,9 @@
 package com.flipkart.client;
 
-import com.flipkart.bean.GymCentre;
-import com.flipkart.bean.Slot;
+import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.bean.Customer;
 import com.flipkart.business.CustomerService;
-import com.flipkart.utils.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
@@ -16,7 +12,26 @@ import static com.flipkart.constant.Constants.PREVIOUS_MENU_MESSAGE;
 
 public class CustomerClient {
     private CustomerService customerService  =  new CustomerService();
+    private List<Customer> customerList = new CustomerDAO().getCustomerList();
 
+    public boolean isUserValid(String userName, String password, List<Customer> customerList) {
+        for(Customer c:customerList) {
+            if (userName.equals(c.getUserName()) && password.equals(c.getPassword())) return true;
+        }
+        return false;
+    }
+
+    public boolean customerLogin(String userName, String password) {
+        System.out.println("HELLO in customer");
+        if (isUserValid(userName, password,customerList)) {
+            System.out.println("Successfully logged in");
+            customerClientMainPage();
+        }
+        else{
+            System.out.println("UserName or password doesn't match");
+            return false;
+        }
+        return true;
 
     public void register(){
         System.out.println("Enter your UserName");
@@ -35,6 +50,7 @@ public class CustomerClient {
         String cardNumber = scanner.next();
 
         customerService.registerCustomer(userName,password,email,phoneNumber,cardNumber);
+        customerClientMainPage();
     }
 
     private void bookSlotSubMenu(){
