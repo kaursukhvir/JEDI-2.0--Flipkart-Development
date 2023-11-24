@@ -34,7 +34,7 @@ public class GymOwnerClient {
                     slotService.addSlot();
                     break;
                 case 5:
-                    System.out.println(PREVIOUS_MENU);
+                    System.out.println(PREVIOUS_MENU_MESSAGE);
                     return;
                 default:
                     System.out.println(INVALID_CHOICE_ERROR);
@@ -43,4 +43,7 @@ public class GymOwnerClient {
         }
     }
 
+    public void register() {
+
+    }
 }

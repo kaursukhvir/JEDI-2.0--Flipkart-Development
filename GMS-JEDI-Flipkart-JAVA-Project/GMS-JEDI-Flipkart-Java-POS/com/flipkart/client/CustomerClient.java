@@ -4,10 +4,30 @@ import com.flipkart.business.CustomerService;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
 import static com.flipkart.constant.Constants.INVALID_CHOICE_ERROR;
-import static com.flipkart.constant.Constants.PREVIOUS_MENU;
+import static com.flipkart.constant.Constants.PREVIOUS_MENU_MESSAGE;
 
 public class CustomerClient {
     private CustomerService customerService  =  new CustomerService();
+
+
+    public void register(){
+        System.out.println("Enter your UserName");
+        String userName = scanner.next();
+
+        System.out.println("Enter your Passkey");
+        String password = scanner.next();
+
+        System.out.println("Enter your Email");
+        String email = scanner.next();
+
+        System.out.println("Enter your Phone Number");
+        String phoneNumber = scanner.next();
+
+        System.out.println("Enter your Card Number");
+        String cardNumber = scanner.next();
+
+        customerService.registerCustomer(userName,password,email,phoneNumber,cardNumber);
+    }
 
     private void bookSlotSubMenu(){
         System.out.println("Provide Location to search :");
@@ -46,7 +66,7 @@ public class CustomerClient {
                     cancelBookingSubMenu();
                     break;
                 case 4:
-                    System.out.println(PREVIOUS_MENU);
+                    System.out.println(PREVIOUS_MENU_MESSAGE);
                     return;
                 default:
                     System.out.println(INVALID_CHOICE_ERROR);

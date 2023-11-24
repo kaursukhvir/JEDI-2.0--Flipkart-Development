@@ -36,9 +36,6 @@ public class MainApplicationClient {
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
-        System.out.println("Enter your Email");
-        String email = scanner.next();
-
         System.out.println("Enter your Passkey");
         String password = scanner.next();
 
@@ -52,25 +49,28 @@ public class MainApplicationClient {
     
     private static void registration(){
 
-        System.out.println("Enter your UserName");
-        String userName = scanner.next();
-
-        System.out.println("Enter your Passkey");
-        String password = scanner.next();
-
-        System.out.println("Enter your Email");
-        String email = scanner.next();
-
         System.out.println("Enter your role");
         Role role = Role.valueOf(scanner.next().toUpperCase());
 
-        userService.register();
+        switch (role){
+            case ADMIN:
+                admin.register();
+                break;
+            case CUSTOMER:
+                customer.register();
+                break;
+            case GYMOWNER:
+                gymOwner.register();
+                break;
+            default:
+                System.out.println(INVALID_CHOICE_ERROR);
+        }
         redirect(role);
 
     }
     
     public static void main(String[] args) {
-        System.out.println(WELCOME);
+        System.out.println(WELCOME_MESSAGE);
         while(true) {
             System.out.println("1. Login\n2. Registration\n3. Exit");
             int choice = scanner.nextInt();
@@ -82,7 +82,7 @@ public class MainApplicationClient {
                     registration();
                     break;
                 case 3:
-                    System.out.println(EXIT);
+                    System.out.println(EXIT_MESSAGE);
                     return;
                 default:
                     System.out.println(INVALID_CHOICE_ERROR);

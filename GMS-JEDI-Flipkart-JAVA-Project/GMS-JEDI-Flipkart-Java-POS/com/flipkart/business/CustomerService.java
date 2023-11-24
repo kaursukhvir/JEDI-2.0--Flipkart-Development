@@ -1,9 +1,14 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.CustomerDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerService {
+
+    private CustomerDAO customerDAO = new CustomerDAO();
+
     public List<String> getAllGymCenterDetailsByLocation(String location){
         //takes City (Location) as input and returns List<GymCenter>
         System.out.println("Gym center details successfully sent");
@@ -37,5 +42,9 @@ public class CustomerService {
         //cancel a booking
         System.out.println("cancelled booking successfully");
         return new Object();
+    }
+
+    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) {
+        customerDAO.registerCustomer(userName,password,email,phoneNumber,cardNumber);
     }
 }

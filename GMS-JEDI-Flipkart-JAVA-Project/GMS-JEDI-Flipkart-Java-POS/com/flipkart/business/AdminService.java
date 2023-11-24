@@ -34,4 +34,7 @@ public class AdminService {
         System.out.println("Successful login for Admin");
         return new Object();
     }
+
+    public void registerAdmin(String userName, String password, String email) {
+    }
 }
