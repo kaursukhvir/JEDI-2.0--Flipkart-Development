@@ -10,7 +10,7 @@ public class GymCentre {
     private String city;
     private int capacity;
     private boolean isApproved;
-    public GymCentre() {}
+
 
     @Override
     public String toString() {

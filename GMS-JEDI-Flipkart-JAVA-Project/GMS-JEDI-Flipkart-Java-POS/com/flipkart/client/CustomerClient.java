@@ -2,8 +2,14 @@ package com.flipkart.client;
 
 import com.flipkart.DAO.CustomerDAO;
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
+import com.flipkart.utils.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
@@ -23,15 +29,15 @@ public class CustomerClient {
 
     public boolean customerLogin(String userName, String password) {
         System.out.println("HELLO in customer");
-        if (isUserValid(userName, password,customerList)) {
+        if (isUserValid(userName, password, customerList)) {
             System.out.println("Successfully logged in");
             customerClientMainPage();
-        }
-        else{
+        } else {
             System.out.println("UserName or password doesn't match");
             return false;
         }
         return true;
+    }
 
     public void register(){
         System.out.println("Enter your UserName");

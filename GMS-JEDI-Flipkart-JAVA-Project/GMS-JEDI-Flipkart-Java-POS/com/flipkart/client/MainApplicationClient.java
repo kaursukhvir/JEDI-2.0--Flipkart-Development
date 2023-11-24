@@ -63,18 +63,15 @@ public class MainApplicationClient {
         System.out.println("Enter your Passkey");
         String password = scanner.next();
 
-
-//   we will extract the user role and call the respective mainPage right now we don't have DB we use default
-            //redirect(Role.CUSTOMER);
             switch (role){
                 case ADMIN:
-                    admin.adminLogin(userName,password);
+                    adminClient.adminLogin(userName,password);
                     break;
                 case GYMOWNER:
-                    gymOwner.gymOwnerLogin(userName,password);
+                    gymOwnerClient.gymOwnerLogin(userName,password);
                     break;
                 case CUSTOMER:
-                    customer.customerLogin(userName,password);
+                    customerClient.customerLogin(userName,password);
                     break;
 
             }

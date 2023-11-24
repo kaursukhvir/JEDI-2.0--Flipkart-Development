@@ -55,7 +55,6 @@ public class GymOwnerClient {
 
     public void gymOwnerClientMainPage() {
 
-
         while(true){
             System.out.println("1. Sending Gym Owner Approval Request\n2. Add a new Gym Center\n3. Send a Gym Centre Approval Request to Admin\n4. Add Slots to a Gym Centre\n5. Go Back to Previous Menu");
             int choice = scanner.nextInt();
@@ -94,7 +93,7 @@ public class GymOwnerClient {
                     System.out.println("Enter time in 24h format (hh:mm:ss) : ");
                     String time = scanner.next();
 
-                    slotService.addSlot(new Slot(, centreId, LocalTime.parse(time)));
+                    slotService.addSlot(new Slot("slot8", centreId, LocalTime.parse(time)));
                     break;
                 case 5:
                     System.out.println(PREVIOUS_MENU_MESSAGE);
