@@ -39,6 +39,14 @@ public class GymOwnerDAO {
         return pendingGymOwnerList;
     }
 
+    public void sendOwnerApprovalRequest(String gymOwnerId){
+        for( GymOwner gymOwner : gymOwnerList ){
+            if(gymOwner.getUserID().equals(gymOwnerId)){
+                pendingGymOwnerList.add(gymOwner);
+                break;
+            }
+        }
+    }
     public void setPendingGymOwnerList(List<GymOwner> pendingGymOwnerList) {
         this.pendingGymOwnerList = pendingGymOwnerList;
     }

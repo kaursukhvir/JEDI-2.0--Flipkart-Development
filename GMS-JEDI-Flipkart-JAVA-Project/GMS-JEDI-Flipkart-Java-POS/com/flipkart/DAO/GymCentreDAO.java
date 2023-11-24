@@ -66,4 +66,13 @@ public class GymCentreDAO {
             }
         }
     }
+
+    public void sendCentreApprovalRequest(String gymCentreId){
+        for( GymCentre gymCentre : gymCentreList ){
+            if(gymCentre.getGymCentreID().equals(gymCentreId)){
+                pendingGymCentreList.add(gymCentre);
+                break;
+            }
+        }
+    }
 }

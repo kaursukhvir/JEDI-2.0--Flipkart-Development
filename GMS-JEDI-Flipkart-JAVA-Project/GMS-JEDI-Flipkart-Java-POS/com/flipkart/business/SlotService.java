@@ -1,8 +1,17 @@
 package com.flipkart.business;
 
+import com.flipkart.DAO.SlotDAO;
+import com.flipkart.bean.Slot;
+
 public class SlotService {
 
-    public void addSlot(){
-        //adds a new slot to particular centre
+    private static SlotDAO slotDAO = new SlotDAO();
+
+    public void addSlot(Slot slot){
+        slotDAO.addSlot(slot);
     }
+
+
+
+
 }

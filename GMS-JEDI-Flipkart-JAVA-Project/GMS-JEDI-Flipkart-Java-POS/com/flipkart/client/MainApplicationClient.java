@@ -22,7 +22,8 @@ public class MainApplicationClient {
                 admin.adminMainPage();
                 break;
             case GYMOWNER:
-                gymOwner.gymOwnerMainPage();
+                // populate with real id later
+                gymOwner.gymOwnerMainPage("dummy id");
                 break;
             case CUSTOMER:
                 customer.customerClientMainPage();
