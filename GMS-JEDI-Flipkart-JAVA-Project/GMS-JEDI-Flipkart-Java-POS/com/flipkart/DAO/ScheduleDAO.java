@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ScheduleDAO {
+public class ScheduleDAO implements ScheduleInterfaceDAO {
 
     private ArrayList<Schedule> schedulesCollection = new ArrayList<>();
 

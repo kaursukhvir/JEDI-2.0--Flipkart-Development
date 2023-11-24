@@ -1,12 +1,11 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Customer;
-import com.flipkart.bean.Role;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDAO {
+public class CustomerDAO implements CustomerInterfaceDAO {
     List<Customer> customerList = new ArrayList<Customer>();
 
     public CustomerDAO() {

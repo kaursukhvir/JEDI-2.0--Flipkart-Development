@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SlotDAO {
+public class SlotDAO implements SlotInterfaceDAO {
     List<Slot> slotList = new ArrayList<>();
 
 

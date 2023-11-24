@@ -1,16 +1,8 @@
 package com.flipkart.business;
 
-import com.flipkart.DAO.CustomerDAO;
 import com.flipkart.DAO.GymOwnerDAO;
-import com.flipkart.bean.Customer;
-import com.flipkart.DAO.GymCentreDAO;
-import com.flipkart.DAO.GymOwnerDAO;
-import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Role;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GymOwnerService {
     private static GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();

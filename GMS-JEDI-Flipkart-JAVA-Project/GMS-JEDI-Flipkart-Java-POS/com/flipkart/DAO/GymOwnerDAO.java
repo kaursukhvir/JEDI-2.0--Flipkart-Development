@@ -6,7 +6,7 @@ import com.flipkart.bean.Role;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymOwnerDAO {
+public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
     private List<GymOwner> gymOwnerList = new ArrayList<>();
     private List<GymOwner> pendingGymOwnerList = new ArrayList<>();

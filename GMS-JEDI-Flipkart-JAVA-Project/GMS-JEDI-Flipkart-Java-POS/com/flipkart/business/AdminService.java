@@ -1,15 +1,15 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.AdminDAO;
+import com.flipkart.DAO.AdminInterfaceDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.Role;
 
 import java.util.List;
 
 public class AdminService {
 
-    AdminDAO adminDAO  = new AdminDAO();
+    AdminInterfaceDAO adminDAO  = new AdminDAO();
 
     private List<GymOwner> pendinGymOwnerList = adminDAO.getPendingGymOwners();
     private List<GymCentre> pendinGymCentreList = adminDAO.getPendingGymCentres();

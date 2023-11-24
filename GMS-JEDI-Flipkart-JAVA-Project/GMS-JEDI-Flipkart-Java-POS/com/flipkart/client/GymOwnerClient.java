@@ -1,10 +1,7 @@
 package com.flipkart.client;
 
 import com.flipkart.bean.Slot;
-import com.flipkart.DAO.CustomerDAO;
-import com.flipkart.DAO.GymCentreDAO;
 import com.flipkart.DAO.GymOwnerDAO;
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;

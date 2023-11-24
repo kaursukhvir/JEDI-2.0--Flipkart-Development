@@ -6,7 +6,7 @@ import com.flipkart.bean.GymOwner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymCentreDAO {
+public class GymCentreDAO implements GymCentreInterfaceDAO {
 
     private static List<GymCentre>  gymCentreList = new ArrayList<>();
     private static List<GymCentre>  pendingGymCentreList = new ArrayList<>();

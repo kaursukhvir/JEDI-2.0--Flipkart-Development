@@ -2,7 +2,6 @@ package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
 import com.flipkart.bean.Customer;
-import com.flipkart.bean.Role;
 
 import java.util.List;
 
