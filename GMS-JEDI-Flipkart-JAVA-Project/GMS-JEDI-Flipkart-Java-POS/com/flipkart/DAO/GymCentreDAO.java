@@ -156,12 +156,17 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public void sendCentreApprovalRequest(String gymCentreId){
-        for( GymCentre gymCentre : gymCentreList ){
-            if(gymCentre.getGymCentreID().equals(gymCentreId)){
-                pendingGymCentreList.add(gymCentre);
-                break;
-            }
-        }
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Sending gym centre approval request..");
+            // SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY="Update GymCentre Set isApproved=? WHERE centreId=?";
+            statement = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY);
+            statement.setInt(1,2);
+            statement.setString(2, gymCentreId);
+            statement.executeUpdate();
+
+        } catch (SQLException se) { se.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }
     }
 
     public List<GymCentre> getGymCentreListByCity(String city) {
