@@ -50,6 +50,10 @@ public class CustomerClient {
         customerClientMainPage(userName);
     }
 
+    private void viewMyProfile(String userName){
+        customerService.viewMyProfile(userName);
+    }
+
     private void bookSlotSubMenu(){
 //        Get Location for filter
         System.out.println("Provide Location to search :");
@@ -79,7 +83,7 @@ public class CustomerClient {
 
     }
 
-    private void bookingsSubMenu(){
+    private void getbookingsSubMenu(){
         System.out.println("Bookings : ");
         customerService.getCustomerBookings();
 
@@ -100,13 +104,13 @@ public class CustomerClient {
             int choice = scanner.nextInt();
             switch(choice){
                 case 1:
-                    customerService.viewMyProfile();
+                    customerService.viewMyProfile(userName);
                     break;
                 case 2:
                     bookSlotSubMenu();
                     break;
                 case 3:
-                    bookingsSubMenu();
+                    getbookingsSubMenu();
                     break;
                 case 4:
                     cancelBookingSubMenu();

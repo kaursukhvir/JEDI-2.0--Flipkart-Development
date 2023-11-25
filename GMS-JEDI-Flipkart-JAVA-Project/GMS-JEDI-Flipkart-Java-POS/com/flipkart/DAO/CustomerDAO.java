@@ -8,8 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.flipkart.constant.SQLConstants.ADD_NEW_CUSTOMER;
-import static com.flipkart.constant.SQLConstants.CUSTOMER_LOGIN_QUERY;
+import static com.flipkart.constant.SQLConstants.*;
 
 public class CustomerDAO implements CustomerInterfaceDAO {
 
@@ -53,5 +52,30 @@ public class CustomerDAO implements CustomerInterfaceDAO {
             exp.printStackTrace();
         }
         return false;
+    }
+
+    public Customer getCustomerById(String userName) {
+        Customer customer = new Customer();
+        try {
+            Connection conn = DBConnection.connect();
+            PreparedStatement stmt = conn.prepareStatement(GET_CUSTOMER_BY_ID);
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            customer.setEmail(rs.getString("email"));
+            customer.setUserID(rs.getString("Id"));
+            customer.setPassword(rs.getString("password"));
+            customer.setUserName(rs.getString("name"));
+            customer.setCustomerPhone(rs.getString("phone"));
+            customer.setCardDetails(rs.getString("cardDetails"));
+
+            stmt.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
+
+        return customer;
     }
 }

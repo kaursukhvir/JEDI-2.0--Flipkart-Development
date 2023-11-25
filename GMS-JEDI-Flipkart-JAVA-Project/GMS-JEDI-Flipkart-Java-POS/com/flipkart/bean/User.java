@@ -9,7 +9,10 @@ public class User {
     private String password;
     private Role role;
 
-    public User(String id,String userName, String email, String password, Role role) {
+    public User() {
+    }
+
+    public User(String id, String userName, String email, String password, Role role) {
         this.userID = id;
         this.userName = userName;
         this.email = email;
@@ -55,5 +58,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "userID='" + userID + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role;
     }
 }

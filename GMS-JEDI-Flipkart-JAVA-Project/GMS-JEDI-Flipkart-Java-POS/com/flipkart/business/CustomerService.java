@@ -1,8 +1,10 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
+import com.flipkart.utils.util;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,8 +58,8 @@ public class CustomerService {
         customerDAO.registerCustomer(userName,password,email,phoneNumber,cardNumber);
     }
 
-    public void viewMyProfile() {
-        //customerDAO.getCustomerById();
+    public void viewMyProfile(String userName) {
+        System.out.println(customerDAO.getCustomerById(userName));
     }
 
     public boolean isUserValid(String userName, String password) {
