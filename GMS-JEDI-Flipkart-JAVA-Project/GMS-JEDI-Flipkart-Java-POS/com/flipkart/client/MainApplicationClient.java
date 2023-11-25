@@ -17,25 +17,24 @@ public class MainApplicationClient {
 
 
     private static void mainPage(){
-        while(true) {
-            System.out.println("1. Login\n2. Registration\n3. Exit");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case 1:
-                    login();
-                    break;
-                case 2:
-                    registration();
-                    break;
-                case 3:
-                    System.out.println(EXIT_MESSAGE);
-                    return;
-                default:
-                    System.out.println(INVALID_CHOICE_ERROR);
-                    break;
-            }
+        System.out.println("1. Login\n2. Registration\n3. Exit");
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+                login();
+                break;
+            case 2:
+                registration();
+                break;
+            case 3:
+                System.out.println(EXIT_MESSAGE);
+                return;
+            default:
+                System.out.println(INVALID_CHOICE_ERROR);
 
+                break;
         }
+        mainPage();
     }
 
 //    private static void redirect(Role role){
@@ -69,7 +68,7 @@ public class MainApplicationClient {
                     adminClient.adminLogin(userName,password);
                     break;
                 case GYMOWNER:
-                    gymOwnerClient.gymOwnerLogin(userName,password);
+//                    gymOwnerClient.gymOwnerLogin(userName,password);
                     break;
                 case CUSTOMER:
                     customerClient.customerLogin(userName,password);

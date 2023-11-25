@@ -12,6 +12,7 @@ public class CustomerService {
 
     private CustomerDAO customerDAO = new CustomerDAO();
     private GymCentreService gymCentreService = new GymCentreService();
+    private BookingService bookingService = new BookingService();
 
     public List<GymCentre> getAllGymCenterDetailsByLocation(String city){
         //takes City (Location) as input and returns List<GymCenter>
@@ -34,13 +35,18 @@ public class CustomerService {
         return new Object();
     }
 
-    public Object bookSlot(String SlotId){
-        //book a slot if available
-
-        return new Object();
+    public void bookSlot(String SlotId){
+//        check if booking is overlapping
+        checkOverlap();
+//        create booking
+        bookingService.addBooking();
+        return;
     }
 
-    public Object cancelBookingbyID(){
+    private void checkOverlap() {
+    }
+
+    public Object cancelBookingbyID(String bookingID){
         //cancel a booking
         System.out.println("cancelled booking successfully");
         return new Object();
@@ -48,5 +54,13 @@ public class CustomerService {
 
     public void registerCustomer(String userId, String userName, String password, String email, String phoneNumber, String cardNumber) {
         customerDAO.registerCustomer(userId, userName,password,email,phoneNumber,cardNumber);
+    }
+
+    public void viewMyProfile() {
+        //customerDAO.getCustomerById();
+    }
+
+    public boolean isUserValid(String userName, String password) {
+        return customerDAO.isUserValid(userName,password);
     }
 }

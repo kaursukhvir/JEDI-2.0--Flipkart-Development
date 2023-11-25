@@ -55,13 +55,13 @@ public class AdminClient {
                 System.out.println(DISAPPROVAL_GYM_OWNER_CONFIRMATION);
             }
 
-            adminService.approveGymOwner(requestGymOwnerId,choice == 1);
+            adminService.approveGymOwner(requestGymOwnerId,choice);
             //modify the list
             adminClientMainPage();
     }
     private void handleGymCenterApprovalRequests(){
             // print the list with indexes from 1
-            System.out.println("Press 0 to EXIT_MESSAGE or Choose The Request To Modify:");
+            System.out.println("Press 0 to EXIT_MESSAGE or Choose the Gym Centre To Modify:");
             String requestGymCenterId = scanner.next();
             if (requestGymCenterId.equals("0")) return;
 //            Now Admin will select an request and we will pop up with two
@@ -72,7 +72,7 @@ public class AdminClient {
             } else if (choice == 2) {
                 System.out.println(DISAPPROVAL_GYM_CENTRE_CONFIRMATION);
             }
-            adminService.approveGymCenter(requestGymCenterId,choice==1);
+            adminService.approveGymCenter(requestGymCenterId,choice);
             //modify the list
             adminClientMainPage();
     }
@@ -86,23 +86,25 @@ public class AdminClient {
                 case 0:
                     List<GymOwner> allGymOwners =  gymOwnerService.viewAllGymOwners();
                     System.out.println("---------------------------------------------------------");
-//                    System.out.printf("%-5s\t", "GYM-OWNER-ID");
-//                    System.out.printf("%-5s\t", "OWNER-NAME");
-//                    System.out.printf("%-5s\t", "EMAIL-ID");
-//                    System.out.printf("%-15s\t", "PAN-NUMBER");
-//                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+                    System.out.printf("%-5s\t", "ID");
+                    System.out.printf("%-5s\t", "NAME");
+                    System.out.printf("%-5s\t", "EMAIL-ID");
+                    System.out.printf("%-15s\t", "PAN");
+                    System.out.printf("%-8s\t\n", "IS-APPROVED");
                     for(GymOwner gymOwner: allGymOwners) {
                         System.out.printf("%-8s\t", gymOwner.getUserID());
                         System.out.printf("%-8s\t", gymOwner.getUserName());
                         System.out.printf("%-8s\t", gymOwner.getEmail());
                         System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved())
+                        if(gymOwner.isApproved()==1)
                         {
                             System.out.println("Yes\n");
                         }
-                        else
+                        else if(gymOwner.isApproved() == 0)
                         {
                             System.out.println("No\n");
+                        } else {
+                            System.out.println("Pending\n");
                         }
                         System.out.println("");
                     }
@@ -121,7 +123,7 @@ public class AdminClient {
                         System.out.printf("%-8s\t", gymOwner.getUserName());
                         System.out.printf("%-8s\t", gymOwner.getEmail());
                         System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved())
+                        if(gymOwner.isApproved()==1)
                         {
                             System.out.println("Yes\n");
                         }
@@ -132,7 +134,7 @@ public class AdminClient {
                         System.out.println("");
                     }
                     System.out.println("---------------------------------------------------------");
-//                    handleGymOwnerApprovalRequests();
+                    handleGymOwnerApprovalRequests();
                     break;
 
                 case 2:
@@ -148,7 +150,7 @@ public class AdminClient {
                         System.out.printf("%-8s\t", gymCentre.getCity());
                         System.out.printf("%-8s\t", gymCentre.getOwnerID());
                         System.out.printf("%-8s\t", gymCentre.getCapacity());
-                        if(gymCentre.isApproved())
+                        if(gymCentre.isApproved() == 1)
                         {
                             System.out.println("Yes\n");
                         }

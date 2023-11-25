@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AdminInterfaceDAO {
     public List<GymOwner> getPendingGymOwners();
-    public void validateGymOwner(String gymOwnerId, boolean isApproved);
-    public void validateGymCentre(String gymCentreId, boolean isApproved);
+    public void validateGymOwner(String gymOwnerId, int isApproved);
+    public void validateGymCentre(String gymCentreId, int isApproved);
     public List<GymCentre> getPendingGymCentres();
 }

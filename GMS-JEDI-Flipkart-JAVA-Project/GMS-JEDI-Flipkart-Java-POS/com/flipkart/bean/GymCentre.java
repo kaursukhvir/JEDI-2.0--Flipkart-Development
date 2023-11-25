@@ -4,12 +4,15 @@ import java.util.List;
 
 public class GymCentre {
 
+    //    INSERT INTO FlipFit.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved)
     private String gymCentreID;
-    private String gymCenterName;
     private String ownerID;
+    private String gymCenterName;
+    protected String gstin;
     private String city;
     private int capacity;
-    private boolean isApproved;
+    private int price;
+    private int isApproved;
 
 
     @Override
@@ -22,13 +25,32 @@ public class GymCentre {
                 '}';
     }
 
-    public GymCentre(String gymCentreID, String gymCenterName, String ownerID, String city, int capacity) {
+    //BAD VOCABULARY
+    public GymCentre(String gymCentreID, String ownerID, String gymCenterName, String gstin, String city, int capacity, int price) {
         this.gymCentreID = gymCentreID;
-        this.gymCenterName = gymCenterName;
         this.ownerID = ownerID;
+        this.gymCenterName = gymCenterName;
+        this.gstin = gstin;
         this.city = city;
         this.capacity = capacity;
-        this.isApproved = false;
+        this.price = price;
+        this.isApproved = 0;
+    }
+
+    public String getGstin() {
+        return gstin;
+    }
+
+    public void setGstin(String gstin) {
+        this.gstin = gstin;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getGymCentreID() {
@@ -71,11 +93,11 @@ public class GymCentre {
         this.ownerID = ownerID;
     }
 
-    public boolean isApproved() {
+    public int isApproved() {
         return isApproved;
     }
 
-    public void setApproved(boolean approved) {
+    public void setApproved(int approved) {
         isApproved = approved;
     }
 }

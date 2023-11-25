@@ -3,6 +3,8 @@ package com.flipkart.DAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.List;
 public class AdminDAO implements AdminInterfaceDAO {
 
@@ -14,12 +16,12 @@ public class AdminDAO implements AdminInterfaceDAO {
         return gymOwnerDAO.getPendingGymOwnerList();
     }
 
-    public void validateGymOwner(String gymOwnerId, boolean isApproved) {
+    public void validateGymOwner(String gymOwnerId, int isApproved) {
         gymOwnerDAO.validateGymOwner(gymOwnerId, isApproved);
     }
 
-    public void validateGymCentre(String gymCentreId, boolean isApproved) {
-        gymOwnerDAO.validateGymOwner(gymCentreId, isApproved);
+    public void validateGymCentre(String gymCentreId, int isApproved) {
+        gymCentreDAO.validateGymCentre(gymCentreId,isApproved);
     }
 
     public List<GymCentre> getPendingGymCentres() {
