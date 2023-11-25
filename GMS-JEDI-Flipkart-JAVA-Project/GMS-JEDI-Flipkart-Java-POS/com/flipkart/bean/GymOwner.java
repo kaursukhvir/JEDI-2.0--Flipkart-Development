@@ -8,8 +8,8 @@ public class GymOwner extends User {
     private String cardDetails;
     private boolean isApproved;
 
-    public GymOwner(String userName, String email, String password, Role role, String panNumber, String cardDetails) {
-        super(userName, email, password, role);
+    public GymOwner(String id,String userName, String email, String password, Role role, String panNumber, String cardDetails) {
+        super(id,userName, email, password, role);
         this.panNumber = panNumber;
         this.cardDetails = cardDetails;
         this.isApproved = false;

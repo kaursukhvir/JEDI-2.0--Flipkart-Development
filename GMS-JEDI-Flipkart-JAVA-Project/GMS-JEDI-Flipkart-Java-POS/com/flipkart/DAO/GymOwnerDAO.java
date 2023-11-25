@@ -2,28 +2,26 @@ package com.flipkart.DAO;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Role;
+import com.flipkart.constant.SQLConstants;
+import com.flipkart.utils.DBConnection;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
+    Connection conn = null;
+    PreparedStatement statement = null;
     private List<GymOwner> gymOwnerList = new ArrayList<>();
     private List<GymOwner> pendingGymOwnerList = new ArrayList<>();
 
 
-
     public GymOwnerDAO() {
-        GymOwner owner1 = new GymOwner("Sita", "sita@flipfit.com", "123", Role.GYMOWNER, "123", "378648327");
-        GymOwner owner2 = new GymOwner("Geeta", "geeta@flipfit.com", "456", Role.GYMOWNER, "345", "874648327");
-        GymOwner owner3 = new GymOwner("Babita", "babita@flipfit.com", "789", Role.GYMOWNER, "567", "926648327");
-
-        gymOwnerList.add(owner1);
-        gymOwnerList.add(owner2);
-        gymOwnerList.add(owner3);
-        pendingGymOwnerList.add(owner1);
-        pendingGymOwnerList.add(owner2);
-        pendingGymOwnerList.add(owner3);
+        setPendingGymOwnerList();
     }
     public List<GymOwner> getGymOwnerList() {
         return gymOwnerList;
@@ -49,8 +47,30 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             }
         }
     }
-    public void setPendingGymOwnerList(List<GymOwner> pendingGymOwnerList) {
-        this.pendingGymOwnerList = pendingGymOwnerList;
+    public void setPendingGymOwnerList(){
+        List<GymOwner> pendingList = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gym owners..");
+
+            statement = conn.prepareStatement(SQLConstants.FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
+
+            ResultSet rs = statement.executeQuery();
+            System.out.println(rs);
+            while(rs.next()) {
+                //System.out.println(rs.getString("name"));
+                GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
+                pendingList.add(owner);
+            }
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
+        }
+        this.pendingGymOwnerList = pendingList;
+        System.out.println(pendingList.isEmpty());
     }
 
     public void validateGymOwner(String gymOwnerId, boolean isApproved) {

@@ -5,36 +5,39 @@ import com.flipkart.DAO.AdminInterfaceDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminService {
 
     AdminInterfaceDAO adminDAO  = new AdminDAO();
 
-    private List<GymOwner> pendinGymOwnerList = adminDAO.getPendingGymOwners();
-    private List<GymCentre> pendinGymCentreList = adminDAO.getPendingGymCentres();
+    private List<GymOwner> pendinGymOwnerList = new ArrayList<>();
+    private List<GymCentre> pendinGymCentreList = new ArrayList<>();
 
-    public Object approveGymCenter(){
+    public void approveGymCenter(String gymCentreId,boolean isApprove){
         //takes GymCenter Object as input and return boolean
         System.out.println("Approved/Rejected Gym Center: ");
-        return new Object();
+        adminDAO.validateGymCentre(gymCentreId,isApprove);
     }
 
-    public Object approveGymOwner(){
+    public void approveGymOwner(String gymOwnerId,boolean isApprove){
         //takes GymOwner Object as input and return boolean
         System.out.println("Approved/Rejected Gym Owner: ");
-        return new Object();
+        adminDAO.validateGymOwner(gymOwnerId,isApprove);
     }
 
     public List<GymCentre> viewPendingGymCentres(){
         //views all pending requests
         //System.out.println("Viewing pending Gym Center Approvals: ");
+        pendinGymCentreList = adminDAO.getPendingGymCentres();
         return pendinGymCentreList;
     }
 
     public List<GymOwner> viewPendingGymOwners(){
         //views all pending requests
         System.out.println("Viewing pending Gym Owner Approvals: ");
+        pendinGymOwnerList = adminDAO.getPendingGymOwners();
         return pendinGymOwnerList;
     }
 

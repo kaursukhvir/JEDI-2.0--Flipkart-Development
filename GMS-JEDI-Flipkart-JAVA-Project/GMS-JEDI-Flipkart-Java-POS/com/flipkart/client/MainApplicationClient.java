@@ -8,6 +8,7 @@ import static com.flipkart.constant.Constants.*;
 
 public class MainApplicationClient {
 
+    public static int userId = 0;
     public static Scanner scanner = new Scanner(System.in);
     private static UserService userService = new UserService();
     private static AdminClient adminClient = new AdminClient();
@@ -82,6 +83,7 @@ public class MainApplicationClient {
     private static void registration(){
 
         System.out.println("Enter your role");
+        userId++;
         Role role = Role.valueOf(scanner.next().toUpperCase());
 
         switch (role){
@@ -90,10 +92,10 @@ public class MainApplicationClient {
                 mainPage();
                 break;
             case CUSTOMER:
-                customerClient.register();
+                customerClient.register(Integer.toString(userId));
                 break;
             case GYMOWNER:
-                gymOwnerClient.register();
+                gymOwnerClient.register(Integer.toString(userId));
                 break;
             default:
                 System.out.println(INVALID_CHOICE_ERROR);

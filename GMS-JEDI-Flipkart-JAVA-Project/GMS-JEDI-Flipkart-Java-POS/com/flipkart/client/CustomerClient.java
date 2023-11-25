@@ -39,7 +39,7 @@ public class CustomerClient {
         return true;
     }
 
-    public void register(){
+    public void register(String userId){
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
@@ -55,7 +55,7 @@ public class CustomerClient {
         System.out.println("Enter your Card Number");
         String cardNumber = scanner.next();
 
-        customerService.registerCustomer(userName,password,email,phoneNumber,cardNumber);
+        customerService.registerCustomer(userId, userName,password,email,phoneNumber,cardNumber);
         customerClientMainPage();
     }
 

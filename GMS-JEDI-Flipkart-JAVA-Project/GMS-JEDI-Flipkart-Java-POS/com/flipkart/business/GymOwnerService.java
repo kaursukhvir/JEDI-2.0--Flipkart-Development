@@ -17,7 +17,7 @@ public class GymOwnerService {
         return new Object();
     }
 
-    public void registerGymOwner(String userName, String password, String email, String panNumber,String cardNumber) {
-        gymOwnerDAO.registerGymOwner(new GymOwner(userName,password, email,Role.GYMOWNER,panNumber,cardNumber));
+    public void registerGymOwner(String userId,String userName, String password, String email, String panNumber,String cardNumber) {
+        gymOwnerDAO.registerGymOwner(new GymOwner(userId,userName,password, email,Role.GYMOWNER,panNumber,cardNumber));
     }
 }

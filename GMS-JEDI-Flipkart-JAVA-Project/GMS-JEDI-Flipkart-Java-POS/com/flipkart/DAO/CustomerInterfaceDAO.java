@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CustomerInterfaceDAO {
     public List<Customer> getCustomerList();
-    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber);
+    public void registerCustomer(String userId,String userName, String password, String email, String phoneNumber, String cardNumber);
 }

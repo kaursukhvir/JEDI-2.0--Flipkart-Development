@@ -5,8 +5,8 @@ public class Customer extends User{
     private String customerPhone;
     private String cardDetails;
 
-    public Customer(String userName, String email, String password, String customerPhone, String cardDetails) {
-        super(userName, email, password, Role.CUSTOMER);
+    public Customer(String userId, String userName, String email, String password, String customerPhone, String cardDetails) {
+        super(userId, userName, email, password, Role.CUSTOMER);
         this.customerPhone = customerPhone;
         this.cardDetails = cardDetails;
     }

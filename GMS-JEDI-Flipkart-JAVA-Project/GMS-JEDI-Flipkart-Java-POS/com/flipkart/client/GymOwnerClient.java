@@ -102,7 +102,7 @@ public class GymOwnerClient {
         }
     }
 
-    public void register() {
+    public void register(String userId) {
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
@@ -118,7 +118,7 @@ public class GymOwnerClient {
         System.out.println("Enter your Card Number");
         String cardNumber = scanner.next();
 
-        gymOwnerService.registerGymOwner(userName,password,email,panNumber,cardNumber);
+        gymOwnerService.registerGymOwner(userId,userName,password,email,panNumber,cardNumber);
         gymOwnerClientMainPage();
     }
 

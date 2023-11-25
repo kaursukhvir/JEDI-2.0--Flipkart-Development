@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
-import static com.flipkart.constant.Constants.APPROVAL_CONFIRMATION;
-import static com.flipkart.constant.Constants.DISAPPROVAL_CONFIRMATION;
+import static com.flipkart.constant.Constants.*;
 
 public class AdminClient {
 
@@ -39,33 +38,39 @@ public class AdminClient {
 
     private void handleGymOwnerApprovalRequests(){
             // print the list with indexes from 1
-            System.out.println("(Press 0 to exit)\nChoose the approval request to modify: ");
-            int requestGymOwnerId = scanner.nextInt();
+            System.out.println("Admin Approval for a Gym Owner ----------");
 
-            if(requestGymOwnerId == 0) {return;}
+            System.out.println("(Press 0 to exit)\nEnter the Id of Gym Owner:");
+            String requestGymOwnerId = scanner.next();
+
+            if(requestGymOwnerId.equals("0")) {return;}
 
             System.out.println("1. Approve the request\n2. Reject the request");
             int choice = scanner.nextInt();
+            if(choice == 1){
+                System.out.println(APPROVAL_GYM_OWNER_CONFIRMATION);
+            } else if (choice == 2) {
+                System.out.println(DISAPPROVAL_GYM_OWNER_CONFIRMATION);
+            }
 
-            System.out.println("Admin Approval for a Gym Owner ----------");
-            adminService.approveGymOwner(/*  Get the gym owner by index from requestGymOwnerId and approve or reject based on choice  */);
+            adminService.approveGymOwner(requestGymOwnerId,choice == 1);
             //modify the list
             adminClientMainPage();
     }
     private void handleGymCenterApprovalRequests(){
             // print the list with indexes from 1
             System.out.println("Press 0 to EXIT_MESSAGE or Choose The Request To Modify:");
-            int requestGymCenterId = scanner.nextInt();
-            if (requestGymCenterId == 0) return;
+            String requestGymCenterId = scanner.next();
+            if (requestGymCenterId.equals("0")) return;
 //            Now Admin will select an request and we will pop up with two
             System.out.println("1. Approve the request\n2. Reject the request\n");
             int choice = scanner.nextInt();
             if(choice == 1){
-                System.out.println(APPROVAL_CONFIRMATION);
+                System.out.println(APPROVAL_GYM_CENTRE_CONFIRMATION);
             } else if (choice == 2) {
-                System.out.println(DISAPPROVAL_CONFIRMATION);
+                System.out.println(DISAPPROVAL_GYM_CENTRE_CONFIRMATION);
             }
-            adminService.approveGymCenter(/*  Get the gym center by index from requestGymCenterId and approve or reject based on choice  */);
+            adminService.approveGymCenter(requestGymCenterId,choice==1);
             //modify the list
             adminClientMainPage();
     }
