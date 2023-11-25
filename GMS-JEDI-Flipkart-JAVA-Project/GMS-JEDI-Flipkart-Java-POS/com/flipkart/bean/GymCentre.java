@@ -22,6 +22,7 @@ public class GymCentre {
                 '}';
     }
 
+    //BAD VOCABULARY
     public GymCentre(String gymCentreID, String gymCenterName, String ownerID, String city, int capacity) {
         this.gymCentreID = gymCentreID;
         this.gymCenterName = gymCenterName;

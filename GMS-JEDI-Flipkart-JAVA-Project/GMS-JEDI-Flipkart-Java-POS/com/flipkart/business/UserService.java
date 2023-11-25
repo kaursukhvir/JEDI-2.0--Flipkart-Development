@@ -3,11 +3,13 @@ package com.flipkart.business;
 import com.flipkart.DAO.CustomerDAO;
 import com.flipkart.bean.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
 
-    List<Customer> customerList = new CustomerDAO().getCustomerList();
+    //List<Customer> customerList = new CustomerDAO().getCustomerList();
+    List<Customer> customerList = new ArrayList<>();
 
     public boolean isUserValid(String userName, String password, List<Customer> customerList) {
         for (Customer c : customerList) {

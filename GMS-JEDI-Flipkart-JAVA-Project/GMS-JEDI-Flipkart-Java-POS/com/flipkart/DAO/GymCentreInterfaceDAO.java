@@ -12,7 +12,7 @@ public interface GymCentreInterfaceDAO {
     public void addGymCentre(GymCentre centre);
     public List<GymCentre> getPendingGymCentreList();
     public void setPendingGymCentreList(List<GymCentre> pendingGymCentreList);
-    public void validateGymCentre(String gymCentreId, boolean isApproved);
+    public void validateGymCentre(String gymCentreId, int isApproved);
     public void sendCentreApprovalRequest(String gymCentreId);
     public List<GymCentre> getGymCentreListByCity(String city);
 }

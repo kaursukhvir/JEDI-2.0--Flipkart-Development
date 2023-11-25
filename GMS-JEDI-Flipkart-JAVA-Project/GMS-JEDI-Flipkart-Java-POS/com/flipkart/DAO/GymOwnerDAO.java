@@ -1,5 +1,6 @@
 package com.flipkart.DAO;
 
+import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Role;
 import com.flipkart.constant.SQLConstants;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
-    Connection conn = null;
-    PreparedStatement statement = null;
+    private Connection conn = null;
+    private PreparedStatement statement = null;
     private List<GymOwner> gymOwnerList = new ArrayList<>();
     private List<GymOwner> pendingGymOwnerList = new ArrayList<>();
 
@@ -107,13 +108,12 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             System.out.println("Fetching gym owners..");
 
             statement = conn.prepareStatement(SQLConstants.FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
-
             ResultSet rs = statement.executeQuery();
-            System.out.println(rs);
             while(rs.next()) {
                 GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
                 pendingList.add(owner);
             }
+            //conn.close();
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
@@ -138,15 +138,31 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
     public void setPendingGymOwnerList(){}
 
     public void validateGymOwner(String gymOwnerId, int isApproved) {
-        for(GymOwner gymOwner : gymOwnerList) {
-            if(gymOwner.getUserID().equals(gymOwnerId)) {
-                gymOwner.setApproved(isApproved);
-            }
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gyms owners..");
+
+            statement = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_BY_ID_QUERY);
+            statement.setInt(1, isApproved);
+            statement.setString(2, gymOwnerId);
+            statement.executeUpdate();
+            System.out.println("The gym owner has been approved!");
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
         }
-        for(GymOwner gymOwner : pendingGymOwnerList) {
-            if(gymOwner.getUserID().equals(gymOwnerId)) {
-                pendingGymOwnerList.remove(gymOwner);
-            }
-        }
+//        for(GymOwner gymOwner : gymOwnerList) {
+//            if(gymOwner.getUserID().equals(gymOwnerId)) {
+//                gymOwner.setApproved(isApproved);
+//            }
+//        }
+//        for(GymOwner gymOwner : pendingGymOwnerList) {
+//            if(gymOwner.getUserID().equals(gymOwnerId)) {
+//                pendingGymOwnerList.remove(gymOwner);
+//            }
+//        }
     }
 }

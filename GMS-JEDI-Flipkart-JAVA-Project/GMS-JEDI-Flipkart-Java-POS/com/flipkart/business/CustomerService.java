@@ -57,7 +57,7 @@ public class CustomerService {
     }
 
     public void viewMyProfile() {
-        customerDAO.getCustomerById();
+        //customerDAO.getCustomerById();
     }
 
     public boolean isUserValid(String userName, String password) {

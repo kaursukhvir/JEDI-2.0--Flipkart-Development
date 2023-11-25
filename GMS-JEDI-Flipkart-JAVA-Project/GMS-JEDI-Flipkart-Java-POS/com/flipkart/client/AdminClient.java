@@ -61,7 +61,7 @@ public class AdminClient {
     }
     private void handleGymCenterApprovalRequests(){
             // print the list with indexes from 1
-            System.out.println("Press 0 to EXIT_MESSAGE or Choose The Request To Modify:");
+            System.out.println("Press 0 to EXIT_MESSAGE or Choose the Gym Centre To Modify:");
             String requestGymCenterId = scanner.next();
             if (requestGymCenterId.equals("0")) return;
 //            Now Admin will select an request and we will pop up with two
@@ -132,7 +132,7 @@ public class AdminClient {
                         System.out.println("");
                     }
                     System.out.println("---------------------------------------------------------");
-//                    handleGymOwnerApprovalRequests();
+                    handleGymOwnerApprovalRequests();
                     break;
 
                 case 2:
