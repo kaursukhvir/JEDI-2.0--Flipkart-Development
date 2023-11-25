@@ -13,6 +13,10 @@ public class GymCentreService {
     private static GymCentreDAO gymCentreDAO = new GymCentreDAO();
     private static ScheduleService scheduleService = new ScheduleService();
 
+    public List<GymCentre> getAllCentres(String gymOwnerId) {
+        return gymCentreDAO.getGymCentreList(gymOwnerId);
+    }
+
     public List<GymCentre> getCentresByCity(String city){
         return gymCentreDAO.getGymCentreListByCity(city);
     }

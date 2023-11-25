@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.bean.GymOwner;
@@ -23,6 +24,8 @@ public class GymOwnerClient {
     private SlotService slotService = new SlotService();
     private GymCentreService gymCentreService = new GymCentreService();
     private String gymOwnerId;
+
+    private static int newGymCentreId = 10;
 
     public boolean isUserValid(String userName, String password, List<GymOwner> gymOwnerList) {
         for(GymOwner c:gymOwnerList) {
@@ -53,26 +56,77 @@ public class GymOwnerClient {
     public void gymOwnerClientMainPage() {
 
         while(true){
-            System.out.println("1. Sending Gym Owner Approval Request\n2. Add a new Gym Center\n3. Send a Gym Centre Approval Request to Admin\n4. Add Slots to a Gym Centre\n5. Go Back to Previous Menu");
+            System.out.println("" +
+                    "0. View all my Gym Centres\n" +
+                    "1. Sending Gym Owner Approval Request\n" +
+                    "2. Add a new Gym Center\n" +
+                    "3. Send a Gym Centre Approval Request to Admin\n" +
+                    "4. Add Slots to a Gym Centre\n" +
+                    "5. Go Back to Previous Menu"
+            );
             int choice = scanner.nextInt();
             switch (choice){
                 /* Take input from user for all service parameters ( Make the menu ) */
+
+                case 0:
+                    List<GymCentre> allGymCentres = gymCentreService.getAllCentres(gymOwnerId);
+
+
+                    System.out.println("---------------------------------------------------------");
+                    for(GymCentre gymCentre: allGymCentres) {
+                        System.out.printf("%-8s\t", gymCentre.getOwnerID());
+                        System.out.printf("%-8s\t", gymCentre.getGymCentreID());
+                        System.out.printf("%-8s\t", gymCentre.getGymCenterName());
+                        System.out.printf("%-8s\t", gymCentre.getCity());
+                        System.out.printf("%-8s\t", gymCentre.getPrice());
+
+                        if(gymCentre.isApproved() == 1) System.out.println("Yes\n");
+                        else if(gymCentre.isApproved() == 0) System.out.println("No\n");
+                        else System.out.println("Pending\n");
+                        System.out.println("");
+                    }
+                    System.out.println("---------------------------------------------------------");
+
+
+
+                    break;
 
                 case 1:
                     gymOwnerService.requestGymOwnerApproval(gymOwnerId);
                     break;
 
                 case 2:
+
+                    System.out.println("Enter gym centre id: ");
+                    String gymId = scanner.next();
+
                     System.out.println("Enter Gym Centre name: ");
                     String gymCentreName = scanner.next();
 
+                    System.out.println("Enter Gym Centre GSTIN: ");
+                    String gstin = scanner.next();
+
                     System.out.println("Enter Gym Centre city: ");
-                    String city = scanner.nextLine();
+                    String city = scanner.next();
 
                     System.out.println("Enter Gym Centre capacity: ");
                     int capacity = scanner.nextInt();
 
-//                    gymCentreService.addCenter(new GymCentre(gymCentreName, gymOwnerId, city, capacity));
+                    System.out.println("Enter price: : ");
+                    int price = scanner.nextInt();
+
+                    newGymCentreId++;
+                    gymCentreService.addCenter(
+                            new GymCentre(
+                                    gymId,
+                                    gymOwnerId,
+                                    gymCentreName,
+                                    gstin,
+                                    city,
+                                    capacity,
+                                    price
+                            )
+                    );
                     break;
 
                 case 3:

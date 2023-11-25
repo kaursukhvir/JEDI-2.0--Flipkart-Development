@@ -22,8 +22,41 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     public GymCentreDAO() {
     }
 
+    // api call to retreive all gym centres and status
+    public List<GymCentre> getGymCentreList(String gymOwnerId) {
+
+        List<GymCentre> allGymCentres = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            statement = conn.prepareStatement(SQLConstants.FETCH_GYM_CENTRES_BY_OWNER_ID);
+            statement.setString(1, gymOwnerId);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
+                gymCentre.setApproved(rs.getInt("isApproved"));
+                allGymCentres.add(gymCentre);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return allGymCentres;
+    }
+
+
+    @Override
     public List<GymCentre> getGymCentreList() {
-        return gymCentreList;
+        return null;
     }
 
     public void setGymCentreList(List<GymCentre> gymCentreList) {
@@ -123,12 +156,17 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public void sendCentreApprovalRequest(String gymCentreId){
-        for( GymCentre gymCentre : gymCentreList ){
-            if(gymCentre.getGymCentreID().equals(gymCentreId)){
-                pendingGymCentreList.add(gymCentre);
-                break;
-            }
-        }
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Sending gym centre approval request..");
+            // SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY="Update GymCentre Set isApproved=? WHERE centreId=?";
+            statement = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY);
+            statement.setInt(1,2);
+            statement.setString(2, gymCentreId);
+            statement.executeUpdate();
+
+        } catch (SQLException se) { se.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }
     }
 
     public List<GymCentre> getGymCentreListByCity(String city) {
