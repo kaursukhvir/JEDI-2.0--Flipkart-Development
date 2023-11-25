@@ -14,18 +14,15 @@ public class ScheduleService {
     private SlotService slotService = new SlotService();
     private ScheduleDAO scheduleDAO = new ScheduleDAO();
 
-    public void createSchedule(){
-        //creates a new schedule
+    public Schedule createSchedule(Date date, String slotId){
+        String centreID = slotService.getSlotByID(slotId).getCentreID();
+        int availability = gymCentreService.getGymCentreById(centreID).getCapacity();
+        return new Schedule(String.valueOf(date)+slotId, date, slotId,availability);
     }
 
-    public Schedule getScheduleDetails(String scheduleId){
-        //give the schedule details of given date and slot
-        return new Schedule("123",new Date(2023, 12, 11),"345",15);
-    }
-
-    public boolean isSchedule(){
+    public Schedule getScheduleByDateandSlotId(String SlotId, Date date){
         //returns whether current schedule exists or not
-        return true;
+        return null;
     }
 
     public void modifySchedule(String scheduleId,int action){
@@ -49,5 +46,13 @@ public class ScheduleService {
             }
         }
         return response;
+    }
+
+    public Schedule getOrCreateSchedule(String slotId, Date date) {
+        if(getScheduleByDateandSlotId(slotId,date) == null ){
+            return createSchedule(date,slotId);
+        }
+        return getScheduleByDateandSlotId(slotId,date);
+
     }
 }

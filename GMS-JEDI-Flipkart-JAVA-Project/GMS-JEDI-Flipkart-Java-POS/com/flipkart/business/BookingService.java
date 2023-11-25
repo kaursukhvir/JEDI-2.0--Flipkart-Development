@@ -9,8 +9,15 @@ public class BookingService {
         //return whether the customer has already booked a slot at same timing
         return false;
     }
+    public void addBooking(String userId, String scheduleID) {
+        bookingDAO.addBooking(userId, scheduleID);
+    }
 
-    public void addBooking() {
-        bookingDAO.addBooking();
+    public void getBookingByCustomerId(String customerId){
+        bookingDAO.getBookingByCustomerId(customerId);
+    }
+
+    public void cancelBooking(String bookingID) {
+        bookingDAO.cancelBookingById(bookingID);
     }
 }

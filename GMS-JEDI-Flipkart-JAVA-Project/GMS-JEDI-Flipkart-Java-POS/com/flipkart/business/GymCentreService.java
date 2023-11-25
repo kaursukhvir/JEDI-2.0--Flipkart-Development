@@ -35,4 +35,9 @@ public class GymCentreService {
         gymCentreDAO.sendCentreApprovalRequest(gymCentreId);
     }
 
+    public GymCentre getGymCentreById(String centreID) {
+//        Create Logic for this ---- ARSH
+//        Using Dummy Right now
+        return new GymCentre();
+    }
 }

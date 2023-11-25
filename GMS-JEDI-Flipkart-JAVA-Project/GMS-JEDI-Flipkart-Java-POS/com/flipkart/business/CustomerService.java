@@ -1,12 +1,9 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
-import com.flipkart.utils.util;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +12,7 @@ public class CustomerService {
     private CustomerDAO customerDAO = new CustomerDAO();
     private GymCentreService gymCentreService = new GymCentreService();
     private BookingService bookingService = new BookingService();
+    private ScheduleService scheduleService = new ScheduleService();
 
     public List<GymCentre> getAllGymCenterDetailsByLocation(String city){
         //takes City (Location) as input and returns List<GymCenter>
@@ -26,10 +24,9 @@ public class CustomerService {
         return gymCentreService.getAvailableSlotsByCentreAndDate(centreID,date);
     }
 
-    public List<Object> getCustomerBookings(){
+    public void getCustomerBookings(String customerId){
         //takes userId and returns List<Bookings>
-        System.out.println("customer details successfully sent");
-        return new ArrayList<Object>();
+        bookingService.getBookingByCustomerId(customerId);
     }
 
     public Object getBookingDetailsByID(){
@@ -37,21 +34,21 @@ public class CustomerService {
         return new Object();
     }
 
-    public void bookSlot(String SlotId){
+    public void bookSlot(String userID,Date date, String slotId){
 //        check if booking is overlapping
         checkOverlap();
+        String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();
 //        create booking
-        bookingService.addBooking();
+        bookingService.addBooking(userID, scheduleId);
         return;
     }
 
     private void checkOverlap() {
     }
 
-    public Object cancelBookingbyID(String bookingID){
+    public void cancelBookingbyID(String bookingID){
         //cancel a booking
-        System.out.println("cancelled booking successfully");
-        return new Object();
+        bookingService.cancelBooking(bookingID);
     }
 
     public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) {

@@ -170,6 +170,8 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public List<GymCentre> getGymCentreListByCity(String city) {
+
+
         List<GymCentre> allCentreByCity = new ArrayList<>();
         for(GymCentre gymCentre: gymCentreList){
             if(gymCentre.getCity().equals(city)){

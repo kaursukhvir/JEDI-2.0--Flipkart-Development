@@ -54,7 +54,7 @@ public class CustomerClient {
         customerService.viewMyProfile(userName);
     }
 
-    private void bookSlotSubMenu(){
+    private void bookSlotSubMenu(String userName){
 //        Get Location for filter
         System.out.println("Provide Location to search :");
         String location = scanner.next();
@@ -79,21 +79,21 @@ public class CustomerClient {
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
 //      Select Slot to book
-        customerService.bookSlot(slotID);
+        customerService.bookSlot(userName,date,slotID);
 
     }
 
-    private void getbookingsSubMenu(){
+    private void getbookingsSubMenu(String userName){
         System.out.println("Bookings : ");
-        customerService.getCustomerBookings();
+        customerService.getCustomerBookings(userName);
 
     }
 
-    private void cancelBookingSubMenu(){
+    private void cancelBookingSubMenu(String userName){
         System.out.println("Select the Booking you want to cancel: ");
-        customerService.getCustomerBookings();
-        String indexOfBookingToRemove = scanner.next();
-        customerService.cancelBookingbyID(indexOfBookingToRemove);
+        customerService.getCustomerBookings(userName);
+        String bookingId = scanner.next();
+        customerService.cancelBookingbyID(bookingId);
 
     }
 
@@ -107,13 +107,13 @@ public class CustomerClient {
                     customerService.viewMyProfile(userName);
                     break;
                 case 2:
-                    bookSlotSubMenu();
+                    bookSlotSubMenu(userName);
                     break;
                 case 3:
-                    getbookingsSubMenu();
+                    getbookingsSubMenu(userName);
                     break;
                 case 4:
-                    cancelBookingSubMenu();
+                    cancelBookingSubMenu(userName);
                     break;
                 case 5:
                     System.out.println(PREVIOUS_MENU_MESSAGE);

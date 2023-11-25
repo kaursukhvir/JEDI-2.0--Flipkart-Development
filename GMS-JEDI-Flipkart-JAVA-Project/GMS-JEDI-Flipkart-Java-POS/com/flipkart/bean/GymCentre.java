@@ -14,6 +14,10 @@ public class GymCentre {
     private int price;
     private int isApproved;
 
+    public GymCentre() {
+
+    }
+
 
     @Override
     public String toString() {

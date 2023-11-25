@@ -40,4 +40,10 @@ public class SQLConstants {
     public static final String CUSTOMER_LOGIN_QUERY = "SELECT * FROM FlipFit.Customer WHERE name = ? AND password = ?";
     public static final String ADD_NEW_CUSTOMER = "INSERT INTO FlipFit.Customer (Id,name,password,email,phone,cardDetails) VALUES (?, ?, ?, ?, ?, ?);";
     public static final String GET_CUSTOMER_BY_ID = "SELECT * FROM FlipFit.Customer WHERE name = ?;";
+
+
+    //  ----------- Booking -----------
+    public static final String GET_BOOKING_BY_CUSTOMER_ID ="Select * From FlipFit.Booking where userID = ?";
+    public static final String CANCEL_BOOKING_BY_ID= "Delete from FlipFit.Booking where bookingId = ?";
+    public static final String ADD_BOOKING= "INSERT INTO FlipFit.Booking (bookingId, userID, scheduleID) values( ?, ?, ?)";
 }
