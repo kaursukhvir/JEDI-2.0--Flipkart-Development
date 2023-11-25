@@ -1,7 +1,5 @@
 package com.flipkart.client;
 
-import com.flipkart.DAO.CustomerDAO;
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
@@ -18,13 +16,7 @@ import static com.flipkart.constant.Constants.PREVIOUS_MENU_MESSAGE;
 
 public class CustomerClient {
     private CustomerService customerService  =  new CustomerService();
-//    private List<Customer> customerList = new CustomerDAO().getCustomerList();
-//    public boolean isUserValid(String userName, String password, List<Customer> customerList) {
-//        for(Customer c:customerList) {
-//            if (userName.equals(c.getUserName()) && password.equals(c.getPassword())) return true;
-//        }
-//        return false;
-//    }
+
 
     public boolean customerLogin(String userName, String password) {
 //        System.out.println("HELLO in customer"); -- BAD
@@ -54,7 +46,7 @@ public class CustomerClient {
         System.out.println("Enter your Card Number");
         String cardNumber = scanner.next();
 
-        customerService.registerCustomer(userId, userName,password,email,phoneNumber,cardNumber);
+        customerService.registerCustomer(userName,password,email,phoneNumber,cardNumber);
         customerClientMainPage(userName);
     }
 
