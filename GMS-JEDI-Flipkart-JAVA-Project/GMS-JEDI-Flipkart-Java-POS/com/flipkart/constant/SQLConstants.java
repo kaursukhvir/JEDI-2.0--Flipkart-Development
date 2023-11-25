@@ -11,6 +11,8 @@ public class SQLConstants {
         return "UPDATE FlipFit.GymOwner SET isApproved = 2 WHERE Id = \"" + gymOwnerId + "\";";
     }
 
+    public static final String ADD_NEW_CUSTOMER = "INSERT INTO FlipFit.GymCentre (userId,userName,password,email,phoneNumber,cardNumber) VALUES (?, ?, ?, ?, ?, ?);";
+
     public static final String REGISTER_GYM_OWNER = "Insert into GymOwner values (?,?,?,?,?,?,?)";
 
     public static final String LOGIN_GYM_OWNER = "select * from GymOwner where Id=? and password=?";
