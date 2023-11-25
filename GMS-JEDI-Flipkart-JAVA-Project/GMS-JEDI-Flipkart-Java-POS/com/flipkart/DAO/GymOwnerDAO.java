@@ -21,9 +21,28 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
 
     public GymOwnerDAO() {
-        setPendingGymOwnerList();
+//        setPendingGymOwnerList();
     }
     public List<GymOwner> getGymOwnerList() {
+
+        List<GymOwner> resGymOwnerList = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching all gym owners..");
+
+            statement = conn.prepareStatement(SQLConstants.FETCH_ALL_GYM_OWNERS_QUERY);
+
+            ResultSet rs = statement.executeQuery();
+//            System.out.println(rs);
+            while(rs.next()) {
+                GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
+                resGymOwnerList.add(owner);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.setGymOwnerList(resGymOwnerList);
         return gymOwnerList;
     }
 
@@ -36,18 +55,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
     }
 
     public List<GymOwner> getPendingGymOwnerList() {
-        return pendingGymOwnerList;
-    }
 
-    public void sendOwnerApprovalRequest(String gymOwnerId){
-        for( GymOwner gymOwner : gymOwnerList ){
-            if(gymOwner.getUserID().equals(gymOwnerId)){
-                pendingGymOwnerList.add(gymOwner);
-                break;
-            }
-        }
-    }
-    public void setPendingGymOwnerList(){
         List<GymOwner> pendingList = new ArrayList<>();
         try {
             conn = DBConnection.connect();
@@ -58,7 +66,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             ResultSet rs = statement.executeQuery();
             System.out.println(rs);
             while(rs.next()) {
-                //System.out.println(rs.getString("name"));
                 GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
                 pendingList.add(owner);
             }
@@ -69,9 +76,21 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             // Handle errors for Class.forName
             e.printStackTrace();
         }
-        this.pendingGymOwnerList = pendingList;
-        System.out.println(pendingList.isEmpty());
+        return pendingList;
     }
+
+    public void sendOwnerApprovalRequest(String gymOwnerId){
+
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Sending gym owner approval request..");
+            statement = conn.prepareStatement(SQLConstants.SEND_GYM_OWNER_APPROVAL_REQ_QUERY(gymOwnerId));
+            statement.executeUpdate();
+
+        } catch (SQLException se) { se.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }
+    }
+    public void setPendingGymOwnerList(){}
 
     public void validateGymOwner(String gymOwnerId, boolean isApproved) {
         for(GymOwner gymOwner : gymOwnerList) {

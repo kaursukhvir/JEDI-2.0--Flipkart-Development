@@ -5,6 +5,7 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminService;
+import com.flipkart.business.GymOwnerService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class AdminClient {
 
     private static Admin admin = new Admin();
     private static AdminService adminService = new AdminService();
+    private static GymOwnerService gymOwnerService = new GymOwnerService();
 
     public boolean isUserValid(String userName, String password) {
         if (userName.equals(admin.getUserName()) && password.equals(admin.getPassword())) {
@@ -78,9 +80,34 @@ public class AdminClient {
     public void adminClientMainPage(){
         System.out.println("Welcome To the Admin Interface. Please select a choice: ");
         while(true){
-            System.out.println("1. View Pending GymOwner Approval Requests\n2. View Pending GymCenter's Approval Requests\n3. Go Back To Previous Menu");
+            System.out.println("0. View All Gym Owners\n1. View Pending GymOwner Approval Requests\n2. View Pending GymCenter's Approval Requests\n3. Go Back To Previous Menu");
             int pendingChoice = scanner.nextInt();
             switch (pendingChoice) {
+                case 0:
+                    List<GymOwner> allGymOwners =  gymOwnerService.viewAllGymOwners();
+                    System.out.println("---------------------------------------------------------");
+//                    System.out.printf("%-5s\t", "GYM-OWNER-ID");
+//                    System.out.printf("%-5s\t", "OWNER-NAME");
+//                    System.out.printf("%-5s\t", "EMAIL-ID");
+//                    System.out.printf("%-15s\t", "PAN-NUMBER");
+//                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+                    for(GymOwner gymOwner: allGymOwners) {
+                        System.out.printf("%-8s\t", gymOwner.getUserID());
+                        System.out.printf("%-8s\t", gymOwner.getUserName());
+                        System.out.printf("%-8s\t", gymOwner.getEmail());
+                        System.out.printf("%-8s\t", gymOwner.getPanNumber());
+                        if(gymOwner.isApproved())
+                        {
+                            System.out.println("Yes\n");
+                        }
+                        else
+                        {
+                            System.out.println("No\n");
+                        }
+                        System.out.println("");
+                    }
+                    System.out.println("---------------------------------------------------------");
+                    break;
                 case 1:
                     List<GymOwner> pendingGymOwners = adminService.viewPendingGymOwners(); //Get listGymOwnerIds
                     System.out.println("---------------------------------------------------------");
@@ -105,7 +132,7 @@ public class AdminClient {
                         System.out.println("");
                     }
                     System.out.println("---------------------------------------------------------");
-                    handleGymOwnerApprovalRequests();
+//                    handleGymOwnerApprovalRequests();
                     break;
 
                 case 2:
