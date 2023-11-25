@@ -68,7 +68,7 @@ public class MainApplicationClient {
                     adminClient.adminLogin(userName,password);
                     break;
                 case GYMOWNER:
-//                    gymOwnerClient.gymOwnerLogin(userName,password);
+                    gymOwnerClient.gymOwnerLogin(userName,password);
                     break;
                 case CUSTOMER:
                     customerClient.customerLogin(userName,password);

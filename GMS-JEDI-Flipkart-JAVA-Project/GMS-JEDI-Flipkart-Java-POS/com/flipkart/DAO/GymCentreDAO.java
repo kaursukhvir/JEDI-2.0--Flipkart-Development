@@ -22,8 +22,41 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     public GymCentreDAO() {
     }
 
+    // api call to retreive all gym centres and status
+    public List<GymCentre> getGymCentreList(String gymOwnerId) {
+
+        List<GymCentre> allGymCentres = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            statement = conn.prepareStatement(SQLConstants.FETCH_GYM_CENTRES_BY_OWNER_ID);
+            statement.setString(1, gymOwnerId);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
+                gymCentre.setApproved(rs.getInt("isApproved"));
+                allGymCentres.add(gymCentre);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return allGymCentres;
+    }
+
+
+    @Override
     public List<GymCentre> getGymCentreList() {
-        return gymCentreList;
+        return null;
     }
 
     public void setGymCentreList(List<GymCentre> gymCentreList) {
