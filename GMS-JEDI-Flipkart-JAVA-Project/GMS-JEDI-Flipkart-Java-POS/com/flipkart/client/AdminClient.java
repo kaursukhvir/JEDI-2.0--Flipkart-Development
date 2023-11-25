@@ -86,11 +86,11 @@ public class AdminClient {
                 case 0:
                     List<GymOwner> allGymOwners =  gymOwnerService.viewAllGymOwners();
                     System.out.println("---------------------------------------------------------");
-//                    System.out.printf("%-5s\t", "GYM-OWNER-ID");
-//                    System.out.printf("%-5s\t", "OWNER-NAME");
-//                    System.out.printf("%-5s\t", "EMAIL-ID");
-//                    System.out.printf("%-15s\t", "PAN-NUMBER");
-//                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+                    System.out.printf("%-5s\t", "ID");
+                    System.out.printf("%-5s\t", "NAME");
+                    System.out.printf("%-5s\t", "EMAIL-ID");
+                    System.out.printf("%-15s\t", "PAN");
+                    System.out.printf("%-8s\t\n", "IS-APPROVED");
                     for(GymOwner gymOwner: allGymOwners) {
                         System.out.printf("%-8s\t", gymOwner.getUserID());
                         System.out.printf("%-8s\t", gymOwner.getUserName());
@@ -100,9 +100,11 @@ public class AdminClient {
                         {
                             System.out.println("Yes\n");
                         }
-                        else
+                        else if(gymOwner.isApproved() == 0)
                         {
                             System.out.println("No\n");
+                        } else {
+                            System.out.println("Pending\n");
                         }
                         System.out.println("");
                     }
@@ -148,7 +150,7 @@ public class AdminClient {
                         System.out.printf("%-8s\t", gymCentre.getCity());
                         System.out.printf("%-8s\t", gymCentre.getOwnerID());
                         System.out.printf("%-8s\t", gymCentre.getCapacity());
-                        if(gymCentre.isApproved())
+                        if(gymCentre.isApproved() == 1)
                         {
                             System.out.println("Yes\n");
                         }

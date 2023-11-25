@@ -9,9 +9,15 @@ public class SQLConstants {
     public static final String FETCH_ALL_PENDING_GYM_OWNERS_QUERY = "SELECT * FROM FlipFit.GymOwner where isApproved = 2";
     public static final String FETCH_ALL_PENDING_GYM_CENTRES_QUERY = "SELECT * FROM FlipFit.GymCentre where isApproved = 2";
 
-    public static String SEND_GYM_OWNER_APPROVAL_REQ_QUERY(String gymOwnerId) {
-        return "UPDATE FlipFit.GymOwner SET isApproved = 2 WHERE Id = \"" + gymOwnerId + "\";";
-    }
+    public static final String SEND_GYM_OWNER_APPROVAL_REQ_QUERY = "UPDATE FlipFit.GymOwner SET isApproved = 2 WHERE Id =?;";
+
+
+//    INSERT INTO FlipFit.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved)
+    public static final String ADD_GYM_CENTRE_QUERY = "INSERT INTO FlipFit.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+
+
+
+
 
     public static final String ADD_NEW_CUSTOMER = "INSERT INTO FlipFit.GymCentre (userId,userName,password,email,phoneNumber,cardNumber) VALUES (?, ?, ?, ?, ?, ?);";
 

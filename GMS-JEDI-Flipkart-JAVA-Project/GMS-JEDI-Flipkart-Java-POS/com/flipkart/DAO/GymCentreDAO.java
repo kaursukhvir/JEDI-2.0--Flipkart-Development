@@ -2,7 +2,6 @@ package com.flipkart.DAO;
 
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.Role;
 import com.flipkart.constant.SQLConstants;
 import com.flipkart.utils.DBConnection;
 
@@ -39,7 +38,26 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public void addGymCentre(GymCentre centre) {
-        this.gymCentreList.add(centre);
+        // call to db api
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Adding gym centre....");
+
+            //    INSERT INTO FlipFit.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved)
+            statement = conn.prepareStatement(SQLConstants.ADD_GYM_CENTRE_QUERY);
+            statement.setString(1,centre.getGymCentreID());
+            statement.setString(2,centre.getOwnerID());
+            statement.setString(3, centre.getGymCenterName());
+            statement.setString(4,centre.getGstin());
+            statement.setString(5, centre.getCity());
+            statement.setInt(6, centre.getCapacity());
+            statement.setInt(7, centre.getPrice());
+            statement.setInt(8, centre.isApproved());
+
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<GymCentre> getPendingGymCentreList() {
@@ -52,16 +70,19 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
 
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                //GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
-                GymCentre gymCentre = new GymCentre(rs.getString("centreId"),rs.getString("centreName"),rs.getString("ownerId"),rs.getString("city"),rs.getInt("capacity"));
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
                 pendingList.add(gymCentre);
             }
             //conn.close();
-        } catch (SQLException se) {
-            // Handle errors for JDBC
-            se.printStackTrace();
         } catch (Exception e) {
-            // Handle errors for Class.forName
             e.printStackTrace();
         }
         return pendingList;

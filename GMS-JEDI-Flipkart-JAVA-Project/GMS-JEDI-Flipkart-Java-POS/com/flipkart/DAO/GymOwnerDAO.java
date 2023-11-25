@@ -36,7 +36,17 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             ResultSet rs = statement.executeQuery();
 //            System.out.println(rs);
             while(rs.next()) {
-                GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
+                GymOwner owner = new GymOwner(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        Role.GYMOWNER,
+                        rs.getString("panNumber"),
+                        rs.getString("cardDetails")
+
+                );
+                owner.setApproved(rs.getInt("isApproved"));
                 resGymOwnerList.add(owner);
             }
         } catch (Exception e) {
@@ -129,7 +139,8 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         try {
             conn = DBConnection.connect();
             System.out.println("Sending gym owner approval request..");
-            statement = conn.prepareStatement(SQLConstants.SEND_GYM_OWNER_APPROVAL_REQ_QUERY(gymOwnerId));
+            statement = conn.prepareStatement(SQLConstants.SEND_GYM_OWNER_APPROVAL_REQ_QUERY);
+            statement.setString(1,gymOwnerId);
             statement.executeUpdate();
 
         } catch (SQLException se) { se.printStackTrace(); }

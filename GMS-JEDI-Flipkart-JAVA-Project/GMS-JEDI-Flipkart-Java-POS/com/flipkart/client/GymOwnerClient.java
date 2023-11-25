@@ -16,44 +16,42 @@ import static com.flipkart.constant.Constants.*;
 
 public class GymOwnerClient {
 
+    GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
+    private List<GymOwner> gymOwnerList = gymOwnerDAO.getGymOwnerList();
 
     private GymOwnerService gymOwnerService = new GymOwnerService();
     private SlotService slotService = new SlotService();
     private GymCentreService gymCentreService = new GymCentreService();
+    private String gymOwnerId;
 
+    public boolean isUserValid(String userName, String password, List<GymOwner> gymOwnerList) {
+        for(GymOwner c:gymOwnerList) {
+            if (userName.equals(c.getUserName()) && password.equals(c.getPassword())) {
+                gymOwnerId = c.getUserID();
+                return true;
+            }
+        }
+        return false;
+    }
 
-//    public boolean isUserValid(String userName, String password, List<GymOwner> gymOwnerList) {
-//        for(GymOwner c:gymOwnerList) {
-//            if (userName.equals(c.getUserName()) && password.equals(c.getPassword())) {
-//                gymOwnerId = c.getUserID();
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean gymOwnerLogin(String userName, String password) {
+        System.out.println("in owner");
+        if (isUserValid(userName, password,gymOwnerList)) {
 
-//    public void gymOwnerLogin(String userName, String password) {
-//        System.out.println("in owner");
-//        if(gymOwnerService.loginGymOwner(userName,password))
-//            gymOwnerClientMainPage();
-//    public boolean gymOwnerLogin(String userName, String password) {
-////        System.out.println("in owner"); -- BAD
-//        if (isUserValid(userName, password,gymOwnerList)) {
-//
-//            System.out.println("Successfully logged in");
-//            gymOwnerClientMainPage(userName);
-//        }
-//        else{
-//            System.out.println("UserName or password doesn't match");
-//            return false;
-//        }
-//        return true;
-//    }
+            System.out.println("Successfully logged in");
+            gymOwnerClientMainPage();
+        }
+        else{
+            System.out.println("UserName or password doesn't match");
+            return false;
+        }
+        return true;
+    }
 
 
 
-    public void gymOwnerClientMainPage(String userName) {
-        System.out.println("WELCOME "+userName+" !!! \nWhat you want to do?");
+    public void gymOwnerClientMainPage() {
+
         while(true){
             System.out.println("1. Sending Gym Owner Approval Request\n2. Add a new Gym Center\n3. Send a Gym Centre Approval Request to Admin\n4. Add Slots to a Gym Centre\n5. Go Back to Previous Menu");
             int choice = scanner.nextInt();
@@ -61,7 +59,7 @@ public class GymOwnerClient {
                 /* Take input from user for all service parameters ( Make the menu ) */
 
                 case 1:
-                    gymOwnerService.requestGymOwnerApproval(userName);
+                    gymOwnerService.requestGymOwnerApproval(gymOwnerId);
                     break;
 
                 case 2:
@@ -121,7 +119,7 @@ public class GymOwnerClient {
         String cardNumber = scanner.next();
 
         gymOwnerService.registerGymOwner(userId,userName,password,email,panNumber,cardNumber);
-        gymOwnerClientMainPage(userName);
+        gymOwnerClientMainPage();
     }
 
 }
