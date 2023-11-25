@@ -34,7 +34,8 @@ public class GymOwnerClient {
 
     public void gymOwnerLogin(String userName, String password) {
         System.out.println("in owner");
-        gymOwnerService.loginGymOwner(userName,password);
+        if(gymOwnerService.loginGymOwner(userName,password))
+            gymOwnerClientMainPage();
     }
 
 

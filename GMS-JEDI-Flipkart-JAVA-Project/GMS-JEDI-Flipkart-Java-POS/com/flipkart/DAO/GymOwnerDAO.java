@@ -50,18 +50,31 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         this.gymOwnerList = gymOwnerList;
     }
 
-    public void loginGymOwner(String username,String password){
+    public boolean loginGymOwner(String username,String password) {
         try {
-            conn  = DBConnection.connect();
-
-            statement = conn.prepareStatement(SQLConstants.LOGIN_GYM_OWNER);
-            statement.setString(1,username);
-            statement.setString(2,password);
-            statement.executeUpdate();
-            System.out.println("Login Success\n");
-        }catch(SQLException e){
+            conn = DBConnection.connect();
+            ResultSet result;
+            try {
+                statement = conn.prepareStatement(SQLConstants.LOGIN_GYM_OWNER);
+                statement.setString(1, username);
+                statement.setString(2, password);
+                result = statement.executeQuery();
+                while (result.next()) {
+                    if (username.equals(result.getString("Id")) && password.equals(result.getString("password"))) {
+                        System.out.println("Login Success\n");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("SQL Exception\n");
+                return false;
+            }
+        }catch (SQLException e){
             System.out.println("SQL Exception\n");
         }
+            return false;
     }
 
     public void registerGymOwner(GymOwner gymOwner){

@@ -13,5 +13,5 @@ public class SQLConstants {
 
     public static final String REGISTER_GYM_OWNER = "Insert into GymOwner values (?,?,?,?,?,?,?)";
 
-    public static final String LOGIN_GYM_OWNER = "Select * from GymOwner where Id=? and password=?";
+    public static final String LOGIN_GYM_OWNER = "select * from GymOwner where Id=? and password=?";
 }

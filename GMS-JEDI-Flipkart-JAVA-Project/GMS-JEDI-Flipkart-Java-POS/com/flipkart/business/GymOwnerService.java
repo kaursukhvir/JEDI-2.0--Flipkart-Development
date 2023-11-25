@@ -22,11 +22,11 @@ public class GymOwnerService {
         return new Object();
     }
 
-    public void loginGymOwner(String username,String password){
-        gymOwnerDAO.loginGymOwner(username,password);
+    public boolean loginGymOwner(String username,String password){
+        return gymOwnerDAO.loginGymOwner(username,password);
     }
 
     public void registerGymOwner(String userId,String userName, String password, String email, String panNumber,String cardNumber) {
-        gymOwnerDAO.registerGymOwner(new GymOwner(userId,userName,password, email,Role.GYMOWNER,panNumber,cardNumber));
+        gymOwnerDAO.registerGymOwner(new GymOwner(userId,userName,email,password,Role.GYMOWNER,panNumber,cardNumber));
     }
 }
