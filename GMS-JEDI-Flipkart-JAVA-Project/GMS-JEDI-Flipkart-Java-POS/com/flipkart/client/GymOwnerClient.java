@@ -97,8 +97,8 @@ public class GymOwnerClient {
 
                 case 2:
 
-//                    System.out.println("Enter your owner id: ");
-//                    String oId = scanner.next();
+                    System.out.println("Enter gym centre id: ");
+                    String gymId = scanner.next();
 
                     System.out.println("Enter Gym Centre name: ");
                     String gymCentreName = scanner.next();
@@ -118,7 +118,7 @@ public class GymOwnerClient {
                     newGymCentreId++;
                     gymCentreService.addCenter(
                             new GymCentre(
-                                    Integer.toString(newGymCentreId),
+                                    gymId,
                                     gymOwnerId,
                                     gymCentreName,
                                     gstin,
