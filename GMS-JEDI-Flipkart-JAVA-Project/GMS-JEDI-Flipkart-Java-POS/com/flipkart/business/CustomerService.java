@@ -52,8 +52,8 @@ public class CustomerService {
         return new Object();
     }
 
-    public void registerCustomer(String userId, String userName, String password, String email, String phoneNumber, String cardNumber) {
-        customerDAO.registerCustomer(userId, userName,password,email,phoneNumber,cardNumber);
+    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) {
+        customerDAO.registerCustomer(userName,password,email,phoneNumber,cardNumber);
     }
 
     public void viewMyProfile() {
