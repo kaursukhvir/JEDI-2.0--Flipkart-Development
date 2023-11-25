@@ -16,8 +16,6 @@ import static com.flipkart.constant.Constants.*;
 
 public class GymOwnerClient {
 
-    GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
-    private List<GymOwner> gymOwnerList = gymOwnerDAO.getGymOwnerList();
 
     private GymOwnerService gymOwnerService = new GymOwnerService();
     private SlotService slotService = new SlotService();
@@ -34,18 +32,9 @@ public class GymOwnerClient {
         return false;
     }
 
-    public boolean gymOwnerLogin(String userName, String password) {
+    public void gymOwnerLogin(String userName, String password) {
         System.out.println("in owner");
-        if (isUserValid(userName, password,gymOwnerList)) {
-
-            System.out.println("Successfully logged in");
-            gymOwnerClientMainPage();
-        }
-        else{
-            System.out.println("UserName or password doesn't match");
-            return false;
-        }
-        return true;
+        gymOwnerService.loginGymOwner(userName,password);
     }
 
 

@@ -55,7 +55,7 @@ public class AdminClient {
                 System.out.println(DISAPPROVAL_GYM_OWNER_CONFIRMATION);
             }
 
-            adminService.approveGymOwner(requestGymOwnerId,choice == 1);
+            adminService.approveGymOwner(requestGymOwnerId,choice);
             //modify the list
             adminClientMainPage();
     }
@@ -72,7 +72,7 @@ public class AdminClient {
             } else if (choice == 2) {
                 System.out.println(DISAPPROVAL_GYM_CENTRE_CONFIRMATION);
             }
-            adminService.approveGymCenter(requestGymCenterId,choice==1);
+            adminService.approveGymCenter(requestGymCenterId,choice);
             //modify the list
             adminClientMainPage();
     }
@@ -96,7 +96,7 @@ public class AdminClient {
                         System.out.printf("%-8s\t", gymOwner.getUserName());
                         System.out.printf("%-8s\t", gymOwner.getEmail());
                         System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved())
+                        if(gymOwner.isApproved()==1)
                         {
                             System.out.println("Yes\n");
                         }
@@ -121,7 +121,7 @@ public class AdminClient {
                         System.out.printf("%-8s\t", gymOwner.getUserName());
                         System.out.printf("%-8s\t", gymOwner.getEmail());
                         System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved())
+                        if(gymOwner.isApproved()==1)
                         {
                             System.out.println("Yes\n");
                         }

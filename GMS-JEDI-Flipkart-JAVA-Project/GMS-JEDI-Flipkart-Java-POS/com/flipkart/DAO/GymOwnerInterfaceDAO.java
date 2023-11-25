@@ -12,6 +12,6 @@ public interface GymOwnerInterfaceDAO {
     public List<GymOwner> getPendingGymOwnerList();
     public void sendOwnerApprovalRequest(String gymOwnerId);
     public void setPendingGymOwnerList();
-    public void validateGymOwner(String gymOwnerId, boolean isApproved);
+    public void validateGymOwner(String gymOwnerId, int isApproved);
 
 }

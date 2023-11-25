@@ -10,4 +10,8 @@ public class SQLConstants {
     public static String SEND_GYM_OWNER_APPROVAL_REQ_QUERY(String gymOwnerId) {
         return "UPDATE FlipFit.GymOwner SET isApproved = 2 WHERE Id = \"" + gymOwnerId + "\";";
     }
+
+    public static final String REGISTER_GYM_OWNER = "Insert into GymOwner values (?,?,?,?,?,?,?)";
+
+    public static final String LOGIN_GYM_OWNER = "Select * from GymOwner where Id=? and password=?";
 }

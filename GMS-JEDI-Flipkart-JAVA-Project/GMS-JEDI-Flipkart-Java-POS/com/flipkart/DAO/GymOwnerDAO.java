@@ -50,8 +50,40 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         this.gymOwnerList = gymOwnerList;
     }
 
+    public void loginGymOwner(String username,String password){
+        try {
+            conn  = DBConnection.connect();
+
+            statement = conn.prepareStatement(SQLConstants.LOGIN_GYM_OWNER);
+            statement.setString(1,username);
+            statement.setString(2,password);
+            statement.executeUpdate();
+            System.out.println("Login Success\n");
+        }catch(SQLException e){
+            System.out.println("SQL Exception\n");
+        }
+    }
+
     public void registerGymOwner(GymOwner gymOwner){
-        this.gymOwnerList.add(gymOwner);
+        try{
+            conn  = DBConnection.connect();
+            statement = conn.prepareStatement(SQLConstants.REGISTER_GYM_OWNER);
+
+            statement.setString(1,gymOwner.getUserName());
+            statement.setString(2,gymOwner.getUserName());
+            statement.setString(3,gymOwner.getEmail());
+            statement.setString(4,gymOwner.getPassword());
+            statement.setString(5,gymOwner.getPanNumber());
+            statement.setString(6,gymOwner.getCardDetails());
+            statement.setInt(7,gymOwner.isApproved());
+
+            statement.executeUpdate();
+            System.out.println("Registration Success\n");
+
+        }catch(SQLException e){
+            System.out.println("Try again with a different Username \n");
+        }
+
     }
 
     public List<GymOwner> getPendingGymOwnerList() {
@@ -92,7 +124,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
     }
     public void setPendingGymOwnerList(){}
 
-    public void validateGymOwner(String gymOwnerId, boolean isApproved) {
+    public void validateGymOwner(String gymOwnerId, int isApproved) {
         for(GymOwner gymOwner : gymOwnerList) {
             if(gymOwner.getUserID().equals(gymOwnerId)) {
                 gymOwner.setApproved(isApproved);

@@ -14,11 +14,11 @@ public class AdminDAO implements AdminInterfaceDAO {
         return gymOwnerDAO.getPendingGymOwnerList();
     }
 
-    public void validateGymOwner(String gymOwnerId, boolean isApproved) {
+    public void validateGymOwner(String gymOwnerId, int isApproved) {
         gymOwnerDAO.validateGymOwner(gymOwnerId, isApproved);
     }
 
-    public void validateGymCentre(String gymCentreId, boolean isApproved) {
+    public void validateGymCentre(String gymCentreId, int isApproved) {
         gymOwnerDAO.validateGymOwner(gymCentreId, isApproved);
     }
 

@@ -16,7 +16,7 @@ public class DBConnection {
     private static Connection single_instance = null;
 
     private static final String user   = "root";
-    private static final String pass  = "";
+    private static final String pass  = "Tushar@123";
     public static Connection connect() throws SQLException{
 
         if(single_instance==null){
@@ -26,7 +26,7 @@ public class DBConnection {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 String url = "jdbc:mysql://localhost:3306/flipfit";//flipfit is the name of database 3306 is the port no. of mysql
                 Connection connection = DriverManager.getConnection(url,user,pass);
-                System.out.println("D atabase Connected");
+                System.out.println("Database Connected");
                 single_instance = connection;
                 return connection;
             }

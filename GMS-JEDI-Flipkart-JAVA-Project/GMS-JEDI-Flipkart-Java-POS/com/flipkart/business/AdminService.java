@@ -15,13 +15,13 @@ public class AdminService {
     private List<GymOwner> pendinGymOwnerList = new ArrayList<>();
     private List<GymCentre> pendinGymCentreList = new ArrayList<>();
 
-    public void approveGymCenter(String gymCentreId,boolean isApprove){
+    public void approveGymCenter(String gymCentreId,int isApproved){
         //takes GymCenter Object as input and return boolean
         System.out.println("Approved/Rejected Gym Center: ");
-        adminDAO.validateGymCentre(gymCentreId,isApprove);
+        adminDAO.validateGymCentre(gymCentreId,isApproved);
     }
 
-    public void approveGymOwner(String gymOwnerId,boolean isApprove){
+    public void approveGymOwner(String gymOwnerId,int isApprove){
         //takes GymOwner Object as input and return boolean
         System.out.println("Approved/Rejected Gym Owner: ");
         adminDAO.validateGymOwner(gymOwnerId,isApprove);
