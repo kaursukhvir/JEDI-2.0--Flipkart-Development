@@ -11,7 +11,7 @@ public class DBConnection {
       // Database credentials
     private static Connection singleInstance = null;
     private static final String user   = "root";
-    private static final String pass  = "apoorv123";
+    private static final String pass  = "";
     public static Connection connect() throws SQLException{
 
         if(singleInstance ==null){

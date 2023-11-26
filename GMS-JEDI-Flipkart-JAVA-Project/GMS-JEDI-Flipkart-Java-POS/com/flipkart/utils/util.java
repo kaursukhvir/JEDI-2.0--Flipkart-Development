@@ -31,7 +31,9 @@ public class util {
             System.out.printf("%-8s\t", gymCentre.getCity());
             System.out.printf("%-8s\t", gymCentre.getOwnerID());
             System.out.printf("%-8s\t", gymCentre.getCapacity());
-            System.out.println("Pending\n");
+            if(gymCentre.isApproved() == 0) System.out.println("No\n");
+            else if(gymCentre.isApproved() == 1) System.out.println("Yes\n");
+            else System.out.println("Pending\n");
         }
         System.out.println(DASHED_LINE);
     }

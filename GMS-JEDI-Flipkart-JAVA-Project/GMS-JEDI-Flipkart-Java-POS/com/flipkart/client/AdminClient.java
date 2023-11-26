@@ -119,15 +119,13 @@ public class AdminClient {
                 case 1:
                     List<GymOwner> pendingGymOwners = adminService.viewPendingGymOwners();
                     printOwnerList(pendingGymOwners);
-                    if(pendingGymOwners.isEmpty()) adminClientMainPage();
-                    else handleGymOwnerApprovalRequests();
+                    if(!pendingGymOwners.isEmpty()) handleGymOwnerApprovalRequests();
                     break;
 
                 case 2:
                     List<GymCentre> pendingGymCentres = adminService.viewPendingGymCentres();//get listGymCenterIds
                     util.printGymCentres(pendingGymCentres);
-                    if(pendingGymCentres.isEmpty()) adminClientMainPage();
-                    else handleGymCenterApprovalRequests();
+                    if(!pendingGymCentres.isEmpty()) handleGymCenterApprovalRequests();
                     break;
 
                 case 3:
