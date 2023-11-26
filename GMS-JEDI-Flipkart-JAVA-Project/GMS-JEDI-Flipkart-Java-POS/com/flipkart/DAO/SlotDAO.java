@@ -41,6 +41,7 @@ public class SlotDAO implements SlotInterfaceDAO {
         try{
             Connection conn = DBConnection.connect();
             PreparedStatement ps = conn.prepareStatement(SQLConstants.FETCH_SLOT_BY_CENTRE);
+            ps.setString(1,gymCentreId);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String slotId = rs.getString("slotId");
@@ -75,6 +76,7 @@ public class SlotDAO implements SlotInterfaceDAO {
         try{
             Connection conn = DBConnection.connect();
             PreparedStatement ps = conn.prepareStatement(SQLConstants.FETCH_SLOT_BY_ID);
+            ps.setString(1,slotID);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String slotId = rs.getString("slotId");

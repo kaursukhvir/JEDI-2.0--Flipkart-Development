@@ -6,7 +6,7 @@ public class Constants {
     public static String RESET_COLOR = "\u001B[0m";
     public static String YELLOW_COLOR = "\u001B[33m";
     public static String DASHED_LINE = GREEN_COLOR +"------------------------------------------------------------------------" + RESET_COLOR;
-    public static String INVALID_CHOICE_ERROR = "\nPlease enter valid choice\n";
+    public static String INVALID_CHOICE_ERROR = RED_COLOR +  "\nPlease enter valid choice\n" + RESET_COLOR;
     public static String EXIT_MESSAGE = RED_COLOR + "\nEXITING THE APPLICATION\n" + RESET_COLOR;
     public static String PREVIOUS_MENU_MESSAGE = "\nGOING BACK TO PREVIOUS MENU\n";
     public static String WELCOME_MESSAGE = GREEN_COLOR + "\nWELCOME TO THE GMS APPLICATION\n" + RESET_COLOR;

@@ -31,7 +31,6 @@ public class MainApplicationClient {
                 return;
             default:
                 System.out.println(INVALID_CHOICE_ERROR);
-
                 break;
         }
         mainPage();

@@ -7,6 +7,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
 import com.flipkart.business.SlotService;
+import com.flipkart.utils.util;
 
 import java.time.LocalTime;
 
@@ -72,25 +73,7 @@ public class GymOwnerClient {
 
                 case 0:
                     List<GymCentre> allGymCentres = gymCentreService.getAllCentres(gymOwnerId);
-
-
-                    System.out.println("---------------------------------------------------------");
-                    for(GymCentre gymCentre: allGymCentres) {
-                        System.out.printf("%-8s\t", gymCentre.getOwnerID());
-                        System.out.printf("%-8s\t", gymCentre.getGymCentreID());
-                        System.out.printf("%-8s\t", gymCentre.getGymCenterName());
-                        System.out.printf("%-8s\t", gymCentre.getCity());
-                        System.out.printf("%-8s\t", gymCentre.getPrice());
-
-                        if(gymCentre.isApproved() == 1) System.out.println("Yes\n");
-                        else if(gymCentre.isApproved() == 0) System.out.println("No\n");
-                        else System.out.println("Pending\n");
-                        System.out.println("");
-                    }
-                    System.out.println("---------------------------------------------------------");
-
-
-
+                    util.printGymCentres(allGymCentres);
                     break;
 
                 case 1:

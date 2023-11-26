@@ -50,6 +50,18 @@ public class CustomerClient {
         customerClientMainPage(userName);
     }
 
+    private void printSlots(List<Slot> slots){
+        System.out.println(DASHED_LINE);
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
+        System.out.printf("%-8s\t\n", "SLOT-TIME" + RESET_COLOR);
+        System.out.println(DASHED_LINE);
+        for(Slot slot: slots) {
+            System.out.printf("%-8s\t", slot.getSlotId());
+            System.out.printf("%-8s\t\n", slot.getTime());
+        }
+        System.out.println(DASHED_LINE);
+    }
+
     private void bookSlotSubMenu(String userName){
         //Get Location for filter
         System.out.println("Provide Location to search :");
@@ -72,7 +84,8 @@ public class CustomerClient {
         //Choose Slot
         System.out.println("Choose from the Below Slots");
         List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,date);
-        util.printList(availableSlots);
+        //util.printList(availableSlots);
+        printSlots(availableSlots);
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
