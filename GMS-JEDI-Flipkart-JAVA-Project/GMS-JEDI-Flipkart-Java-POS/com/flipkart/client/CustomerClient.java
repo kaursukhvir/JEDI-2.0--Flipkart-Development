@@ -58,7 +58,7 @@ public class CustomerClient {
 //        Get Location for filter
         System.out.println("Provide Location to search :");
         String location = scanner.next();
-        List<GymCentre> centreListByLocation = customerService.getAllGymCenterDetailsByLocation(location);
+        List<GymCentre> centreListByLocation = customerService.getAllGymCenterDetailsByCity(location);
         util.printList(centreListByLocation); // Print All Centres
 //        Select Gym Centre
         System.out.print("Choose a gymCentre ID to proceed:");

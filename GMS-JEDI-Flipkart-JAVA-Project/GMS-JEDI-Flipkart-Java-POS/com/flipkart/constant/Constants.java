@@ -1,6 +1,10 @@
 package com.flipkart.constant;
 
 public class Constants {
+    public static String GREEN_COLOR = "\u001B[32m";
+    public static String RED_COLOR = "\u001B[31m";
+    public static String RESET_COLOR = "\u001B[0m";
+    public static String YELLOW_COLOR = "\u001B[33m";
     public static String INVALID_CHOICE_ERROR = "\nPlease enter valid choice\n";
     public static String EXIT_MESSAGE = "\nEXITING THE APPLICATION\n";
     public static String PREVIOUS_MENU_MESSAGE = "\nGOING BACK TO PREVIOUS MENU\n";

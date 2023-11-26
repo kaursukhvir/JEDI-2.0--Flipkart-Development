@@ -112,6 +112,7 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
                         rs.getInt("capacity"),
                         rs.getInt("price")
                 );
+                gymCentre.setApproved(rs.getInt("isApproved"));
                 pendingList.add(gymCentre);
             }
             //conn.close();
@@ -170,14 +171,38 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public List<GymCentre> getGymCentreListByCity(String city) {
-
-
         List<GymCentre> allCentreByCity = new ArrayList<>();
-        for(GymCentre gymCentre: gymCentreList){
-            if(gymCentre.getCity().equals(city)){
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gyms centres by City..");
+            statement = conn.prepareStatement(SQLConstants.FETCH_GYM_CENTRES_BY_CITY);
+            statement.setString(1, city);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
                 allCentreByCity.add(gymCentre);
             }
+            //System.out.println("The gym centre has been approved!");
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
         }
+//        for(GymCentre gymCentre: gymCentreList){
+//            if(gymCentre.getCity().equals(city)){
+//                allCentreByCity.add(gymCentre);
+//            }
+//        }
         return allCentreByCity;
     }
 }

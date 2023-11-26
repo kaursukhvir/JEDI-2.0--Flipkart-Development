@@ -14,7 +14,7 @@ public class CustomerService {
     private BookingService bookingService = new BookingService();
     private ScheduleService scheduleService = new ScheduleService();
 
-    public List<GymCentre> getAllGymCenterDetailsByLocation(String city){
+    public List<GymCentre> getAllGymCenterDetailsByCity(String city){
         //takes City (Location) as input and returns List<GymCenter>
         return gymCentreService.getCentresByCity(city);
     }

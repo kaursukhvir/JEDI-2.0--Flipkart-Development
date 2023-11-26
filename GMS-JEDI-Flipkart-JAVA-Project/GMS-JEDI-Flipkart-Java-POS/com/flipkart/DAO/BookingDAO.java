@@ -51,7 +51,6 @@ public class BookingDAO {
     }
 
     public void cancelBookingById(String bookingID) {
-
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(CANCEL_BOOKING_BY_ID);
