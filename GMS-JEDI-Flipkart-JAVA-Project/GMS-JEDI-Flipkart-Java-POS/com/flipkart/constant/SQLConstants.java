@@ -60,4 +60,6 @@ public class SQLConstants {
     public static final String FETCH_SLOT_BY_CENTRE ="SELECT * FROM FlipFit.Slot WHERE centreId=?";
     public static final String ADD_SLOT ="INSERT INTO FlipFit.Slot(slotId, centreId, time) values (?, ?, ?)";
     public static final String FETCH_SLOT_BY_ID = "SELECT * FROM FlipFit.Slot WHERE slotId=?";
+
+    public static final String CHECK_BOOKING_OVERLAP = "Select * from FlipFit.Booking where userID=?";
 }

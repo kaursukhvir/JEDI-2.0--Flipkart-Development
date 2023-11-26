@@ -1,11 +1,15 @@
 package com.flipkart.DAO;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.utils.DBConnection;
 
+import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.flipkart.constant.SQLConstants.*;
 
@@ -13,6 +17,7 @@ public class BookingDAO {
 
     public BookingDAO() {
     }
+    private static final List<Booking> allBookingList = new ArrayList<>();
 
     public void  addBooking(String userName, String scheduleID){
         try {
@@ -30,25 +35,30 @@ public class BookingDAO {
         }
 //
     }
-    public void getBookingByCustomerId(String customerId) {
+    public List<Booking> getBookingByCustomerId(String customerId) {
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
             stmt.setString(1, customerId);
-            ResultSet output = stmt.executeQuery();
-            System.out.println("BookingId \t ScheduleID");
-            while(output.next()) {
-                System.out.printf("%-12s\t", output.getInt("bookingId") );
-                System.out.printf("  %-7s\t",output.getString("scheduleID"));
-                System.out.println("");
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                Booking booking = new Booking(
+                        rs.getString("bookingId"),
+                        rs.getString("userID"),
+                        rs.getString("scheduleID")
+                );
+
+                allBookingList.add(booking);
             }
-            System.out.println("*********************************************");
         } catch(SQLException sql) {
             sql.printStackTrace();
         } catch(Exception excep) {
             excep.printStackTrace();
         }
+        return allBookingList;
     }
+
 
     public void cancelBookingById(String bookingID) {
         try {
@@ -62,4 +72,5 @@ public class BookingDAO {
         excep.printStackTrace();
         }
     }
+
 }

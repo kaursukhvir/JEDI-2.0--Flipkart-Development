@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
@@ -95,8 +96,18 @@ public class CustomerClient {
 
     private void getbookingsSubMenu(String userName){
         System.out.println("Bookings : ");
-        customerService.getCustomerBookings(userName);
+        List<Booking> allBookingList= customerService.getCustomerBookings(userName);
+        System.out.println(DASHED_LINE);
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
+        System.out.printf("%-8s\t\n", "SLOT-TIME" + RESET_COLOR);
+        System.out.println(DASHED_LINE);
+        for(Booking booking: allBookingList) {
+            System.out.printf("%-8s\t", booking.getBookingID());
+            System.out.printf("%-8s\t\n", booking.getUserID());
+            System.out.printf("%-8s\t\n", booking.getScheduleID());
 
+        }
+        System.out.println(DASHED_LINE);
     }
 
     private void cancelBookingSubMenu(String userName){
@@ -116,6 +127,7 @@ public class CustomerClient {
         System.out.println(YELLOW_COLOR + "CARD DETAILS: "+ RESET_COLOR + customer.getCardDetails());
         System.out.println(GREEN_COLOR +"------------------------------------------------------------------------" + RESET_COLOR);
     }
+
 
     public void customerClientMainPage(String userName) {
         System.out.println("WELCOME "+userName+" !!\n What you what to do");

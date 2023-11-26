@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
@@ -25,9 +26,9 @@ public class CustomerService {
         return gymCentreService.getAvailableSlotsByCentreAndDate(centreID,date);
     }
 
-    public void getCustomerBookings(String customerId){
+    public List<Booking> getCustomerBookings(String customerId){
         //takes userId and returns List<Bookings>
-        bookingService.getBookingByCustomerId(customerId);
+        return bookingService.getBookingByCustomerId(customerId);
     }
 
     public Object getBookingDetailsByID(){

@@ -1,6 +1,9 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.BookingDAO;
+import com.flipkart.bean.Booking;
+
+import java.util.List;
 
 public class BookingService {
 
@@ -13,8 +16,8 @@ public class BookingService {
         bookingDAO.addBooking(userId, scheduleID);
     }
 
-    public void getBookingByCustomerId(String customerId){
-        bookingDAO.getBookingByCustomerId(customerId);
+    public List<Booking> getBookingByCustomerId(String customerId){
+        return bookingDAO.getBookingByCustomerId(customerId);
     }
 
     public void cancelBooking(String bookingID) {
