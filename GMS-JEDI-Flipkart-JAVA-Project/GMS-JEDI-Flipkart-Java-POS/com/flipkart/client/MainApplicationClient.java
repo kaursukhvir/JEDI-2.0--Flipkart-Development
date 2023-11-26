@@ -75,8 +75,6 @@ public class MainApplicationClient {
                     break;
 
             }
-
-
     }
     
     private static void registration(){

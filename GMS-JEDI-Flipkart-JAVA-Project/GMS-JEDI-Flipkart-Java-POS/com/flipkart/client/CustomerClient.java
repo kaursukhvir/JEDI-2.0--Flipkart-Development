@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
@@ -7,19 +8,18 @@ import com.flipkart.utils.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
-import static com.flipkart.constant.Constants.INVALID_CHOICE_ERROR;
-import static com.flipkart.constant.Constants.PREVIOUS_MENU_MESSAGE;
+import static com.flipkart.constant.Constants.*;
+import static com.flipkart.constant.Constants.RESET_COLOR;
 
 public class CustomerClient {
     private CustomerService customerService  =  new CustomerService();
 
-
     public boolean customerLogin(String userName, String password) {
-//        System.out.println("HELLO in customer"); -- BAD
         if (customerService.isUserValid(userName, password)) {
             System.out.println("Successfully logged in");
             customerClientMainPage(userName);
@@ -50,20 +50,17 @@ public class CustomerClient {
         customerClientMainPage(userName);
     }
 
-    private void viewMyProfile(String userName){
-        customerService.viewMyProfile(userName);
-    }
-
     private void bookSlotSubMenu(String userName){
-//        Get Location for filter
+        //Get Location for filter
         System.out.println("Provide Location to search :");
         String location = scanner.next();
         List<GymCentre> centreListByLocation = customerService.getAllGymCenterDetailsByCity(location);
-        util.printList(centreListByLocation); // Print All Centres
-//        Select Gym Centre
+        // Print All Centres
+        util.printGymCentres(centreListByLocation);
+        //Select Gym Centre
         System.out.print("Choose a gymCentre ID to proceed:");
         String chosenGym = scanner.next();
-//        Select Date
+        //Select Date
         System.out.print("Enter Date (dd/MM/yyyy): ");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = null;
@@ -72,13 +69,13 @@ public class CustomerClient {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-//        Choose Slot
+        //Choose Slot
         System.out.println("Choose from the Below Slots");
         List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,date);
         util.printList(availableSlots);
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
-//      Select Slot to book
+        //Select Slot to book
         customerService.bookSlot(userName,date,slotID);
 
     }
@@ -97,6 +94,16 @@ public class CustomerClient {
 
     }
 
+    public void printCustomerProfile(Customer customer){
+        System.out.println(GREEN_COLOR +"------------------------------------------------------------------------" + RESET_COLOR);
+        System.out.println(YELLOW_COLOR + "USER ID: "+ RESET_COLOR + customer.getUserID());
+        System.out.println(YELLOW_COLOR + "USER NAME: "+ RESET_COLOR + customer.getUserName());
+        System.out.println(YELLOW_COLOR + "EMAIL: "+ RESET_COLOR + customer.getEmail());
+        System.out.println(YELLOW_COLOR + "CONTACT: "+ RESET_COLOR + customer.getCustomerPhone());
+        System.out.println(YELLOW_COLOR + "CARD DETAILS: "+ RESET_COLOR + customer.getCardDetails());
+        System.out.println(GREEN_COLOR +"------------------------------------------------------------------------" + RESET_COLOR);
+    }
+
     public void customerClientMainPage(String userName) {
         System.out.println("WELCOME "+userName+" !!\n What you what to do");
         while(true){
@@ -104,7 +111,8 @@ public class CustomerClient {
             int choice = scanner.nextInt();
             switch(choice){
                 case 1:
-                    customerService.viewMyProfile(userName);
+                    Customer customer= customerService.viewMyProfile(userName);
+                    printCustomerProfile(customer);
                     break;
                 case 2:
                     bookSlotSubMenu(userName);

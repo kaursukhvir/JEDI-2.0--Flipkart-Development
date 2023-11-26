@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 
@@ -35,10 +36,10 @@ public class CustomerService {
     }
 
     public void bookSlot(String userID,Date date, String slotId){
-//        check if booking is overlapping
+        //check if booking is overlapping
         checkOverlap();
         String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();
-//        create booking
+        //create booking
         bookingService.addBooking(userID, scheduleId);
         return;
     }
@@ -55,8 +56,8 @@ public class CustomerService {
         customerDAO.registerCustomer(userName,password,email,phoneNumber,cardNumber);
     }
 
-    public void viewMyProfile(String userName) {
-        System.out.println(customerDAO.getCustomerById(userName));
+    public Customer viewMyProfile(String userName) {
+        return customerDAO.getCustomerById(userName);
     }
 
     public boolean isUserValid(String userName, String password) {

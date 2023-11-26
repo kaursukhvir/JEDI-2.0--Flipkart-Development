@@ -6,6 +6,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminService;
 import com.flipkart.business.GymOwnerService;
+import com.flipkart.utils.util;
 
 import java.util.List;
 import java.util.Scanner;
@@ -77,6 +78,34 @@ public class AdminClient {
             adminClientMainPage();
     }
 
+    private void printOwnerList(List<GymOwner> gymOwnerList){
+        System.out.println(DASHED_LINE);
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "ID");
+        System.out.printf("%-8s\t", "NAME");
+        System.out.printf("%-8s\t", "EMAIL-ID");
+        System.out.printf("%11s\t", "PAN");
+        System.out.printf("%23s\t\n", "IS-APPROVED" + RESET_COLOR);
+        System.out.println(DASHED_LINE);
+        System.out.println("");
+        for(GymOwner gymOwner: gymOwnerList) {
+            System.out.printf("%-8s\t", gymOwner.getUserID());
+            System.out.printf("%-8s\t", gymOwner.getUserName());
+            System.out.printf("%-8s\t", gymOwner.getEmail());
+            System.out.printf("%-8s\t", gymOwner.getPanNumber());
+            if(gymOwner.isApproved()==1)
+            {
+                System.out.println("Yes\n");
+            }
+            else if(gymOwner.isApproved() == 0)
+            {
+                System.out.println("No\n");
+            } else {
+                System.out.println("Pending\n");
+            }
+        }
+        System.out.println(DASHED_LINE);
+    }
+
     public void adminClientMainPage(){
         System.out.println("Welcome To the Admin Interface. Please select a choice: ");
         while(true){
@@ -85,83 +114,26 @@ public class AdminClient {
             switch (pendingChoice) {
                 case 0:
                     List<GymOwner> allGymOwners =  gymOwnerService.viewAllGymOwners();
-
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.printf(YELLOW_COLOR + "%-8s\t", "ID");
-                    System.out.printf("%-8s\t", "NAME");
-                    System.out.printf("%-8s\t", "EMAIL-ID");
-                    System.out.printf("%11s\t", "PAN");
-                    System.out.printf("%23s\t\n", "IS-APPROVED" + RESET_COLOR);
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.println("");
-                    for(GymOwner gymOwner: allGymOwners) {
-                        System.out.printf("%-8s\t", gymOwner.getUserID());
-                        System.out.printf("%-8s\t", gymOwner.getUserName());
-                        System.out.printf("%-8s\t", gymOwner.getEmail());
-                        System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved()==1)
-                        {
-                            System.out.println("Yes\n");
-                        }
-                        else if(gymOwner.isApproved() == 0)
-                        {
-                            System.out.println("No\n");
-                        } else {
-                            System.out.println("Pending\n");
-                        }
-                    }
-                    System.out.println("--------------------------------------------------------------------");
+                    printOwnerList(allGymOwners);
                     break;
                 case 1:
-                    List<GymOwner> pendingGymOwners = adminService.viewPendingGymOwners(); //Get listGymOwnerIds
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.printf(YELLOW_COLOR + "%-8s\t", "ID");
-                    System.out.printf("%-8s\t", "NAME");
-                    System.out.printf("%-8s\t", "EMAIL-ID");
-                    System.out.printf("%11s\t", "PAN");
-                    System.out.printf("%23s\t\n", "IS-APPROVED" + RESET_COLOR);
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.println("");
-                    for(GymOwner gymOwner: pendingGymOwners) {
-                        System.out.printf("%-8s\t", gymOwner.getUserID());
-                        System.out.printf("%-8s\t", gymOwner.getUserName());
-                        System.out.printf("%-8s\t", gymOwner.getEmail());
-                        System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        System.out.println("Pending\n");
-                    }
-                    System.out.println("---------------------------------------------------------");
-                    handleGymOwnerApprovalRequests();
+                    List<GymOwner> pendingGymOwners = adminService.viewPendingGymOwners();
+                    printOwnerList(pendingGymOwners);
+                    if(pendingGymOwners.isEmpty()) adminClientMainPage();
+                    else handleGymOwnerApprovalRequests();
                     break;
 
                 case 2:
                     List<GymCentre> pendingGymCentres = adminService.viewPendingGymCentres();//get listGymCenterIds
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.printf(YELLOW_COLOR + "%-8s\t", "CENTRE-ID");
-                    System.out.printf("%-8s\t", "NAME");
-                    System.out.printf("%-6s\t", "CITY");
-                    System.out.printf("%12s\t", "OWNER-ID");
-                    System.out.printf("%8s\t", "CAPACITY");
-                    System.out.printf("%-8s\t\n", "IS-APPROVED" + RESET_COLOR);
-                    System.out.println("------------------------------------------------------------------------");
-                    System.out.println("");
-                    for(GymCentre gymCentre: pendingGymCentres) {
-                        System.out.printf("%-8s\t", gymCentre.getGymCentreID());
-                        System.out.printf("%-8s\t", gymCentre.getGymCenterName());
-                        System.out.printf("%-8s\t", gymCentre.getCity());
-                        System.out.printf("%-8s\t", gymCentre.getOwnerID());
-                        System.out.printf("%-8s\t", gymCentre.getCapacity());
-                        System.out.println("Pending\n");
-                    }
-                    System.out.println("-------------------------------------------------------------");
-                    handleGymCenterApprovalRequests();
+                    util.printGymCentres(pendingGymCentres);
+                    if(pendingGymCentres.isEmpty()) adminClientMainPage();
+                    else handleGymCenterApprovalRequests();
                     break;
 
                 case 3:
                     return;
             }
         }
-
-
     }
 
 }
