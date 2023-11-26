@@ -17,20 +17,41 @@ public class ScheduleService {
     public Schedule createSchedule(Date date, String slotId){
         String centreID = slotService.getSlotByID(slotId).getCentreID();
         int availability = gymCentreService.getGymCentreById(centreID).getCapacity();
-        return new Schedule(String.valueOf(date)+slotId, date, slotId,availability);
+        String scheduleId = date+slotId;
+        scheduleDAO.addSchedule(scheduleId, date, slotId, availability);
+
+        return new Schedule(scheduleId, date, slotId, availability);
     }
 
-    public Schedule getScheduleByDateandSlotId(String SlotId, Date date){
+    public Schedule getScheduleByDateAndSlotId(String SlotId, Date date){
         //returns whether current schedule exists or not
+        List<Schedule> scheduleList = scheduleDAO.getAllScheduleByDate(date);
+        for(Schedule schedule: scheduleList){
+            if(schedule.getSlotID().equals(SlotId))
+                return schedule;
+        }
+
+        //Schedule doesn't exist, return null
         return null;
     }
 
     public void modifySchedule(String scheduleId,int action){
         // increment or decrement availability based on action
+        // 1 for increasing availability, -1 for decreasing
+        scheduleDAO.modifySchedule(scheduleId, action);
     }
 
-    public boolean checkAvailability(String centreID, Date date){
-        return  true;
+    public List<Schedule> checkAvailability(String centreID, Date date){
+        List<Slot> allSlotsForGym = slotService.getAllSlotsByCentre(centreID);
+        List<Schedule> allAvailableSchedules = new ArrayList<>();
+        for(Slot slot : allSlotsForGym){
+            String slotId = slot.getSlotId();
+            Schedule schedule = getOrCreateSchedule(slotId, date);
+            if(schedule.getAvailability() > 0)
+                allAvailableSchedules.add(schedule);
+        }
+
+        return allAvailableSchedules;
     }
 
     public List<Slot> getAllAvailableSlotsByDate(String centreID, Date date) {
@@ -49,10 +70,11 @@ public class ScheduleService {
     }
 
     public Schedule getOrCreateSchedule(String slotId, Date date) {
-        if(getScheduleByDateandSlotId(slotId,date) == null ){
+        Schedule schedule = getScheduleByDateAndSlotId(slotId, date);
+        if( schedule == null ){
             return createSchedule(date,slotId);
         }
-        return getScheduleByDateandSlotId(slotId,date);
+        return schedule;
 
     }
 }

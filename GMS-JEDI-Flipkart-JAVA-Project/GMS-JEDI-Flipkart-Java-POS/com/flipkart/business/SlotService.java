@@ -20,4 +20,7 @@ public class SlotService {
     public Slot getSlotByID(String slotID){
         return slotDAO.getSlotById(slotID);
     }
+    public List<Slot> getSlotList(){
+        return slotDAO.getSlotList();
+    }
 }
