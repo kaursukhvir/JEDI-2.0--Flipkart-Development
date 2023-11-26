@@ -1,6 +1,7 @@
 package com.flipkart.bean;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.UUID;
 
 public class Schedule {
 
@@ -9,8 +10,8 @@ public class Schedule {
     private String slotID;
     private int availability;
 
-    public Schedule(String scheduleID, Date date, String slotID, int availability) {
-        this.scheduleID = scheduleID;
+    public Schedule( Date date, String slotID, int availability) {
+        this.scheduleID = String.valueOf(UUID.randomUUID());
         this.date = date;
         this.slotID = slotID;
         this.availability = availability;

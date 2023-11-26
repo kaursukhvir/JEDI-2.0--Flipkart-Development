@@ -11,20 +11,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class ScheduleDAO implements ScheduleInterfaceDAO {
 
-    public void addSchedule(String scheduleID, Date date, String slotID, int availability){
-        Schedule schedule = new Schedule(scheduleID,date,slotID,availability);
+    public void addSchedule( Schedule schedule){
         try{
             Connection conn = DBConnection.connect();
             PreparedStatement ps = conn.prepareStatement(SQLConstants.ADD_SCHEDULE);
-            ps.setString(1, scheduleID);
-            ps.setDate(2, new java.sql.Date(date.getTime()));
-            ps.setString(3, slotID);
-            ps.setInt(4, availability);
+            ps.setString(1, schedule.getScheduleID());
+            ps.setDate(2, schedule.getDate());
+            ps.setString(3, schedule.getSlotID());
+            ps.setInt(4, schedule.getAvailability());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -44,7 +44,7 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
                 String slotId = rs.getString("slotId");
                 int availability = rs.getInt("'availability");
                 Date date = new Date(rs.getDate("date").getTime());
-                schedule = new Schedule(scheduleId, date, slotId, availability);
+                schedule = new Schedule(date, slotId, availability);
             }
             if(schedule == null)
                 throw new SQLException("Not Found");
@@ -66,9 +66,9 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
             while(rs.next()){
                 String scheduleId = rs.getString("scheduleId");
                 String slotId = rs.getString("slotId");
-                int availability = rs.getInt("'availability");
+                int availability = rs.getInt("‘availability’");
 
-                response.add(new Schedule(scheduleId, date, slotId, availability));
+                response.add(new Schedule( date, slotId, availability));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

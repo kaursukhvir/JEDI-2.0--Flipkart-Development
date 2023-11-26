@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import static com.flipkart.constant.SQLConstants.*;
 
@@ -38,7 +39,7 @@ public class BookingDAO {
             ResultSet output = stmt.executeQuery();
             System.out.println("BookingId \t ScheduleID");
             while(output.next()) {
-                System.out.printf("%-12s\t", output.getInt("bookingId") );
+                System.out.printf("%-12s\t", output.getString("bookingId") );
                 System.out.printf("  %-7s\t",output.getString("scheduleID"));
                 System.out.println("");
             }

@@ -5,8 +5,9 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class CustomerService {
 
@@ -35,12 +36,12 @@ public class CustomerService {
         return new Object();
     }
 
-    public void bookSlot(String userID,Date date, String slotId){
+    public void bookSlot(String userName,Date date, String slotId){
         //check if booking is overlapping
         checkOverlap();
         String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();
         //create booking
-        bookingService.addBooking(userID, scheduleId);
+        bookingService.addBooking(userName, scheduleId);
         return;
     }
 

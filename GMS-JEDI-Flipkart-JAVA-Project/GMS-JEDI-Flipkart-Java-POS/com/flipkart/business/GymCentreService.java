@@ -5,7 +5,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class GymCentreService {
