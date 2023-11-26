@@ -10,6 +10,8 @@ import com.flipkart.business.SlotService;
 
 import java.time.LocalTime;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
@@ -138,13 +140,40 @@ public class GymOwnerClient {
                     break;
 
                 case 4:
-                    System.out.println("Enter Gym Centre Id: ");
-                    String centreId = scanner.next();
 
-                    System.out.println("Enter time in 24h format (hh:mm:ss) : ");
-                    String time = scanner.next();
+                    boolean isAdding = true;
+                    String centreId = null;
 
-                    slotService.addSlot(new Slot("slot8", centreId, LocalTime.parse(time)));
+                    List<Slot> newSlotList = new ArrayList<>();
+                    while (isAdding) {
+                        System.out.println("Enter new slot id: ");
+                        String slotId = scanner.next();
+
+                        System.out.println("Enter Gym Centre Id: ");
+                        centreId = scanner.next();
+
+                        System.out.println("Enter time in 24h format (hh:mm:ss) : ");
+                        String time = scanner.next();
+
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                        LocalTime localTime = LocalTime.parse(time, formatter);
+
+                        newSlotList.add(new Slot(
+                                slotId,
+                                centreId,
+                                localTime
+                        ));
+
+                        System.out.println("Do you want to enter more slots (y/n)?: ");
+                        String addChoice = scanner.next();
+                        addChoice = addChoice.toLowerCase();
+
+                        if(addChoice.equals("n") || addChoice.equals("no")) {
+                            isAdding = false;
+                        }
+                    }
+
+                    slotService.addSlotsForGym(centreId, newSlotList);
                     break;
                 case 5:
                     System.out.println(PREVIOUS_MENU_MESSAGE);

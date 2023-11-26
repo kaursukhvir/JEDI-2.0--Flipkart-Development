@@ -8,6 +8,7 @@ public class Slot {
     private LocalTime time;
 
     public Slot(String slotId, String centreID, LocalTime time) {
+        this.slotId = slotId;
         this.centreID = centreID;
         this.time = time;
     }

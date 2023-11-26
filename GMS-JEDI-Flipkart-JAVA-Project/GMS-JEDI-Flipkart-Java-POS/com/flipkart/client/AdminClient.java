@@ -129,7 +129,6 @@ public class AdminClient {
                     if(pendingGymCentres.isEmpty()) adminClientMainPage();
                     else handleGymCenterApprovalRequests();
                     break;
-
                 case 3:
                     return;
             }
