@@ -121,6 +121,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
                 GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
+                owner.setApproved(rs.getInt("isApproved"));
                 pendingList.add(owner);
             }
             //conn.close();

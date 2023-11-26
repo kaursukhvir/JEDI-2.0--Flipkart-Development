@@ -85,12 +85,15 @@ public class AdminClient {
             switch (pendingChoice) {
                 case 0:
                     List<GymOwner> allGymOwners =  gymOwnerService.viewAllGymOwners();
-                    System.out.println("---------------------------------------------------------");
-                    System.out.printf("%-5s\t", "ID");
-                    System.out.printf("%-5s\t", "NAME");
-                    System.out.printf("%-5s\t", "EMAIL-ID");
-                    System.out.printf("%-15s\t", "PAN");
-                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+
+                    System.out.println("--------------------------------------------------------------------");
+                    System.out.printf(YELLOW_COLOR + "%-8s\t", "ID");
+                    System.out.printf("%-8s\t", "NAME");
+                    System.out.printf("%-8s\t", "EMAIL-ID");
+                    System.out.printf("%11s\t", "PAN");
+                    System.out.printf("%23s\t\n", "IS-APPROVED" + RESET_COLOR);
+                    System.out.println("--------------------------------------------------------------------");
+                    System.out.println("");
                     for(GymOwner gymOwner: allGymOwners) {
                         System.out.printf("%-8s\t", gymOwner.getUserID());
                         System.out.printf("%-8s\t", gymOwner.getUserName());
@@ -106,32 +109,25 @@ public class AdminClient {
                         } else {
                             System.out.println("Pending\n");
                         }
-                        System.out.println("");
                     }
-                    System.out.println("---------------------------------------------------------");
+                    System.out.println("--------------------------------------------------------------------");
                     break;
                 case 1:
                     List<GymOwner> pendingGymOwners = adminService.viewPendingGymOwners(); //Get listGymOwnerIds
-                    System.out.println("---------------------------------------------------------");
-//                    System.out.printf("%-5s\t", "GYM-OWNER-ID");
-//                    System.out.printf("%-5s\t", "OWNER-NAME");
-//                    System.out.printf("%-5s\t", "EMAIL-ID");
-//                    System.out.printf("%-15s\t", "PAN-NUMBER");
-//                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+                    System.out.println("--------------------------------------------------------------------");
+                    System.out.printf(YELLOW_COLOR + "%-8s\t", "ID");
+                    System.out.printf("%-8s\t", "NAME");
+                    System.out.printf("%-8s\t", "EMAIL-ID");
+                    System.out.printf("%11s\t", "PAN");
+                    System.out.printf("%23s\t\n", "IS-APPROVED" + RESET_COLOR);
+                    System.out.println("--------------------------------------------------------------------");
+                    System.out.println("");
                     for(GymOwner gymOwner: pendingGymOwners) {
                         System.out.printf("%-8s\t", gymOwner.getUserID());
                         System.out.printf("%-8s\t", gymOwner.getUserName());
                         System.out.printf("%-8s\t", gymOwner.getEmail());
                         System.out.printf("%-8s\t", gymOwner.getPanNumber());
-                        if(gymOwner.isApproved()==1)
-                        {
-                            System.out.println("Yes\n");
-                        }
-                        else
-                        {
-                            System.out.println("No\n");
-                        }
-                        System.out.println("");
+                        System.out.println("Pending\n");
                     }
                     System.out.println("---------------------------------------------------------");
                     handleGymOwnerApprovalRequests();
@@ -139,28 +135,24 @@ public class AdminClient {
 
                 case 2:
                     List<GymCentre> pendingGymCentres = adminService.viewPendingGymCentres();//get listGymCenterIds
-                    System.out.println("---------------------------------------------------------");
-//                    System.out.printf("%-5s\t", "GYM-OWNER-ID");
-//                    System.out.printf("%-5s\t", "OWNER-NAME");
-//                    System.out.printf("%-5s\t", "EMAIL-ID");
-//                    System.out.printf("%-15s\t", "PAN-NUMBER");
-//                    System.out.printf("%-8s\t\n", "IS-APPROVED");
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.printf(YELLOW_COLOR + "%-8s\t", "CENTRE-ID");
+                    System.out.printf("%-8s\t", "NAME");
+                    System.out.printf("%-6s\t", "CITY");
+                    System.out.printf("%12s\t", "OWNER-ID");
+                    System.out.printf("%8s\t", "CAPACITY");
+                    System.out.printf("%-8s\t\n", "IS-APPROVED" + RESET_COLOR);
+                    System.out.println("------------------------------------------------------------------------");
+                    System.out.println("");
                     for(GymCentre gymCentre: pendingGymCentres) {
                         System.out.printf("%-8s\t", gymCentre.getGymCentreID());
+                        System.out.printf("%-8s\t", gymCentre.getGymCenterName());
                         System.out.printf("%-8s\t", gymCentre.getCity());
                         System.out.printf("%-8s\t", gymCentre.getOwnerID());
                         System.out.printf("%-8s\t", gymCentre.getCapacity());
-                        if(gymCentre.isApproved() == 1)
-                        {
-                            System.out.println("Yes\n");
-                        }
-                        else
-                        {
-                            System.out.println("No\n");
-                        }
-                        System.out.println("");
+                        System.out.println("Pending\n");
                     }
-                    System.out.println("---------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------");
                     handleGymCenterApprovalRequests();
                     break;
 
