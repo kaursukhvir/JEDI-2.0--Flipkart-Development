@@ -127,7 +127,6 @@ public class AdminClient {
                     util.printGymCentres(pendingGymCentres);
                     if(!pendingGymCentres.isEmpty()) handleGymCenterApprovalRequests();
                     break;
-
                 case 3:
                     return;
             }

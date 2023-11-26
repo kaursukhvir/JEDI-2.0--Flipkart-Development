@@ -23,4 +23,12 @@ public class SlotService {
     public List<Slot> getSlotList(){
         return slotDAO.getSlotList();
     }
+
+    public void addSlotsForGym(String gymCentreId, List<Slot> slotList){
+        System.out.printf("Adding all slots to gym: " + gymCentreId);
+        for(Slot slot : slotList) {
+            slot.setCentreID(gymCentreId);
+            slotDAO.addSlot(slot);
+        }
+    }
 }
