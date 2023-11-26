@@ -50,7 +50,7 @@ public class SQLConstants {
     public static final String ADD_BOOKING= "INSERT INTO FlipFit.Booking (bookingId, userID, scheduleID) values( ?, ?, ?)";
 
     // ------------- Schedule -------------
-    public static final String ADD_SCHEDULE="INSERT INTO FlipFit.Schedule(scheduleId, date, slotId, 'availability' ) values (?,?,?,?)";
+    public static final String ADD_SCHEDULE="INSERT INTO FlipFit.Schedule(scheduleId, date, slotId, ‘availability’ ) values (?,?,?,?)";
     public static final String GET_SCHEDULES_BY_DATE="SELECT * FROM FlipFit.Schedule WHERE date=?";
     public static final String GET_SCHEDULE_BY_ID ="SELECT * FROM FlipFit.Schedule WHERE slotId=?";
     public static final String MODIFY_SCHEDULE_AVAILABILITY ="UPDATE FlipFit.Schedule SET 'availability'=? WHERE scheduleId=?";
