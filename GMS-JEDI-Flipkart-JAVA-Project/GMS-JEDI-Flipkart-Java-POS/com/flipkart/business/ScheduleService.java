@@ -1,8 +1,9 @@
 package com.flipkart.business;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Schedule;
@@ -17,10 +18,11 @@ public class ScheduleService {
     public Schedule createSchedule(Date date, String slotId){
         String centreID = slotService.getSlotByID(slotId).getCentreID();
         int availability = gymCentreService.getGymCentreById(centreID).getCapacity();
-        String scheduleId = date+slotId;
-        scheduleDAO.addSchedule(scheduleId, date, slotId, availability);
+        UUID scheduleId = UUID.randomUUID();
+        Schedule schedule = new Schedule( date, slotId, availability);
+        scheduleDAO.addSchedule(schedule);
 
-        return new Schedule(scheduleId, date, slotId, availability);
+        return schedule;
     }
 
     public Schedule getScheduleByDateAndSlotId(String SlotId, Date date){

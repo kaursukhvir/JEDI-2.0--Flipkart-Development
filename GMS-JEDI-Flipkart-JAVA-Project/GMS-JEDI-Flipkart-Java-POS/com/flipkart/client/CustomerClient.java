@@ -10,7 +10,7 @@ import com.flipkart.utils.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
@@ -76,21 +76,22 @@ public class CustomerClient {
         //Select Date
         System.out.print("Enter Date (dd/MM/yyyy): ");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = null;
+        java.util.Date date = null;
+        Date sqlDate = null;
         try {
             date = sdf.parse(scanner.next());
+            sqlDate = new Date(date.getTime());
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
         //Choose Slot
         System.out.println("Choose from the Below Slots");
-        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,date);
-        //util.printList(availableSlots);
+        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
         printSlots(availableSlots);
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
-        customerService.bookSlot(userName,date,slotID);
+        customerService.bookSlot(userName,sqlDate,slotID);
 
     }
 
