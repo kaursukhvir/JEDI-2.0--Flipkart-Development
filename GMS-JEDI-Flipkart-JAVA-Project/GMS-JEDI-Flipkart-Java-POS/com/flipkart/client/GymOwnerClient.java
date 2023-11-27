@@ -3,7 +3,6 @@ package com.flipkart.client;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.GymOwnerDAO;
-import com.flipkart.bean.GymOwner;
 import com.flipkart.business.*;
 import com.flipkart.utils.util;
 

@@ -1,13 +1,9 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Booking;
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Schedule;
-import com.flipkart.bean.Slot;
 import com.flipkart.utils.DBConnection;
 import com.flipkart.utils.UserPlan;
 
-import java.awt.print.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
