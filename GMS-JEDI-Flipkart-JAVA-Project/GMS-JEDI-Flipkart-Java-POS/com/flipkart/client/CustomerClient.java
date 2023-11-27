@@ -6,6 +6,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
+import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
 
 import java.text.ParseException;
@@ -30,6 +31,7 @@ public class CustomerClient {
         }
         return true;
     }
+
 
     public void register(String userId){
         System.out.println("Enter your UserName");
@@ -105,6 +107,26 @@ public class CustomerClient {
 
     }
 
+    private void printUserPlan(String userName){
+        System.out.println("Bookings : ");
+        List<UserPlan> allUserPlan= customerService.getCustomerPlan(userName);
+        System.out.println(DASHED_LINE);
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "Centre-ID");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "DATE");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-TIME");
+        System.out.printf("%-8s\t\n", "SCHEDULE_ID" + RESET_COLOR);
+        System.out.println(DASHED_LINE);
+        for(UserPlan userPlan: allUserPlan) {
+            System.out.printf("%-8s\t", userPlan.getCentreID());
+            System.out.printf("%-8s\t", userPlan.getSlotId());
+            System.out.printf("%-8s\t", userPlan.getDate());
+            System.out.printf("%-8s\t", userPlan.getTime());
+            System.out.printf("%-8s\t\n", userPlan.getScheduleID());
+        }
+        System.out.println(DASHED_LINE);
+    }
+
     private void printbookingsSubMenu(String userName){
         System.out.println("Bookings : ");
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
@@ -152,7 +174,7 @@ public class CustomerClient {
                     bookSlotSubMenu(userName);
                     break;
                 case 3:
-                    printbookingsSubMenu(userName);
+                    printUserPlan(userName);
                     break;
                 case 4:
                     cancelBookingSubMenu(userName);
