@@ -9,7 +9,7 @@ import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Schedule;
 import com.flipkart.bean.Slot;
 
-public class ScheduleService {
+public class ScheduleService implements ScheduleServiceInterface {
 
     private GymCentreService gymCentreService = new GymCentreService();
     private SlotService slotService = new SlotService();

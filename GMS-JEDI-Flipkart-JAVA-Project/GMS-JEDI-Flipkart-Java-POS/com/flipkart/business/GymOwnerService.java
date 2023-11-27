@@ -6,7 +6,7 @@ import com.flipkart.bean.Role;
 
 import java.util.List;
 
-public class GymOwnerService {
+public class GymOwnerService implements GymOwnerServiceInterface {
     private static GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
     public void requestGymOwnerApproval(String gymOwnerId) {
         gymOwnerDAO.sendOwnerApprovalRequest(gymOwnerId);
@@ -17,10 +17,10 @@ public class GymOwnerService {
     }
 
 
-    public Object addGymOwnerDetails() {
-        //takes gymOwner object as input
-        return new Object();
-    }
+//    public Object addGymOwnerDetails() {
+//        //takes gymOwner object as input
+//        return new Object();
+//    }
 
     public boolean loginGymOwner(String username,String password){
         return gymOwnerDAO.loginGymOwner(username,password);
