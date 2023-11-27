@@ -34,16 +34,19 @@ public class CustomerService implements CustomerServiceInterface {
 
 
     public void bookSlot(String userName,Date date, String slotId){
-        //check if booking is overlapping
-        checkOverlap();
+
         String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();
         //create booking
+        boolean isOverlap = bookingService.checkBookingOverlap(userName,date,slotId);
+        if(isOverlap) {
+            System.out.println("There exists a conflicting booking, First cancel it!!!!");
+            return;
+        }
         bookingService.addBooking(userName, scheduleId);
         return;
     }
 
-    private void checkOverlap() {
-    }
+
 
     public void cancelBookingbyID(String bookingID){
         //cancel a booking
