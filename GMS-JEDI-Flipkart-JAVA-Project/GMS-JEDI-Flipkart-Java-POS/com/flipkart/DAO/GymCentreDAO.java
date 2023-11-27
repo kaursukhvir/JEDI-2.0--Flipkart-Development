@@ -133,7 +133,7 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
     public void validateGymCentre(String gymCentreId, int isApproved) {
-        System.out.println("IN VALIDATE GYM CENTRE");
+//        System.out.println("IN VALIDATE GYM CENTRE");
         try {
             conn = DBConnection.connect();
             System.out.println("Fetching gyms centres..");
@@ -142,7 +142,7 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
             statement.setInt(1, isApproved);
             statement.setString(2, gymCentreId);
             statement.executeUpdate();
-            System.out.println("The gym centre has been approved!");
+//            System.out.println("The gym centre has been approved!");
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();

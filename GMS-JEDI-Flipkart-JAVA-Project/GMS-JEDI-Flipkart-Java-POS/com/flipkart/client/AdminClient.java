@@ -60,7 +60,7 @@ public class AdminClient {
 
             adminService.approveGymOwner(requestGymOwnerId,choice);
             //modify the list
-            adminClientMainPage();
+//            adminClientMainPage();
     }
     private void handleGymCenterApprovalRequests(){
             // print the list with indexes from 1
@@ -77,7 +77,7 @@ public class AdminClient {
             }
             adminService.approveGymCenter(requestGymCenterId,choice);
             //modify the list
-            adminClientMainPage();
+//            adminClientMainPage();
     }
 
     private void printOwnerList(List<GymOwner> gymOwnerList){

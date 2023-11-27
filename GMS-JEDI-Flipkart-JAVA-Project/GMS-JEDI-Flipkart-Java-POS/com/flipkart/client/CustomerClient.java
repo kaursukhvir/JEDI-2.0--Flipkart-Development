@@ -10,7 +10,6 @@ import com.flipkart.utils.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
@@ -96,11 +95,11 @@ public class CustomerClient {
 
     }
 
-    private void getbookingsSubMenu(String userName){
+    private void printbookingsSubMenu(String userName){
         System.out.println("Bookings : ");
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
-        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "BOOKING-ID");
         System.out.printf("%45s\t\n", "SLOT-TIME" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(Booking booking: allBookingList) {
@@ -112,7 +111,7 @@ public class CustomerClient {
 
     private void cancelBookingSubMenu(String userName){
         System.out.println("Select the Booking you want to cancel: ");
-        getbookingsSubMenu(userName);
+        printbookingsSubMenu(userName);
         String bookingId = scanner.next();
         customerService.cancelBookingbyID(bookingId);
 
@@ -130,7 +129,7 @@ public class CustomerClient {
 
 
     public void customerClientMainPage(String userName) {
-        System.out.println("WELCOME "+userName+" !!\n What you what to do");
+        System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\n What you what to do"+RESET_COLOR);
         while(true){
             System.out.println("1. View My Profile \n2. Book a slot in a Gym \n3. View Bookings\n4. Cancel Bookings\n5. Go Back to previous menu");
             int choice = scanner.nextInt();
@@ -143,7 +142,7 @@ public class CustomerClient {
                     bookSlotSubMenu(userName);
                     break;
                 case 3:
-                    getbookingsSubMenu(userName);
+                    printbookingsSubMenu(userName);
                     break;
                 case 4:
                     cancelBookingSubMenu(userName);
