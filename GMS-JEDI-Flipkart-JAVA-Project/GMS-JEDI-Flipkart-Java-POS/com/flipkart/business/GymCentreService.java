@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.GymCentreDAO;
+import com.flipkart.DAO.GymCentreInterfaceDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 
@@ -10,11 +11,11 @@ import java.util.List;
 
 public class GymCentreService implements GymCentreServiceInterface{
 
-    private static GymCentreDAO gymCentreDAO = new GymCentreDAO();
-    private static ScheduleService scheduleService = new ScheduleService();
+    private static GymCentreInterfaceDAO gymCentreDAO = new GymCentreDAO();
+    private static ScheduleServiceInterface scheduleService = new ScheduleService();
 
-    public List<GymCentre> getAllCentres(String gymOwnerId) {
-        return gymCentreDAO.getGymCentreList(gymOwnerId);
+    public List<GymCentre> getAllCentresByOwmerId(String gymOwnerId) {
+        return gymCentreDAO.getAllCentresByOwmerId(gymOwnerId);
     }
 
     public List<GymCentre> getCentresByCity(String city){
@@ -36,6 +37,7 @@ public class GymCentreService implements GymCentreServiceInterface{
     }
 
     public GymCentre getGymCentreById(String centreID) {
+        GymCentre gymCentre = gymCentreDAO.getGymCentreByCentreId(centreID);
 //        Create Logic for this ---- ARSH
 //        Using Dummy Right now
         return new GymCentre();

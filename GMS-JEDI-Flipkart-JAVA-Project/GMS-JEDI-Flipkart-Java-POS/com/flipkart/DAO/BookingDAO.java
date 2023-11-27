@@ -1,6 +1,7 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.business.GymCentreServiceInterface;
 import com.flipkart.utils.DBConnection;
 import com.flipkart.utils.UserPlan;
 
@@ -14,10 +15,8 @@ import java.util.List;
 
 import static com.flipkart.constant.SQLConstants.*;
 
-public class BookingDAO {
+public class BookingDAO implements BookingInterfaceDAO {
 
-    public BookingDAO() {
-    }
 
     public void  addBooking(String userName, String scheduleID){
         try {
@@ -42,14 +41,13 @@ public class BookingDAO {
             PreparedStatement stmt = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
             stmt.setString(1, customerId);
             ResultSet rs = stmt.executeQuery();
-
             while(rs.next()) {
                 Booking booking = new Booking(
                         rs.getString("bookingId"),
                         rs.getString("userID"),
                         rs.getString("scheduleID")
-                );
 
+                );
                 allBookingList.add(booking);
             }
         } catch(SQLException sql) {

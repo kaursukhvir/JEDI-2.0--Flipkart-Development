@@ -1,15 +1,15 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.BookingDAO;
+import com.flipkart.DAO.BookingInterfaceDAO;
 import com.flipkart.bean.Booking;
 
 import java.util.List;
 
-import java.util.UUID;
 
 public class BookingService implements BookingServiceInterface {
 
-    private final BookingDAO bookingDAO = new BookingDAO();
+    private BookingInterfaceDAO bookingDAO = new BookingDAO();
     public boolean checkBookingOverlap(String customerId,String date,String time){
         //return whether the customer has already booked a slot at same timing
         return false;

@@ -54,7 +54,7 @@ public class GymOwnerClient {
                 /* Take input from user for all service parameters ( Make the menu ) */
 
                 case 0:
-                    List<GymCentre> allGymCentres = gymCentreService.getAllCentres(gymOwnerId);
+                    List<GymCentre> allGymCentres = gymCentreService.getAllCentresByOwmerId(gymOwnerId);
                     util.printGymCentres(allGymCentres);
                     break;
 

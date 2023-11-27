@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GymCentreServiceInterface {
 
-    List<GymCentre> getAllCentres(String gymOwnerId);
+    List<GymCentre> getAllCentresByOwmerId(String gymOwnerId);
     List<GymCentre> getCentresByCity(String city);
     List<Slot> getAvailableSlotsByCentreAndDate(String centreID, Date date);
     void addCenter(GymCentre gymCentre);

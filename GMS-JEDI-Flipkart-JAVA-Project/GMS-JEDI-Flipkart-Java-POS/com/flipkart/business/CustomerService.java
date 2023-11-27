@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.DAO.CustomerInterfaceDAO;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
@@ -8,14 +9,13 @@ import com.flipkart.bean.Slot;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class CustomerService implements CustomerServiceInterface {
 
-    private CustomerDAO customerDAO = new CustomerDAO();
-    private GymCentreService gymCentreService = new GymCentreService();
-    private BookingService bookingService = new BookingService();
-    private ScheduleService scheduleService = new ScheduleService();
+    private CustomerInterfaceDAO customerDAO = new CustomerDAO();
+    private GymCentreServiceInterface gymCentreService = new GymCentreService();
+    private BookingServiceInterface bookingService = new BookingService();
+    private ScheduleServiceInterface scheduleService = new ScheduleService();
 
     public List<GymCentre> getAllGymCenterDetailsByCity(String city){
         //takes City (Location) as input and returns List<GymCenter>

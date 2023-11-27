@@ -1,7 +1,6 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.GymCentre;
-import com.flipkart.bean.GymOwner;
 import com.flipkart.constant.SQLConstants;
 import com.flipkart.utils.DBConnection;
 
@@ -12,18 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymCentreDAO implements GymCentreInterfaceDAO {
+import static com.flipkart.constant.SQLConstants.FETCH_GYM_CENTRE_BY_ID;
 
+public class GymCentreDAO implements GymCentreInterfaceDAO {
     private Connection conn = null;
     private PreparedStatement statement = null;
-    private static List<GymCentre>  gymCentreList = new ArrayList<>();
-    private static List<GymCentre>  pendingGymCentreList = new ArrayList<>();
 
     public GymCentreDAO() {
     }
 
     // api call to retreive all gym centres and status
-    public List<GymCentre> getGymCentreList(String gymOwnerId) {
+    public List<GymCentre> getAllCentresByOwmerId(String gymOwnerId) {
 
         List<GymCentre> allGymCentres = new ArrayList<>();
         try {
@@ -54,20 +52,32 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     }
 
 
-    @Override
-    public List<GymCentre> getGymCentreList() {
-        return null;
-    }
 
-    public void setGymCentreList(List<GymCentre> gymCentreList) {
-        this.gymCentreList = gymCentreList;
-    }
-
-    public GymCentre getGymCentre(String gymCentreId) throws Exception {
-        for(GymCentre gym : gymCentreList) {
-            if(gym.getGymCentreID().equals(gymCentreId)) return gym;
+    public GymCentre getGymCentreByCentreId(String gymCentreId){
+        GymCentre gymCentre = new GymCentre();
+        try {
+            Connection conn = DBConnection.connect();
+            PreparedStatement stmt = conn.prepareStatement(FETCH_GYM_CENTRE_BY_ID);
+            stmt.setString(1, gymCentreId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            gymCentre.setGymCentreID(rs.getString("centreId"));
+            gymCentre.setOwnerID(rs.getString("ownerId"));
+            gymCentre.setGymCenterName(rs.getString("centreName"));
+            gymCentre.setGstin(rs.getString("gstin"));
+            gymCentre.setCity(rs.getString("city"));
+            gymCentre.setCapacity(rs.getInt("capacity"));
+            gymCentre.setPrice(rs.getInt("price"));
+            gymCentre.setApproved(rs.getInt("isApproved"));
+            stmt.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        } catch (Exception exp) {
+            exp.printStackTrace();
         }
-        throw new Exception("Gym Not Found");
+
+        return gymCentre;
+
     }
 
     public void addGymCentre(GymCentre centre) {
@@ -120,10 +130,6 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
             e.printStackTrace();
         }
         return pendingList;
-    }
-
-    public void setPendingGymCentreList(List<GymCentre> pendingGymCentreList) {
-        this.pendingGymCentreList = pendingGymCentreList;
     }
 
     public void validateGymCentre(String gymCentreId, int isApproved) {
