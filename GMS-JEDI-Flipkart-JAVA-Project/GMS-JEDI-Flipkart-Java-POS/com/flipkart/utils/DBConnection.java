@@ -15,6 +15,7 @@ public class DBConnection {
     public static Connection connect() throws SQLException{
 
         if(singleInstance ==null){
+
             System.out.println("Connecting to DB....");
             // Register the jdbc driver
             try {
