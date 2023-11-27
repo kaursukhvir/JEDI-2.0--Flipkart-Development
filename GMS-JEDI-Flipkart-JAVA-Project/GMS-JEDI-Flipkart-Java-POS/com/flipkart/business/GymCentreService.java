@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
-public class GymCentreService {
+public class GymCentreService implements GymCentreServiceInterface{
 
     private static GymCentreDAO gymCentreDAO = new GymCentreDAO();
     private static ScheduleService scheduleService = new ScheduleService();

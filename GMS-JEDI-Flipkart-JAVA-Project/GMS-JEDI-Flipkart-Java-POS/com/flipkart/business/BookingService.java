@@ -7,7 +7,7 @@ import java.util.List;
 
 import java.util.UUID;
 
-public class BookingService {
+public class BookingService implements BookingServiceInterface {
 
     private final BookingDAO bookingDAO = new BookingDAO();
     public boolean checkBookingOverlap(String customerId,String date,String time){
