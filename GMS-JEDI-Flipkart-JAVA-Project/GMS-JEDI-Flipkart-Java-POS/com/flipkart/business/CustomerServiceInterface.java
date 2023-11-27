@@ -12,7 +12,7 @@ public interface CustomerServiceInterface {
     List<GymCentre> getAllGymCenterDetailsByCity(String city);
     List<Slot> getAvailableSlots(String centreID, Date date);
     List<Booking> getCustomerBookings(String customerId);
-    void bookSlot(String userID,Date date, String slotId);
+    boolean bookSlot(String userID,Date date, String slotId,String centreId);
     void cancelBookingbyID(String bookingID);
     void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber);
     Customer viewMyProfile(String userName);

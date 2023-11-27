@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.DAO.CustomerInterfaceDAO;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
@@ -8,14 +9,18 @@ import com.flipkart.bean.Slot;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.UUID;
+
+
+import static com.flipkart.constant.Constants.*;
 
 public class CustomerService implements CustomerServiceInterface {
 
-    private CustomerDAO customerDAO = new CustomerDAO();
-    private GymCentreService gymCentreService = new GymCentreService();
-    private BookingService bookingService = new BookingService();
-    private ScheduleService scheduleService = new ScheduleService();
+    private CustomerInterfaceDAO customerDAO = new CustomerDAO();
+    private GymCentreServiceInterface gymCentreService = new GymCentreService();
+    private BookingServiceInterface bookingService = new BookingService();
+    private ScheduleServiceInterface scheduleService = new ScheduleService();
+
+    private SlotServiceInterface slotService = new SlotService();
 
     public List<GymCentre> getAllGymCenterDetailsByCity(String city){
         //takes City (Location) as input and returns List<GymCenter>
@@ -33,20 +38,21 @@ public class CustomerService implements CustomerServiceInterface {
     }
 
 
-    public void bookSlot(String userName,Date date, String slotId){
-
+    public boolean bookSlot(String userName,Date date, String slotId,String centreId){
+        if(!slotService.isSlotValid(slotId,centreId)){
+            System.out.println(INVALID_SLOT);
+            return false;
+        }
         String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();
         //create booking
         boolean isOverlap = bookingService.checkBookingOverlap(userName,date,slotId);
         if(isOverlap) {
             System.out.println("There exists a conflicting booking, First cancel it!!!!");
-            return;
+            return false;
         }
         bookingService.addBooking(userName, scheduleId);
-        return;
+        return true;
     }
-
-
 
     public void cancelBookingbyID(String bookingID){
         //cancel a booking

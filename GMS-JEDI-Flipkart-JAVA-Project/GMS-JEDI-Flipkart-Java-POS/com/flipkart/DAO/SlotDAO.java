@@ -70,7 +70,6 @@ public class SlotDAO implements SlotInterfaceDAO {
         }
     }
 
-
     public Slot getSlotById(String slotID) {
         Slot slot = null;
         try{
@@ -79,12 +78,31 @@ public class SlotDAO implements SlotInterfaceDAO {
             ps.setString(1,slotID);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String slotId = rs.getString("slotId");
                 String centreId = rs.getString("centreId");
                 LocalTime time = rs.getTime("time").toLocalTime();
-
-                slot = new Slot(slotId, centreId, time);
+                slot = new Slot(slotID, centreId, time);
             }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return slot;
+    }
+
+    public Slot getSlotByIdandCentreId(String slotID,String centreID) {
+        Slot slot = null;
+        try{
+            Connection conn = DBConnection.connect();
+            PreparedStatement ps = conn.prepareStatement(SQLConstants.FETCH_SLOT_BY_ID_AND_CENTRE_ID);
+            ps.setString(1,slotID);
+            ps.setString(2,centreID);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                LocalTime time = rs.getTime("time").toLocalTime();
+                slot = new Slot(slotID, centreID, time);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
