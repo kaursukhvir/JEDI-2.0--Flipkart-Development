@@ -1,8 +1,6 @@
 package com.flipkart.DAO;
 
-import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.bean.Role;
 import com.flipkart.constant.SQLConstants;
 import com.flipkart.utils.DBConnection;
 

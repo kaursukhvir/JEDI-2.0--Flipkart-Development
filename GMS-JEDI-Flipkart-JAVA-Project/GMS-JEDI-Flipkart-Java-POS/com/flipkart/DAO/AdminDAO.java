@@ -2,9 +2,6 @@ package com.flipkart.DAO;
 
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 public class AdminDAO implements AdminInterfaceDAO {
 

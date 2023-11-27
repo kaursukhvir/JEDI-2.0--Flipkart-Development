@@ -1,17 +1,13 @@
 package com.flipkart.business;
 
 import com.flipkart.DAO.BookingDAO;
-import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Booking;
-import com.flipkart.bean.Schedule;
 import com.flipkart.bean.Slot;
 import com.flipkart.utils.UserPlan;
 
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
-import java.util.UUID;
 
 public class BookingService implements BookingServiceInterface {
 

@@ -5,7 +5,6 @@ import com.flipkart.DAO.GymCentreInterfaceDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 
-import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
