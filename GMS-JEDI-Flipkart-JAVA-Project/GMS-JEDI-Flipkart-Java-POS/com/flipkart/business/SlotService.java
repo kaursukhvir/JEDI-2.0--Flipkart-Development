@@ -30,7 +30,7 @@ public class SlotService implements SlotServiceInterface {
     }
 
     public void addSlotsForGym(String gymCentreId, List<Slot> slotList){
-        System.out.printf("Adding all slots to gym: " + gymCentreId);
+        System.out.println("Adding all slots to gym: " + gymCentreId);
         for(Slot slot : slotList) {
             slot.setCentreID(gymCentreId);
             slotDAO.addSlot(slot);
