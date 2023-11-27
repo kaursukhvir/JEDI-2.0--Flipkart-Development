@@ -9,4 +9,5 @@ public interface SlotServiceInterface {
     Slot getSlotByID(String slotID);
     List<Slot> getSlotList();
     void addSlotsForGym(String gymCentreId, List<Slot> slotList);
+    boolean isSlotValid(String slotID);
 }

@@ -41,7 +41,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
                         rs.getString("name"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        Role.GYMOWNER,
                         rs.getString("panNumber"),
                         rs.getString("cardDetails")
 
@@ -115,12 +114,12 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         List<GymOwner> pendingList = new ArrayList<>();
         try {
             conn = DBConnection.connect();
-            System.out.println("Fetching gym owners..");
+//            System.out.println("Fetching gym owners..");
 
             statement = conn.prepareStatement(SQLConstants.FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), Role.GYMOWNER, rs.getString("panNumber"), rs.getString("cardDetails"));
+                GymOwner owner = new GymOwner(rs.getString("id"),rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getString("panNumber"), rs.getString("cardDetails"));
                 owner.setApproved(rs.getInt("isApproved"));
                 pendingList.add(owner);
             }
@@ -158,7 +157,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             statement.setInt(1, isApproved);
             statement.setString(2, gymOwnerId);
             statement.executeUpdate();
-            System.out.println("The gym owner has been approved!");
+//            System.out.println("The gym owner has been approved!");
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();

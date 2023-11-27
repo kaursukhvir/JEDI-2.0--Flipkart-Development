@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.util.List;
 public class AdminDAO implements AdminInterfaceDAO {
 
-    private static GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
-    private static GymCentreDAO gymCentreDAO = new GymCentreDAO();
+    private static GymOwnerInterfaceDAO gymOwnerDAO = new GymOwnerDAO();
+    private static GymCentreInterfaceDAO gymCentreDAO = new GymCentreDAO();
 
 
     public List<GymOwner> getPendingGymOwners() {

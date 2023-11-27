@@ -4,9 +4,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.business.GymCentreService;
-import com.flipkart.business.GymOwnerService;
-import com.flipkart.business.SlotService;
+import com.flipkart.business.*;
 import com.flipkart.utils.util;
 
 import java.time.LocalTime;
@@ -21,11 +19,11 @@ import static com.flipkart.constant.Constants.*;
 public class GymOwnerClient {
 
     GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
-    private List<GymOwner> gymOwnerList = gymOwnerDAO.getGymOwnerList();
+    //private List<GymOwner> gymOwnerList = gymOwnerDAO.getGymOwnerList();
 
-    private GymOwnerService gymOwnerService = new GymOwnerService();
-    private SlotService slotService = new SlotService();
-    private GymCentreService gymCentreService = new GymCentreService();
+    private GymOwnerServiceInterface gymOwnerService = new GymOwnerService();
+    private SlotServiceInterface slotService = new SlotService();
+    private GymCentreServiceInterface gymCentreService = new GymCentreService();
     private String gymOwnerId;
 
     private static int newGymCentreId = 10;
@@ -33,7 +31,34 @@ public class GymOwnerClient {
 
 
     public boolean gymOwnerLogin(String userName, String password) {
-        return gymOwnerService.loginGymOwner(userName,password);
+        if (gymOwnerService.loginGymOwner(userName,password)) {
+            System.out.println("Successfully logged in");
+            gymOwnerClientMainPage();
+        } else {
+            System.out.println("UserName or password doesn't match");
+            return false;
+        }
+        return true;
+    }
+
+    public void register(String userId) {
+        System.out.println("Enter your UserName");
+        String userName = scanner.next();
+
+        System.out.println("Enter your Passkey");
+        String password = scanner.next();
+
+        System.out.println("Enter your Email");
+        String email = scanner.next();
+
+        System.out.println("Enter your PAN Number");
+        String panNumber = scanner.next();
+
+        System.out.println("Enter your Card Number");
+        String cardNumber = scanner.next();
+
+        gymOwnerService.registerGymOwner(userId,userName,password,email,panNumber,cardNumber);
+        gymOwnerClientMainPage();
     }
 
 
@@ -54,7 +79,7 @@ public class GymOwnerClient {
                 /* Take input from user for all service parameters ( Make the menu ) */
 
                 case 0:
-                    List<GymCentre> allGymCentres = gymCentreService.getAllCentres(gymOwnerId);
+                    List<GymCentre> allGymCentres = gymCentreService.getAllCentresByOwmerId(gymOwnerId);
                     util.printGymCentres(allGymCentres);
                     break;
 
@@ -150,24 +175,6 @@ public class GymOwnerClient {
         }
     }
 
-    public void register(String userId) {
-        System.out.println("Enter your UserName");
-        String userName = scanner.next();
 
-        System.out.println("Enter your Passkey");
-        String password = scanner.next();
-
-        System.out.println("Enter your Email");
-        String email = scanner.next();
-
-        System.out.println("Enter your PAN Number");
-        String panNumber = scanner.next();
-
-        System.out.println("Enter your Card Number");
-        String cardNumber = scanner.next();
-
-        gymOwnerService.registerGymOwner(userId,userName,password,email,panNumber,cardNumber);
-        gymOwnerClientMainPage();
-    }
 
 }
