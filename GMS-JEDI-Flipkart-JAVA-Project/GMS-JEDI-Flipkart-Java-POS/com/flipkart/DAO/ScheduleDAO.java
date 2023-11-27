@@ -42,13 +42,11 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 String slotId = rs.getString("slotId");
-                int availability = rs.getInt("'availability");
+                int availability = rs.getInt("availability");
                 Date date = new Date(rs.getDate("date").getTime());
                 schedule = new Schedule(date, slotId, availability);
+                schedule.setScheduleID(scheduleId);
             }
-            if(schedule == null)
-                throw new SQLException("Not Found");
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,9 +64,10 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
             while(rs.next()){
                 String scheduleId = rs.getString("scheduleId");
                 String slotId = rs.getString("slotId");
-                int availability = rs.getInt("‘availability’");
-
-                response.add(new Schedule( date, slotId, availability));
+                int availability = rs.getInt("availability");
+                Schedule schedule = new Schedule( date, slotId, availability);
+                schedule.setScheduleID(scheduleId);
+                response.add(schedule);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

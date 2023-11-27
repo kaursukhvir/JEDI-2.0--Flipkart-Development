@@ -18,7 +18,6 @@ public class ScheduleService implements ScheduleServiceInterface {
     public Schedule createSchedule(Date date, String slotId){
         String centreID = slotService.getSlotByID(slotId).getCentreID();
         int availability = gymCentreService.getGymCentreById(centreID).getCapacity();
-        UUID scheduleId = UUID.randomUUID();
         Schedule schedule = new Schedule( date, slotId, availability);
         scheduleDAO.addSchedule(schedule);
 
@@ -69,6 +68,10 @@ public class ScheduleService implements ScheduleServiceInterface {
             }
         }
         return response;
+    }
+
+    public Schedule getSchedule(String scheduleID){
+        return scheduleDAO.getSchedule(scheduleID);
     }
 
     public Schedule getOrCreateSchedule(String slotId, Date date) {

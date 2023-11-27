@@ -52,10 +52,10 @@ public class SQLConstants {
     public static final String ADD_BOOKING= "INSERT INTO FlipFit.Booking (bookingId, userID, scheduleID) values( ?, ?, ?)";
 
     // ------------- Schedule -------------
-    public static final String ADD_SCHEDULE="INSERT INTO FlipFit.Schedule(scheduleId, date, slotId, ‘availability’ ) values (?,?,?,?)";
+    public static final String ADD_SCHEDULE="INSERT INTO FlipFit.Schedule(scheduleId, date, slotId, availability ) values (?,?,?,?)";
     public static final String GET_SCHEDULES_BY_DATE="SELECT * FROM FlipFit.Schedule WHERE date=?";
-    public static final String GET_SCHEDULE_BY_ID ="SELECT * FROM FlipFit.Schedule WHERE slotId=?";
-    public static final String MODIFY_SCHEDULE_AVAILABILITY ="UPDATE FlipFit.Schedule SET 'availability'=? WHERE scheduleId=?";
+    public static final String GET_SCHEDULE_BY_ID ="SELECT * FROM FlipFit.Schedule WHERE scheduleId=?";
+    public static final String MODIFY_SCHEDULE_AVAILABILITY ="UPDATE `flipfit`.`schedule` SET availability = ? WHERE (`scheduleId` = ?)";
 
     // ---------------- Slot ----------------
     public static final String FETCH_ALL_SLOTS ="SELECT * FROM FlipFit.Slot";
@@ -63,7 +63,8 @@ public class SQLConstants {
     public static final String ADD_SLOT ="INSERT INTO FlipFit.Slot(slotId, centreId, time) values (?, ?, ?)";
     public static final String FETCH_SLOT_BY_ID = "SELECT * FROM FlipFit.Slot WHERE slotId=?";
 
-    public static final String CHECK_BOOKING_OVERLAP = "Select * from FlipFit.Booking where userID=?";
+    public static final String GET_BOOKING_BY_BOOKING_ID ="Select * From FlipFit.Booking where bookingId = ?";
+
 
     public static final String GET_USERPLAN_BY_CUSTOMER_ID = "select * from slot join schedule where slot.slotId=schedule.slotId and schedule.scheduleId=?";
 }
