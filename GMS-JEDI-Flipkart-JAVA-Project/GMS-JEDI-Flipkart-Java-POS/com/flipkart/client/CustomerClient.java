@@ -100,20 +100,18 @@ public class CustomerClient {
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
         System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
-        System.out.printf("%-8s\t\n", "SLOT-TIME" + RESET_COLOR);
+        System.out.printf("%45s\t\n", "SLOT-TIME" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(Booking booking: allBookingList) {
             System.out.printf("%-8s\t", booking.getBookingID());
-            System.out.printf("%-8s\t\n", booking.getUserID());
             System.out.printf("%-8s\t\n", booking.getScheduleID());
-
         }
         System.out.println(DASHED_LINE);
     }
 
     private void cancelBookingSubMenu(String userName){
         System.out.println("Select the Booking you want to cancel: ");
-        customerService.getCustomerBookings(userName);
+        getbookingsSubMenu(userName);
         String bookingId = scanner.next();
         customerService.cancelBookingbyID(bookingId);
 

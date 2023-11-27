@@ -17,7 +17,6 @@ public class BookingDAO {
 
     public BookingDAO() {
     }
-    private static final List<Booking> allBookingList = new ArrayList<>();
 
     public void  addBooking(String userName, String scheduleID){
         try {
@@ -36,6 +35,7 @@ public class BookingDAO {
 //
     }
     public List<Booking> getBookingByCustomerId(String customerId) {
+        List<Booking> allBookingList = new ArrayList<>();
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(GET_BOOKING_BY_CUSTOMER_ID);
