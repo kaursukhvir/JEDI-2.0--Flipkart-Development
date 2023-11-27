@@ -6,6 +6,7 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
+import com.flipkart.utils.UserPlan;
 
 import java.sql.Date;
 import java.util.List;
@@ -37,6 +38,9 @@ public class CustomerService implements CustomerServiceInterface {
         return bookingService.getBookingByCustomerId(customerId);
     }
 
+    public List<UserPlan> getCustomerPlan(String customerId){
+        return bookingService.getCustomerPlan(customerId);
+    }
 
     public boolean bookSlot(String userName,Date date, String slotId,String centreId){
         if(!slotService.isSlotValid(slotId,centreId)){
