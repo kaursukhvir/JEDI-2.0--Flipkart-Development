@@ -6,6 +6,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
+import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
 
 import java.text.ParseException;
@@ -30,6 +31,7 @@ public class CustomerClient {
         }
         return true;
     }
+
 
     public void register(String userId){
         System.out.println("Enter your UserName");
@@ -90,19 +92,50 @@ public class CustomerClient {
             throw new RuntimeException(e);
         }
         //Choose Slot
+//        System.out.println("Choose from the Below Slots");
+//        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
+//        printSlots(availableSlots);
+//        if(availableSlots.isEmpty()){
+//            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
+//            bookSlotSubMenu(userName);
+//            return;
+//        }
+        chooseSlot(chosenGym,userName,sqlDate,chosenGym);
+    }
+
+    private void chooseSlot(String gymCentreId,String userName,Date sqlDate,String centreId){
         System.out.println("Choose from the Below Slots");
-        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
+        List<Slot> availableSlots = customerService.getAvailableSlots(gymCentreId,sqlDate);
         printSlots(availableSlots);
         if(availableSlots.isEmpty()){
-            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
+            System.out.println(RED_COLOR +"There are no available slots in the " + gymCentreId + ". Please Select some other gym" + RESET_COLOR);
             bookSlotSubMenu(userName);
             return;
         }
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
-        customerService.bookSlot(userName,sqlDate,slotID);
+        if(!customerService.bookSlot(userName,sqlDate,slotID,centreId)) chooseSlot(gymCentreId, userName, sqlDate,centreId);
+    }
 
+    private void printUserPlan(String userName){
+        System.out.println("Bookings : ");
+        List<UserPlan> allUserPlan= customerService.getCustomerPlan(userName);
+        System.out.println(DASHED_LINE);
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "Centre-ID");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "DATE");
+        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-TIME");
+        System.out.printf("%-8s\t\n", "SCHEDULE_ID" + RESET_COLOR);
+        System.out.println(DASHED_LINE);
+        for(UserPlan userPlan: allUserPlan) {
+            System.out.printf("%-8s\t", userPlan.getCentreID());
+            System.out.printf("%-8s\t", userPlan.getSlotId());
+            System.out.printf("%-8s\t", userPlan.getDate());
+            System.out.printf("%-8s\t", userPlan.getTime());
+            System.out.printf("%-8s\t\n", userPlan.getScheduleID());
+        }
+        System.out.println(DASHED_LINE);
     }
 
     private void printbookingsSubMenu(String userName){
@@ -110,7 +143,7 @@ public class CustomerClient {
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
         System.out.printf(YELLOW_COLOR + "%-8s\t", "BOOKING-ID");
-        System.out.printf("%45s\t\n", "SLOT-TIME" + RESET_COLOR);
+        System.out.printf("%45s\t\n", "SCHEDULE-ID" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(Booking booking: allBookingList) {
             System.out.printf("%-8s\t", booking.getBookingID());
@@ -152,7 +185,7 @@ public class CustomerClient {
                     bookSlotSubMenu(userName);
                     break;
                 case 3:
-                    printbookingsSubMenu(userName);
+                    printUserPlan(userName);
                     break;
                 case 4:
                     cancelBookingSubMenu(userName);

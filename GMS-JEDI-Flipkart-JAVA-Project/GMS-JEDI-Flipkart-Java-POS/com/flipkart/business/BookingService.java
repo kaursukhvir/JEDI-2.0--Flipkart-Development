@@ -5,6 +5,7 @@ import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Booking;
 import com.flipkart.bean.Schedule;
 import com.flipkart.bean.Slot;
+import com.flipkart.utils.UserPlan;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -31,6 +32,10 @@ public class BookingService implements BookingServiceInterface {
 
     public List<Booking> getBookingByCustomerId(String customerId){
         return bookingDAO.getBookingByCustomerId(customerId);
+    }
+
+    public List<UserPlan> getCustomerPlan(String customerId){
+        return bookingDAO.getCustomerPlan(customerId);
     }
 
     public void cancelBooking(String bookingID) {
