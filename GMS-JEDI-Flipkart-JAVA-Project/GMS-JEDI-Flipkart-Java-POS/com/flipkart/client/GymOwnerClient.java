@@ -24,7 +24,6 @@ public class GymOwnerClient {
     private GymOwnerServiceInterface gymOwnerService = new GymOwnerService();
     private SlotServiceInterface slotService = new SlotService();
     private GymCentreServiceInterface gymCentreService = new GymCentreService();
-    private String gymOwnerId;
 
     private static int newGymCentreId = 10;
 
@@ -33,7 +32,7 @@ public class GymOwnerClient {
     public boolean gymOwnerLogin(String userName, String password) {
         if (gymOwnerService.loginGymOwner(userName,password)) {
             System.out.println("Successfully logged in");
-            gymOwnerClientMainPage();
+            gymOwnerClientMainPage(userName);
         } else {
             System.out.println("UserName or password doesn't match");
             return false;
@@ -41,7 +40,7 @@ public class GymOwnerClient {
         return true;
     }
 
-    public void register(String userId) {
+    public void register() {
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
@@ -57,13 +56,13 @@ public class GymOwnerClient {
         System.out.println("Enter your Card Number");
         String cardNumber = scanner.next();
 
-        gymOwnerService.registerGymOwner(userId,userName,password,email,panNumber,cardNumber);
-        gymOwnerClientMainPage();
+        gymOwnerService.registerGymOwner(userName,userName,password,email,panNumber,cardNumber);
+        gymOwnerClientMainPage(userName);
     }
 
 
 
-    public void gymOwnerClientMainPage() {
+    public void gymOwnerClientMainPage(String gymOwnerId) {
 
         while(true){
             System.out.println("" +
