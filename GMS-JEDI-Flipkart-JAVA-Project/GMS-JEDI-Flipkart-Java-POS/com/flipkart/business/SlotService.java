@@ -31,4 +31,8 @@ public class SlotService implements SlotServiceInterface {
             slotDAO.addSlot(slot);
         }
     }
+
+    public boolean isSlotValid(String slotID){
+        return getSlotByID(slotID) != null;
+    }
 }

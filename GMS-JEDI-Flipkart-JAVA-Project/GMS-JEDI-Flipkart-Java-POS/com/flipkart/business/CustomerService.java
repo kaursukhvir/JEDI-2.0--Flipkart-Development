@@ -16,6 +16,7 @@ public class CustomerService implements CustomerServiceInterface {
     private GymCentreServiceInterface gymCentreService = new GymCentreService();
     private BookingServiceInterface bookingService = new BookingService();
     private ScheduleServiceInterface scheduleService = new ScheduleService();
+    private SlotServiceInterface slotService = new SlotService();
 
     public List<GymCentre> getAllGymCenterDetailsByCity(String city){
         //takes City (Location) as input and returns List<GymCenter>
@@ -34,6 +35,11 @@ public class CustomerService implements CustomerServiceInterface {
 
 
     public void bookSlot(String userName,Date date, String slotId){
+//        check is slotid isvalid
+        if(!slotService.isSlotValid(slotId)) {
+            return;
+        }
+
         //check if booking is overlapping
         checkOverlap();
         String scheduleId = scheduleService.getOrCreateSchedule(slotId,date).getScheduleID();

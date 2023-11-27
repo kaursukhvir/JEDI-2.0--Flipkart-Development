@@ -71,6 +71,11 @@ public class CustomerClient {
         // Print All Centres
         util.printGymCentres(centreListByLocation);
         //Select Gym Centre
+        if(centreListByLocation.isEmpty()){
+            System.out.println(RED_COLOR +"There are no available GYM Centres in " + location + ". Please Select some other location" + RESET_COLOR);
+            bookSlotSubMenu(userName);
+            return;
+        }
         System.out.print("Choose a gymCentre ID to proceed:");
         String chosenGym = scanner.next();
         //Select Date
@@ -88,6 +93,11 @@ public class CustomerClient {
         System.out.println("Choose from the Below Slots");
         List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
         printSlots(availableSlots);
+        if(availableSlots.isEmpty()){
+            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
+            bookSlotSubMenu(userName);
+            return;
+        }
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
