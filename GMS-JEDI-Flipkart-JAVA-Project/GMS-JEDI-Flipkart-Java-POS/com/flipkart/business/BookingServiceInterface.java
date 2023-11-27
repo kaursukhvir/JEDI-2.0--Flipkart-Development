@@ -1,6 +1,7 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.utils.UserPlan;
 
 import java.time.LocalTime;
 import java.util.Date;
@@ -11,4 +12,5 @@ public interface BookingServiceInterface {
     void addBooking(String userId, String scheduleID);
     List<Booking> getBookingByCustomerId(String customerId);
     void cancelBooking(String bookingID);
+    List<UserPlan> getCustomerPlan(String customerId);
 }
