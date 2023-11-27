@@ -39,7 +39,6 @@ public class BookingService implements BookingServiceInterface {
     }
 
     public void cancelBooking(String bookingID) {
-
         Booking booking  = bookingDAO.getBookingByBookingId(bookingID);
         bookingDAO.cancelBookingById(bookingID);
         scheduleService.modifySchedule(booking.getScheduleID(),1);

@@ -78,13 +78,12 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
         try{
             Connection conn = DBConnection.connect();
             int availability = getSchedule(scheduleId).getAvailability();
-            if(availability < 1){
+            if(availability < 1 && action == -1){
                 return false;
             }
             PreparedStatement ps = conn.prepareStatement(SQLConstants.MODIFY_SCHEDULE_AVAILABILITY);
             ps.setInt(1, availability+action);
             ps.setString(2, scheduleId);
-
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

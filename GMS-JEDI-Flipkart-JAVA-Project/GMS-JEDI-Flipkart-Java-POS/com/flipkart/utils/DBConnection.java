@@ -17,7 +17,7 @@ public class DBConnection {
     public static Connection connect() throws SQLException{
 
         if(singleInstance ==null){
-            System.out.println("Connecting to DB....");
+//            System.out.println("Connecting to DB....");
             // Register the jdbc driver
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,7 +26,7 @@ public class DBConnection {
                 Properties newProp = new Properties();
                 newProp.load(inputStream);
                 Connection connection = DriverManager.getConnection(newProp.getProperty("url"),newProp.getProperty("user"),newProp.getProperty("password"));
-                System.out.println("Database Connected");
+//                System.out.println("Database Connected");
                 singleInstance = connection;
                 return connection;
             }

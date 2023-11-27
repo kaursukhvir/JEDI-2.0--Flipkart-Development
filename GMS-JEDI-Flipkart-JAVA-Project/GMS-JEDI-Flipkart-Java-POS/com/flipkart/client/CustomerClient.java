@@ -144,7 +144,7 @@ public class CustomerClient {
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
         System.out.printf(YELLOW_COLOR + "%-8s\t", "BOOKING-ID");
-        System.out.printf("%45s\t\n", "SCHEDULE-ID" + RESET_COLOR);
+        System.out.printf("%47s\t\n", "SCHEDULE-ID" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(Booking booking: allBookingList) {
             System.out.printf("%-8s\t", booking.getBookingID());
@@ -173,7 +173,7 @@ public class CustomerClient {
 
 
     public void customerClientMainPage(String userName) {
-        System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\n What you what to do"+RESET_COLOR);
+        System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\nWhat you what to do"+RESET_COLOR);
         while(true){
             System.out.println("1. View My Profile \n2. Book a slot in a Gym \n3. View Bookings\n4. Cancel Bookings\n5. Go Back to previous menu");
             int choice = scanner.nextInt();
