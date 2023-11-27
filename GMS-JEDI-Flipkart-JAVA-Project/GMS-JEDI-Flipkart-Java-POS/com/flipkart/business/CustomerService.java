@@ -10,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class CustomerService {
+public class CustomerService implements CustomerServiceInterface {
 
     private CustomerDAO customerDAO = new CustomerDAO();
     private GymCentreService gymCentreService = new GymCentreService();
@@ -32,10 +32,6 @@ public class CustomerService {
         return bookingService.getBookingByCustomerId(customerId);
     }
 
-    public Object getBookingDetailsByID(){
-        System.out.println("booking details successfully sent");
-        return new Object();
-    }
 
     public void bookSlot(String userName,Date date, String slotId){
         //check if booking is overlapping

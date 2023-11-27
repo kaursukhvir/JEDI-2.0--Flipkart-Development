@@ -1,6 +1,6 @@
 package com.flipkart.client;
 import com.flipkart.bean.Role;
-import com.flipkart.business.UserService;
+
 
 import java.util.Scanner;
 
@@ -10,7 +10,6 @@ public class MainApplicationClient {
 
     public static int userId = 0;
     public static Scanner scanner = new Scanner(System.in);
-    private static UserService userService = new UserService();
     private static AdminClient adminClient = new AdminClient();
     private static CustomerClient customerClient = new CustomerClient();
     private static GymOwnerClient gymOwnerClient = new GymOwnerClient();
@@ -35,21 +34,6 @@ public class MainApplicationClient {
         }
         mainPage();
     }
-
-//    private static void redirect(Role role){
-//        switch (role){
-//            case ADMIN:
-//                admin.adminMainPage();
-//                break;
-//            case GYMOWNER:
-//                gymOwner.gymOwnerMainPage();
-//                break;
-//            case CUSTOMER:
-//                customer.customerClientMainPage();
-//                break;
-//
-//        }
-//    }
 
     private static void login(){
 

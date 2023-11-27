@@ -8,7 +8,7 @@ import com.flipkart.bean.GymOwner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminService {
+public class AdminService implements AdminServiceInterface{
 
     AdminInterfaceDAO adminDAO  = new AdminDAO();
 
@@ -41,12 +41,4 @@ public class AdminService {
         return pendinGymOwnerList;
     }
 
-//    public Object addAdmin(String userName, String email, String password, Role role){
-//        //takes username and password, verifies role and redirects to admin home
-//        System.out.println("Successful login for Admin");
-//        return new Object();
-//    }
-
-//    public void registerAdmin(String userName, String password, String email) {
-//    }
 }
