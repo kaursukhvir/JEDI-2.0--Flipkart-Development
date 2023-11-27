@@ -5,6 +5,7 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
+import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.utils.util;
 
 import java.text.ParseException;
@@ -18,7 +19,7 @@ import static com.flipkart.constant.Constants.*;
 import static com.flipkart.constant.Constants.RESET_COLOR;
 
 public class CustomerClient {
-    private CustomerService customerService  =  new CustomerService();
+    private CustomerServiceInterface customerService  =  new CustomerService();
 
     public boolean customerLogin(String userName, String password) {
         if (customerService.isUserValid(userName, password)) {

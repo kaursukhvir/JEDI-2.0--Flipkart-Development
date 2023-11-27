@@ -5,7 +5,9 @@ import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminService;
+import com.flipkart.business.AdminServiceInterface;
 import com.flipkart.business.GymOwnerService;
+import com.flipkart.business.GymOwnerServiceInterface;
 import com.flipkart.utils.util;
 
 import java.util.List;
@@ -17,8 +19,8 @@ import static com.flipkart.constant.Constants.*;
 public class AdminClient {
 
     private static Admin admin = new Admin();
-    private static AdminService adminService = new AdminService();
-    private static GymOwnerService gymOwnerService = new GymOwnerService();
+    private static AdminServiceInterface adminService = new AdminService();
+    private static GymOwnerServiceInterface gymOwnerService = new GymOwnerService();
 
     public boolean isUserValid(String userName, String password) {
         if (userName.equals(admin.getUserName()) && password.equals(admin.getPassword())) {
