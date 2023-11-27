@@ -69,7 +69,7 @@ public class BookingDAO {
         return allBookingList;
     }
 
-    public List<UserPlan> getUserPlan(String customerId) {
+    public List<UserPlan> getCustomerPlan(String customerId) {
         List<UserPlan> allUserPlan = new ArrayList<>();
         List<Booking> allBookingList = getBookingByCustomerId(customerId);
         for (Booking booking : allBookingList) {
@@ -100,7 +100,7 @@ public class BookingDAO {
     public boolean checkBookingOverlap(String customerId, Date date, LocalTime localTime){
         LocalTime endTime = localTime.plusHours(1);
 
-        List<UserPlan> allUserPlan = getUserPlan(customerId);
+        List<UserPlan> allUserPlan = getCustomerPlan(customerId);
         for(UserPlan userPlan:allUserPlan){
 
             if(userPlan.getDate().equals(date)){
