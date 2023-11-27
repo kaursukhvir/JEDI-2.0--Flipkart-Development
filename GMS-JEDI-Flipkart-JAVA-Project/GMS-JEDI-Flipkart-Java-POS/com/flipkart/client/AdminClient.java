@@ -1,7 +1,6 @@
 package com.flipkart.client;
 
 import com.flipkart.bean.Admin;
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.AdminService;

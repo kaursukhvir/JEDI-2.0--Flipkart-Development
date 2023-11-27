@@ -1,11 +1,9 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Schedule;
-import com.flipkart.bean.Slot;
 import com.flipkart.constant.SQLConstants;
 import com.flipkart.utils.DBConnection;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-import java.util.UUID;
 
 public class ScheduleDAO implements ScheduleInterfaceDAO {
 

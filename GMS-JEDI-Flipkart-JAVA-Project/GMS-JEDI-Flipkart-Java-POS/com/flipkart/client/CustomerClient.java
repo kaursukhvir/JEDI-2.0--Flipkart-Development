@@ -6,8 +6,6 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
-import com.flipkart.exceptions.DataEntryException;
-import com.flipkart.exceptions.InvalidChoiceException;
 import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
 
@@ -94,23 +92,30 @@ public class CustomerClient {
             throw new DataEntryException();
         }
         //Choose Slot
+//        System.out.println("Choose from the Below Slots");
+//        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
+//        printSlots(availableSlots);
+//        if(availableSlots.isEmpty()){
+//            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
+//            bookSlotSubMenu(userName);
+//            return;
+//        }
+        chooseSlot(chosenGym,userName,sqlDate,chosenGym);
+    }
+
+    private void chooseSlot(String gymCentreId,String userName,Date sqlDate,String centreId){
         System.out.println("Choose from the Below Slots");
-        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
+        List<Slot> availableSlots = customerService.getAvailableSlots(gymCentreId,sqlDate);
         printSlots(availableSlots);
         if(availableSlots.isEmpty()){
-            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
+            System.out.println(RED_COLOR +"There are no available slots in the " + gymCentreId + ". Please Select some other gym" + RESET_COLOR);
             bookSlotSubMenu(userName);
             return;
         }
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
-        try{
-            customerService.bookSlot(userName,sqlDate,slotID);
-        } catch (Exception e){
-
-        }
-
+        if(!customerService.bookSlot(userName,sqlDate,slotID,centreId)) chooseSlot(gymCentreId, userName, sqlDate,centreId);
     }
 
     private void printUserPlan(String userName){
@@ -138,7 +143,7 @@ public class CustomerClient {
         List<Booking> allBookingList= customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
         System.out.printf(YELLOW_COLOR + "%-8s\t", "BOOKING-ID");
-        System.out.printf("%45s\t\n", "SLOT-TIME" + RESET_COLOR);
+        System.out.printf("%45s\t\n", "SCHEDULE-ID" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(Booking booking: allBookingList) {
             System.out.printf("%-8s\t", booking.getBookingID());
@@ -170,33 +175,27 @@ public class CustomerClient {
         System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\n What you what to do"+RESET_COLOR);
         while(true){
             System.out.println("1. View My Profile \n2. Book a slot in a Gym \n3. View Bookings\n4. Cancel Bookings\n5. Go Back to previous menu");
-            try{
-                int choice = scanner.nextInt();
-                if( choice < 1 || choice > 5)
-                    throw new InvalidChoiceException();
-                switch(choice){
-                    case 1:
-                        Customer customer= customerService.viewMyProfile(userName);
-                        printCustomerProfile(customer);
-                        break;
-                    case 2:
-                        bookSlotSubMenu(userName);
-                        break;
-                    case 3:
-                        printUserPlan(userName);
-                        break;
-                    case 4:
-                        cancelBookingSubMenu(userName);
-                        break;
-                    case 5:
-                        System.out.println(PREVIOUS_MENU_MESSAGE);
-                        return;
-                    default:
-                        System.out.println(INVALID_CHOICE_ERROR);
-                        break;
-                }
-            } catch (InvalidChoiceException e){
-                System.out.println(e.getMessage());
+            int choice = scanner.nextInt();
+            switch(choice){
+                case 1:
+                    Customer customer= customerService.viewMyProfile(userName);
+                    printCustomerProfile(customer);
+                    break;
+                case 2:
+                    bookSlotSubMenu(userName);
+                    break;
+                case 3:
+                    printUserPlan(userName);
+                    break;
+                case 4:
+                    cancelBookingSubMenu(userName);
+                    break;
+                case 5:
+                    System.out.println(PREVIOUS_MENU_MESSAGE);
+                    return;
+                default:
+                    System.out.println(INVALID_CHOICE_ERROR);
+                    break;
             }
         }
     }
