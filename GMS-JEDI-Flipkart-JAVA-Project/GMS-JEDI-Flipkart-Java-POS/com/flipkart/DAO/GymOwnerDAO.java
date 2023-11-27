@@ -15,26 +15,30 @@ import java.util.List;
 
 public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
-    private Connection conn = null;
-    private PreparedStatement statement = null;
+    /**
+     * Private data members
+     */
+    private Connection conn = null; /** Connection to the database */
+    private PreparedStatement statement = null; /** SQL Query Statement */
     private List<GymOwner> gymOwnerList = new ArrayList<>();
-    private List<GymOwner> pendingGymOwnerList = new ArrayList<>();
 
+    /**
+     * Constructor class
+     */
+    public GymOwnerDAO() {}
 
-    public GymOwnerDAO() {
-//        setPendingGymOwnerList();
-    }
+    /**
+     * Makes an API call to the database to fetch the
+     * complete list of all GymOwners registered with GMS.
+     * @return         list of gym owner list
+     */
     public List<GymOwner> getGymOwnerList() {
 
         List<GymOwner> resGymOwnerList = new ArrayList<>();
         try {
             conn = DBConnection.connect();
-            System.out.println("Fetching all gym owners..");
-
             statement = conn.prepareStatement(SQLConstants.FETCH_ALL_GYM_OWNERS_QUERY);
-
             ResultSet rs = statement.executeQuery();
-//            System.out.println(rs);
             while(rs.next()) {
                 GymOwner owner = new GymOwner(
                         rs.getString("id"),
@@ -43,7 +47,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
                         rs.getString("password"),
                         rs.getString("panNumber"),
                         rs.getString("cardDetails")
-
                 );
                 owner.setApproved(rs.getInt("isApproved"));
                 resGymOwnerList.add(owner);
@@ -56,10 +59,22 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         return gymOwnerList;
     }
 
+    /**
+     * Sets the gymOwnerList with an existing list
+     * @param  gymOwnerList     existing list
+     * @return                  void
+     */
     public void setGymOwnerList(List<GymOwner> gymOwnerList) {
         this.gymOwnerList = gymOwnerList;
     }
 
+    /**
+     * Authenticates the user by fetching details from the db
+     * and logs in that user, if successful.
+     * @param  username     unique username of the user
+     * @param  password     password of the user
+     * @return              whether login was successful or not (true/false)
+     */
     public boolean loginGymOwner(String username,String password) {
         try {
             conn = DBConnection.connect();
@@ -87,6 +102,12 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             return false;
     }
 
+    /**
+     * Registers a new gym owner with the GMS platform and adds
+     * the details to DB. Initially, this gym owner is not approved
+     * @param  gymOwner     complete GymOwner object of a new gym owner
+     * @return              void
+     */
     public void registerGymOwner(GymOwner gymOwner){
         try{
             conn  = DBConnection.connect();
@@ -109,13 +130,17 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
 
     }
 
+    /**
+     * Fetches a list of all gym owners from the db that have sent
+     * an approval request to the admin, i.e., their approval
+     * status is "Pending"
+     * @return         list of GymOwner objects with approval status as Pending
+     */
     public List<GymOwner> getPendingGymOwnerList() {
 
         List<GymOwner> pendingList = new ArrayList<>();
         try {
             conn = DBConnection.connect();
-//            System.out.println("Fetching gym owners..");
-
             statement = conn.prepareStatement(SQLConstants.FETCH_ALL_PENDING_GYM_OWNERS_QUERY);
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
@@ -123,7 +148,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
                 owner.setApproved(rs.getInt("isApproved"));
                 pendingList.add(owner);
             }
-            //conn.close();
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
@@ -134,6 +158,12 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
         return pendingList;
     }
 
+    /**
+     * A gym owner sends an approval request to the admin so that
+     * they get approved in order to list their gym centres with GMS
+     * @param  gymOwnerId   the id of the GymOwner who wants to send a req
+     * @return              void
+     */
     public void sendOwnerApprovalRequest(String gymOwnerId){
 
         try {
@@ -148,6 +178,12 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
     }
     public void setPendingGymOwnerList(){}
 
+    /**
+     * Admin calls this function to validate (approve/disapprove) a gymOwner
+     * @param  gymOwnerId   the id of the GymOwner who is being validated
+     * @param  isApproved   approval status, 0: Not Approved, 1: Approved, 2: Pending
+     * @return              void
+     */
     public void validateGymOwner(String gymOwnerId, int isApproved) {
         try {
             conn = DBConnection.connect();
@@ -157,7 +193,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             statement.setInt(1, isApproved);
             statement.setString(2, gymOwnerId);
             statement.executeUpdate();
-//            System.out.println("The gym owner has been approved!");
         } catch (SQLException se) {
             // Handle errors for JDBC
             se.printStackTrace();
@@ -165,15 +200,5 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO{
             // Handle errors for Class.forName
             e.printStackTrace();
         }
-//        for(GymOwner gymOwner : gymOwnerList) {
-//            if(gymOwner.getUserID().equals(gymOwnerId)) {
-//                gymOwner.setApproved(isApproved);
-//            }
-//        }
-//        for(GymOwner gymOwner : pendingGymOwnerList) {
-//            if(gymOwner.getUserID().equals(gymOwnerId)) {
-//                pendingGymOwnerList.remove(gymOwner);
-//            }
-//        }
     }
 }
