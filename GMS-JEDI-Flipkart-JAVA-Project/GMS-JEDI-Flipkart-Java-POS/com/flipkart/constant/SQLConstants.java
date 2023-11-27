@@ -62,4 +62,6 @@ public class SQLConstants {
     public static final String FETCH_SLOT_BY_ID = "SELECT * FROM FlipFit.Slot WHERE slotId=?";
 
     public static final String CHECK_BOOKING_OVERLAP = "Select * from FlipFit.Booking where userID=?";
+
+    public static final String GET_USERPLAN_BY_CUSTOMER_ID = "select * from slot join schedule where slot.slotId=schedule.slotId and schedule.scheduleId=?";
 }

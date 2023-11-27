@@ -30,28 +30,10 @@ public class GymOwnerClient {
 
     private static int newGymCentreId = 10;
 
-    public boolean isUserValid(String userName, String password, List<GymOwner> gymOwnerList) {
-        for(GymOwner c:gymOwnerList) {
-            if (userName.equals(c.getUserName()) && password.equals(c.getPassword())) {
-                gymOwnerId = c.getUserID();
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public boolean gymOwnerLogin(String userName, String password) {
-        System.out.println("in owner");
-        if (isUserValid(userName, password,gymOwnerList)) {
-
-            System.out.println("Successfully logged in");
-            gymOwnerClientMainPage();
-        }
-        else{
-            System.out.println("UserName or password doesn't match");
-            return false;
-        }
-        return true;
+        return gymOwnerService.loginGymOwner(userName,password);
     }
 
 

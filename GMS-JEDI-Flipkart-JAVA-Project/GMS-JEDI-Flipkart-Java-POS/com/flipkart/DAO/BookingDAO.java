@@ -2,6 +2,7 @@ package com.flipkart.DAO;
 
 import com.flipkart.bean.Booking;
 import com.flipkart.utils.DBConnection;
+import com.flipkart.utils.UserPlan;
 
 import java.awt.print.Book;
 import java.sql.Connection;
@@ -57,6 +58,36 @@ public class BookingDAO {
             excep.printStackTrace();
         }
         return allBookingList;
+    }
+
+//    public List<UserPlan> getUserPlan(String customerId) {
+//        List<UserPlan> allUserPlan = new ArrayList<>();
+//        List<Booking> allBookingList = getBookingByCustomerId(customerId);
+//        for (Booking booking : allBookingList) {
+//            try {
+//                Connection conn = DBConnection.connect();
+//                PreparedStatement stmt = conn.prepareStatement(GET_USERPLAN_BY_CUSTOMER_ID);
+//                stmt.setString(1, booking.getScheduleID());
+//                ResultSet rs = stmt.executeQuery();
+//
+//                while(rs.next()) {
+//                    UserPlan userPlan = new UserPlan(
+//                            rs.getString("bookingId"),
+//                            rs.getString("userID"),
+//                            rs.getString("scheduleID"),
+//                            rs.get
+//                    );
+//
+//                    allBookingList.add(booking);
+//                }
+//            } catch (SQLException sql) {
+//                sql.printStackTrace();
+//            }
+//        }
+//    }
+
+    public void checkBookingOverlap(String customerId){
+
     }
 
 
