@@ -6,6 +6,8 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
+import com.flipkart.exceptions.DataEntryException;
+import com.flipkart.exceptions.InvalidChoiceException;
 import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
 
@@ -89,7 +91,7 @@ public class CustomerClient {
             date = sdf.parse(scanner.next());
             sqlDate = new Date(date.getTime());
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new DataEntryException();
         }
         //Choose Slot
         System.out.println("Choose from the Below Slots");
@@ -103,7 +105,11 @@ public class CustomerClient {
         System.out.println("Enter SlotID");
         String slotID = scanner.next();
         //Select Slot to book
-        customerService.bookSlot(userName,sqlDate,slotID);
+        try{
+            customerService.bookSlot(userName,sqlDate,slotID);
+        } catch (Exception e){
+
+        }
 
     }
 
@@ -164,27 +170,33 @@ public class CustomerClient {
         System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\n What you what to do"+RESET_COLOR);
         while(true){
             System.out.println("1. View My Profile \n2. Book a slot in a Gym \n3. View Bookings\n4. Cancel Bookings\n5. Go Back to previous menu");
-            int choice = scanner.nextInt();
-            switch(choice){
-                case 1:
-                    Customer customer= customerService.viewMyProfile(userName);
-                    printCustomerProfile(customer);
-                    break;
-                case 2:
-                    bookSlotSubMenu(userName);
-                    break;
-                case 3:
-                    printUserPlan(userName);
-                    break;
-                case 4:
-                    cancelBookingSubMenu(userName);
-                    break;
-                case 5:
-                    System.out.println(PREVIOUS_MENU_MESSAGE);
-                    return;
-                default:
-                    System.out.println(INVALID_CHOICE_ERROR);
-                    break;
+            try{
+                int choice = scanner.nextInt();
+                if( choice < 1 || choice > 5)
+                    throw new InvalidChoiceException();
+                switch(choice){
+                    case 1:
+                        Customer customer= customerService.viewMyProfile(userName);
+                        printCustomerProfile(customer);
+                        break;
+                    case 2:
+                        bookSlotSubMenu(userName);
+                        break;
+                    case 3:
+                        printUserPlan(userName);
+                        break;
+                    case 4:
+                        cancelBookingSubMenu(userName);
+                        break;
+                    case 5:
+                        System.out.println(PREVIOUS_MENU_MESSAGE);
+                        return;
+                    default:
+                        System.out.println(INVALID_CHOICE_ERROR);
+                        break;
+                }
+            } catch (InvalidChoiceException e){
+                System.out.println(e.getMessage());
             }
         }
     }

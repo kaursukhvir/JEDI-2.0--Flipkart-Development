@@ -5,6 +5,7 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
+import com.flipkart.exceptions.BookingFailedException;
 import com.flipkart.utils.UserPlan;
 
 import java.sql.Date;
@@ -43,11 +44,9 @@ public class CustomerService implements CustomerServiceInterface {
         //create booking
         boolean isOverlap = bookingService.checkBookingOverlap(userName,date,slotId);
         if(isOverlap) {
-            System.out.println("There exists a conflicting booking, First cancel it!!!!");
-            return;
+            throw new BookingFailedException("There exists a conflicting booking, First cancel it!!!!");
         }
         bookingService.addBooking(userName, scheduleId);
-        return;
     }
 
 
