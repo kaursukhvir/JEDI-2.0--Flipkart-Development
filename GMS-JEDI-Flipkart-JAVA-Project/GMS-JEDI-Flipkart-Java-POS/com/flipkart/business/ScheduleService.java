@@ -3,7 +3,6 @@ package com.flipkart.business;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-import java.util.UUID;
 
 import com.flipkart.DAO.ScheduleDAO;
 import com.flipkart.bean.Schedule;

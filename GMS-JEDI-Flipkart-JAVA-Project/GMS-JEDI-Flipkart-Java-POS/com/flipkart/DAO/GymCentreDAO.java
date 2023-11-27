@@ -20,8 +20,8 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
     public GymCentreDAO() {
     }
 
-    // api call to retreive all gym centres and status
-    public List<GymCentre> getAllCentresByOwmerId(String gymOwnerId) {
+    // api call to retrieve all gym centres and status
+    public List<GymCentre> getAllCentresByOwmerId(String gymOwnerId)  {
 
         List<GymCentre> allGymCentres = new ArrayList<>();
         try {
@@ -71,8 +71,6 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
             gymCentre.setApproved(rs.getInt("isApproved"));
             stmt.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
-        } catch (Exception exp) {
             exp.printStackTrace();
         }
 
