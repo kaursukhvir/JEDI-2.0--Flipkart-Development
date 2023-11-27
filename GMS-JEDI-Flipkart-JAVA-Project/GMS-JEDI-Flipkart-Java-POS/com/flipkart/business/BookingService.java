@@ -22,8 +22,12 @@ public class BookingService implements BookingServiceInterface {
         return bookingDAO.checkBookingOverlap(customerId,date,slot.getTime());
     }
     public void addBooking(String userName, String scheduleID) {
+        boolean isAvailable = scheduleService.modifySchedule(scheduleID,-1);
+        if(!isAvailable){
+            System.out.println("No seats available for the booking");
+            return;
+        }
         bookingDAO.addBooking(userName, scheduleID);
-        scheduleService.modifySchedule(scheduleID,-1);
     }
 
     public List<Booking> getBookingByCustomerId(String customerId){

@@ -6,6 +6,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
+import com.flipkart.exceptions.DataEntryException;
 import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
 
@@ -33,7 +34,7 @@ public class CustomerClient {
     }
 
 
-    public void register(String userId){
+    public void register(){
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 

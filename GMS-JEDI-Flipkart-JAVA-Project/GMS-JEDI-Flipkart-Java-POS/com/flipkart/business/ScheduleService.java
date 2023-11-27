@@ -35,10 +35,10 @@ public class ScheduleService implements ScheduleServiceInterface {
         return null;
     }
 
-    public void modifySchedule(String scheduleId,int action){
+    public boolean modifySchedule(String scheduleId,int action){
         // increment or decrement availability based on action
         // 1 for increasing availability, -1 for decreasing
-        scheduleDAO.modifySchedule(scheduleId, action);
+        return scheduleDAO.modifySchedule(scheduleId, action);
     }
 
     public List<Schedule> checkAvailability(String centreID, Date date){

@@ -73,11 +73,14 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
         return response;
     }
 
-    public void modifySchedule(String scheduleId,int action){
+    public boolean modifySchedule(String scheduleId,int action){
         //1 for increasing, -1 for decreasing
         try{
             Connection conn = DBConnection.connect();
             int availability = getSchedule(scheduleId).getAvailability();
+            if(availability < 1){
+                return false;
+            }
             PreparedStatement ps = conn.prepareStatement(SQLConstants.MODIFY_SCHEDULE_AVAILABILITY);
             ps.setInt(1, availability+action);
             ps.setString(2, scheduleId);
@@ -86,5 +89,6 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return true;
     }
 }
