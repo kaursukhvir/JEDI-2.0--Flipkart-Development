@@ -63,7 +63,7 @@ public class MainApplicationClient {
     private static void registration(){
 
         System.out.println("Enter your role");
-        userId++;
+//        userId++;
         Role role = Role.valueOf(scanner.next().toUpperCase());
 
         switch (role){
@@ -72,10 +72,10 @@ public class MainApplicationClient {
                 mainPage();
                 break;
             case CUSTOMER:
-                customerClient.register(Integer.toString(userId));
+                customerClient.register();
                 break;
             case GYMOWNER:
-                gymOwnerClient.register(Integer.toString(userId));
+                gymOwnerClient.register();
                 break;
             default:
                 System.out.println(INVALID_CHOICE_ERROR);

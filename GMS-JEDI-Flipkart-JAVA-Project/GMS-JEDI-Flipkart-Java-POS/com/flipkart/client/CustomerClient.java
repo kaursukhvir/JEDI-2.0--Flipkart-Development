@@ -33,7 +33,7 @@ public class CustomerClient {
     }
 
 
-    public void register(String userId){
+    public void register(){
         System.out.println("Enter your UserName");
         String userName = scanner.next();
 
