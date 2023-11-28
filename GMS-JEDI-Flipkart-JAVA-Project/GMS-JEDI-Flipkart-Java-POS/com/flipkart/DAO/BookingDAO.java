@@ -1,6 +1,7 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.exceptions.BookingFailedException;
 import com.flipkart.utils.DBConnection;
 import com.flipkart.utils.UserPlan;
 
@@ -17,13 +18,12 @@ import static com.flipkart.constant.SQLConstants.*;
 
 public class BookingDAO {
 
-
-
     public BookingDAO() {
     }
 
     ScheduleDAO scheduleDAO  = new ScheduleDAO();
-    public void  addBooking(String userName, String scheduleID){
+
+    public void  addBooking(String userName, String scheduleID) throws BookingFailedException{
         try {
             System.out.println(userName + scheduleID);
             Connection conn = DBConnection.connect();
@@ -34,13 +34,13 @@ public class BookingDAO {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
+            throw new BookingFailedException("Booking failed for current slot. Try again later.");
         } catch (Exception exp) {
-            exp.printStackTrace();
+            System.out.println("Oops! An error occurred. Try again later.");
         }
-//
+
     }
-    public List<Booking> getBookingByCustomerId(String customerId) {
+    public List<Booking> getBookingByCustomerId(String customerId) throws BookingFailedException {
         List<Booking> allBookingList = new ArrayList<>();
         try {
             Connection conn = DBConnection.connect();
@@ -58,9 +58,9 @@ public class BookingDAO {
                 allBookingList.add(booking);
             }
         } catch(SQLException sql) {
-            sql.printStackTrace();
-        } catch(Exception excep) {
-            excep.printStackTrace();
+            throw new BookingFailedException("Could not retrieve Bookings by customer id:  " + customerId);
+        } catch(Exception e) {
+            System.out.println("Oops! An error occurred. Try again later.");
         }
         return allBookingList;
     }
@@ -86,8 +86,8 @@ public class BookingDAO {
 
                     allUserPlan.add(userPlan);
                 }
-            } catch (SQLException sql) {
-                sql.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Could not retreive User Plan. Try again later.");
             }
         }
         return allUserPlan;
@@ -111,20 +111,20 @@ public class BookingDAO {
     }
 
 
-    public void cancelBookingById(String bookingID) {
+    public void cancelBookingById(String bookingID) throws BookingFailedException {
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(CANCEL_BOOKING_BY_ID);
             stmt.setString(1, bookingID);
             stmt.executeUpdate();
         } catch(SQLException sql) {
-            sql.printStackTrace();
-        } catch(Exception excep) {
-        excep.printStackTrace();
+            throw new BookingFailedException("Could not cancel booking for BookingId: " + bookingID);
+        } catch(Exception e) {
+            System.out.println("Oops! An error occurred. Try again later.");
         }
     }
 
-    public Booking getBookingByBookingId(String bookingId){
+    public Booking getBookingByBookingId(String bookingId) throws BookingFailedException{
         Booking booking  = null;
         try {
             Connection conn = DBConnection.connect();
@@ -141,9 +141,9 @@ public class BookingDAO {
 
             }
         } catch(SQLException sql) {
-            sql.printStackTrace();
+            throw new BookingFailedException("Could not fetch booking by bookingId: " + bookingId);
         } catch(Exception excep) {
-            excep.printStackTrace();
+            System.out.println("Oops! An error occurred. Try again later.");
         }
         return booking;
     }
