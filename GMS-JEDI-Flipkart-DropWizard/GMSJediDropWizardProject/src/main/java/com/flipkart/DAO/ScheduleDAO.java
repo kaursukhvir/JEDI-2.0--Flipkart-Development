@@ -1,8 +1,8 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Schedule;
-import main.java.com.flipkart.constant.SQLConstants;
-import main.java.com.flipkart.utils.DBConnection;
+import com.flipkart.bean.Schedule;
+import com.flipkart.constant.SQLConstants;
+import com.flipkart.utils.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

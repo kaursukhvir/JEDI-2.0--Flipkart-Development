@@ -1,4 +1,4 @@
-package main.java.com.flipkart.utils;
+package com.flipkart.utils;
 
 import java.sql.Date;
 import java.time.LocalTime;

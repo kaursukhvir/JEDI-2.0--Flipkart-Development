@@ -1,6 +1,6 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.GymCentre;
+import com.flipkart.bean.GymCentre;
 
 import java.util.List;
 

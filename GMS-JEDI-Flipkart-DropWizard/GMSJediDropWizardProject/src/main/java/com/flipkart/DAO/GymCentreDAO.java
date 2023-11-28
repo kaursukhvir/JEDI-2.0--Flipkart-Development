@@ -1,8 +1,8 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.GymCentre;
-import main.java.com.flipkart.constant.SQLConstants;
-import main.java.com.flipkart.utils.DBConnection;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.constant.SQLConstants;
+import com.flipkart.utils.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.java.com.flipkart.constant.SQLConstants.FETCH_GYM_CENTRE_BY_ID;
+import static com.flipkart.constant.SQLConstants.FETCH_GYM_CENTRE_BY_ID;
 
 public class GymCentreDAO implements GymCentreInterfaceDAO {
     private Connection conn = null;

@@ -1,11 +1,11 @@
-package main.java.com.flipkart.client;
+package com.flipkart.client;
 
 
-import main.java.com.flipkart.bean.Role;
+import com.flipkart.bean.Role;
 
 import java.util.Scanner;
 
-import static main.java.com.flipkart.constant.Constants.*;
+import static com.flipkart.constant.Constants.*;
 
 public class MainApplicationClient {
 

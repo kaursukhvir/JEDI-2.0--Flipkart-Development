@@ -1,16 +1,16 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Customer;
-import main.java.com.flipkart.exceptions.RegistrationFailedException;
-import main.java.com.flipkart.exceptions.UserInvalidException;
-import main.java.com.flipkart.utils.DBConnection;
+import com.flipkart.bean.Customer;
+import com.flipkart.exceptions.RegistrationFailedException;
+import com.flipkart.exceptions.UserInvalidException;
+import com.flipkart.utils.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static main.java.com.flipkart.constant.SQLConstants.*;
+import static com.flipkart.constant.SQLConstants.*;
 
 public class CustomerDAO implements CustomerInterfaceDAO {
 

@@ -1,4 +1,4 @@
-package main.java.com.flipkart.constant;
+package com.flipkart.constant;
 
 public class SQLConstants {
 

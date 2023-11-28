@@ -1,11 +1,9 @@
-package main.java.com.dropwizard;
+package com.dropwizard;
 
-/**
- * Hello world!
- *
- */
 
-import main.java.com.flipkart.rest.GMSMainController;
+import com.flipkart.rest.AdminController;
+import com.flipkart.rest.CustomerController;
+import com.flipkart.rest.GymOwnerController;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Bootstrap;
@@ -13,10 +11,8 @@ import io.dropwizard.setup.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**s
- * Hello world!
- *
- */
+import javax.ws.rs.PathParam;
+
 public class App extends Application<Configuration> {
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
@@ -28,7 +24,11 @@ public class App extends Application<Configuration> {
     public void run(Configuration c, Environment e) throws Exception {
         LOGGER.info("Registering REST resources");
         //  e.jersey().register(new EmployeeRESTController(e.getValidator()));
-        e.jersey().register(new GMSMainController());
+
+        System.out.println("HERE");
+        e.jersey().register(new AdminController());
+        e.jersey().register(new CustomerController());
+        e.jersey().register(new GymOwnerController());
     }
 
     public static void main(String[] args) throws Exception {

@@ -1,9 +1,9 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Booking;
-import main.java.com.flipkart.exceptions.BookingFailedException;
-import main.java.com.flipkart.utils.DBConnection;
-import main.java.com.flipkart.utils.UserPlan;
+import com.flipkart.bean.Booking;
+import com.flipkart.exceptions.BookingFailedException;
+import com.flipkart.utils.DBConnection;
+import com.flipkart.utils.UserPlan;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static main.java.com.flipkart.constant.SQLConstants.*;
+import static com.flipkart.constant.SQLConstants.*;
 
 public class BookingDAO {
 

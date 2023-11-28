@@ -1,10 +1,10 @@
-package main.java.com.flipkart.utils;
+package com.flipkart.utils;
 
-import main.java.com.flipkart.bean.GymCentre;
+import com.flipkart.bean.GymCentre;
 
 import java.util.List;
 
-import static main.java.com.flipkart.constant.Constants.*;
+import static com.flipkart.constant.Constants.*;
 
 public class util {
 

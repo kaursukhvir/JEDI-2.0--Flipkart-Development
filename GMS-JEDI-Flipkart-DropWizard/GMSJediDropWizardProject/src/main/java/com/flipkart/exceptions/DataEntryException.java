@@ -1,7 +1,7 @@
-package main.java.com.flipkart.exceptions;
+package com.flipkart.exceptions;
 
-import static main.java.com.flipkart.constant.Constants.RED_COLOR;
-import static main.java.com.flipkart.constant.Constants.YELLOW_COLOR;
+import static com.flipkart.constant.Constants.RED_COLOR;
+import static com.flipkart.constant.Constants.YELLOW_COLOR;
 
 public class DataEntryException extends RuntimeException{
     public DataEntryException(){

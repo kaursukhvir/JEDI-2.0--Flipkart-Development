@@ -1,10 +1,10 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.DAO.BookingDAO;
-import main.java.com.flipkart.bean.Booking;
-import main.java.com.flipkart.bean.Slot;
-import main.java.com.flipkart.exceptions.BookingFailedException;
-import main.java.com.flipkart.utils.UserPlan;
+import com.flipkart.DAO.BookingDAO;
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Slot;
+import com.flipkart.exceptions.BookingFailedException;
+import com.flipkart.utils.UserPlan;
 
 import java.util.Date;
 import java.util.List;

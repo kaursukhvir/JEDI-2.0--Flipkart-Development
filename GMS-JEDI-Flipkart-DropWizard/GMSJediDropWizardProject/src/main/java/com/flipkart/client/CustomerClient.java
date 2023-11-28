@@ -1,15 +1,15 @@
-package main.java.com.flipkart.client;
+package com.flipkart.client;
 
-import main.java.com.flipkart.bean.Booking;
-import main.java.com.flipkart.bean.Customer;
-import main.java.com.flipkart.bean.GymCentre;
-import main.java.com.flipkart.bean.Slot;
-import main.java.com.flipkart.business.CustomerService;
-import main.java.com.flipkart.business.CustomerServiceInterface;
-import main.java.com.flipkart.exceptions.DataEntryException;
-import main.java.com.flipkart.utils.UserPlan;
-import main.java.com.flipkart.utils.util;
-import main.java.com.flipkart.validators.Validators;
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
+import com.flipkart.business.CustomerService;
+import com.flipkart.business.CustomerServiceInterface;
+import com.flipkart.exceptions.DataEntryException;
+import com.flipkart.utils.UserPlan;
+import com.flipkart.utils.util;
+import com.flipkart.validators.Validators;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static main.java.com.flipkart.client.MainApplicationClient.scanner;
-import static main.java.com.flipkart.constant.Constants.*;
+import static com.flipkart.client.MainApplicationClient.scanner;
+import static com.flipkart.constant.Constants.*;
 
 
 public class CustomerClient {

@@ -1,7 +1,7 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.bean.Booking;
-import main.java.com.flipkart.utils.UserPlan;
+import com.flipkart.bean.Booking;
+import com.flipkart.utils.UserPlan;
 
 import java.util.Date;
 import java.util.List;

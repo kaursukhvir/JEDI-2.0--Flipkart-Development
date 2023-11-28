@@ -1,9 +1,9 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.DAO.GymCentreDAO;
-import main.java.com.flipkart.DAO.GymCentreInterfaceDAO;
-import main.java.com.flipkart.bean.GymCentre;
-import main.java.com.flipkart.bean.Slot;
+import com.flipkart.DAO.GymCentreDAO;
+import com.flipkart.DAO.GymCentreInterfaceDAO;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
 
 import java.sql.Date;
 import java.util.List;

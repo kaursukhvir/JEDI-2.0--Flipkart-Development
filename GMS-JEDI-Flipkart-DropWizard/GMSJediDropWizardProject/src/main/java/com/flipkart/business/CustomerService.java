@@ -1,19 +1,19 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.DAO.CustomerDAO;
-import main.java.com.flipkart.DAO.CustomerInterfaceDAO;
-import main.java.com.flipkart.bean.Booking;
-import main.java.com.flipkart.bean.Customer;
-import main.java.com.flipkart.bean.GymCentre;
-import main.java.com.flipkart.bean.Slot;
-import main.java.com.flipkart.exceptions.RegistrationFailedException;
-import main.java.com.flipkart.exceptions.UserInvalidException;
-import main.java.com.flipkart.utils.UserPlan;
+import com.flipkart.DAO.CustomerDAO;
+import com.flipkart.DAO.CustomerInterfaceDAO;
+import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
+import com.flipkart.exceptions.RegistrationFailedException;
+import com.flipkart.exceptions.UserInvalidException;
+import com.flipkart.utils.UserPlan;
 
 import java.sql.Date;
 import java.util.List;
 
-import static main.java.com.flipkart.constant.Constants.*;
+import static com.flipkart.constant.Constants.*;
 
 public class CustomerService implements CustomerServiceInterface {
 

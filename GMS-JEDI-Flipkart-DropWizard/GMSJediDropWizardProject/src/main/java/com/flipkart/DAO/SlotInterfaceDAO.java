@@ -1,6 +1,6 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Slot;
+import com.flipkart.bean.Slot;
 
 import java.util.List;
 

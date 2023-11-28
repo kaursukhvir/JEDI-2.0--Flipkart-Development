@@ -1,8 +1,8 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Customer;
-import main.java.com.flipkart.exceptions.RegistrationFailedException;
-import main.java.com.flipkart.exceptions.UserInvalidException;
+import com.flipkart.bean.Customer;
+import com.flipkart.exceptions.RegistrationFailedException;
+import com.flipkart.exceptions.UserInvalidException;
 
 public interface CustomerInterfaceDAO {
 

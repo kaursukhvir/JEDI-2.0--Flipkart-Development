@@ -1,4 +1,4 @@
-package main.java.com.flipkart.utils;
+package com.flipkart.utils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,8 +19,8 @@ public class DBConnection {
             // Register the jdbc driver
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-//                    String url = "jdbc:mysql://localhost:3306/Flipfit";//flipfit is the name of database 3306 is the port no. of mysql
-                FileInputStream inputStream = new FileInputStream("/Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-JAVA-Project/GMS-JEDI-Flipkart-Java-POS/com/flipkart/config.properties");
+//              String url = "jdbc:mysql://localhost:3306/Flipfit";//flipfit is the name of database 3306 is the port no. of mysql
+                FileInputStream inputStream = new FileInputStream("/Users/arsh.d/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-JAVA-Project/GMS-JEDI-Flipkart-Java-POS/com/flipkart/config.properties");
                 Properties newProp = new Properties();
                 newProp.load(inputStream);
                 Connection connection = DriverManager.getConnection(newProp.getProperty("url"),newProp.getProperty("user"),newProp.getProperty("password"));
@@ -36,7 +36,6 @@ public class DBConnection {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
         }
         else{
             return singleInstance;

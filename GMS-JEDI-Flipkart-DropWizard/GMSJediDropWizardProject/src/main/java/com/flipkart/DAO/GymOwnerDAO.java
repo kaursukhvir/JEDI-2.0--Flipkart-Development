@@ -1,8 +1,8 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.GymOwner;
-import main.java.com.flipkart.constant.SQLConstants;
-import main.java.com.flipkart.utils.DBConnection;
+import com.flipkart.bean.GymOwner;
+import com.flipkart.constant.SQLConstants;
+import com.flipkart.utils.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -128,12 +128,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
 
     }
 
-    /**
-     * Fetches a list of all gym owners from the db that have sent
-     * an approval request to the admin, i.e., their approval
-     * status is "Pending"
-     * @return         list of GymOwner objects with approval status as Pending
-     */
+
     public List<GymOwner> getPendingGymOwnerList() {
 
         List<GymOwner> pendingList = new ArrayList<>();
@@ -156,12 +151,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
         return pendingList;
     }
 
-    /**
-     * A gym owner sends an approval request to the admin so that
-     * they get approved in order to list their gym centres with GMS
-     * @param  gymOwnerId   the id of the GymOwner who wants to send a req
-     * @return              void
-     */
+
     public void sendOwnerApprovalRequest(String gymOwnerId){
 
         try {

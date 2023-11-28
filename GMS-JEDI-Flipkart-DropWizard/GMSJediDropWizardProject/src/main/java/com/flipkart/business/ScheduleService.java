@@ -1,8 +1,8 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.DAO.ScheduleDAO;
-import main.java.com.flipkart.bean.Schedule;
-import main.java.com.flipkart.bean.Slot;
+import com.flipkart.DAO.ScheduleDAO;
+import com.flipkart.bean.Schedule;
+import com.flipkart.bean.Slot;
 
 import java.sql.Date;
 import java.util.ArrayList;

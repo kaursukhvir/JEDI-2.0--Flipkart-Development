@@ -1,6 +1,6 @@
-package main.java.com.flipkart.business;
+package com.flipkart.business;
 
-import main.java.com.flipkart.bean.Slot;
+import com.flipkart.bean.Slot;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package main.java.com.flipkart.DAO;
+package com.flipkart.DAO;
 
-import main.java.com.flipkart.bean.Booking;
+import com.flipkart.bean.Booking;
 
 import java.util.List;
 

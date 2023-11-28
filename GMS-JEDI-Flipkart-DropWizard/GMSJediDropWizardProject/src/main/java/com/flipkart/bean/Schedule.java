@@ -1,4 +1,4 @@
-package main.java.com.flipkart.bean;
+package com.flipkart.bean;
 
 import java.sql.Date;
 import java.util.UUID;

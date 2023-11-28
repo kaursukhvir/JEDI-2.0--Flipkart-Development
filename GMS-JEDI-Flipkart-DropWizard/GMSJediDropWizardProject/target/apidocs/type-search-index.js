@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"com.flipkart.rest","l":"AdminController"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.flipkart.rest","l":"CustomerController"},{"p":"com.flipkart.rest","l":"GymOwnerController"}];updateSearchResults();

@@ -1,11 +1,11 @@
-package main.java.com.flipkart.client;
+package com.flipkart.client;
 
-import main.java.com.flipkart.DAO.GymOwnerDAO;
-import main.java.com.flipkart.bean.GymCentre;
-import main.java.com.flipkart.bean.Slot;
-import main.java.com.flipkart.business.*;
-import main.java.com.flipkart.exceptions.LoginFailedException;
-import main.java.com.flipkart.utils.util;
+import com.flipkart.DAO.GymOwnerDAO;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
+import com.flipkart.business.*;
+import com.flipkart.exceptions.LoginFailedException;
+import com.flipkart.utils.util;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static main.java.com.flipkart.client.MainApplicationClient.scanner;
-import static main.java.com.flipkart.constant.Constants.*;
+import static com.flipkart.client.MainApplicationClient.scanner;
+import static com.flipkart.constant.Constants.*;
 
 public class GymOwnerClient {
 

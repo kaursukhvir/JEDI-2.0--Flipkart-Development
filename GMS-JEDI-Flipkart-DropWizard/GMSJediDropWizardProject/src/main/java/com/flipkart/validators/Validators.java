@@ -1,4 +1,4 @@
-package main.java.com.flipkart.validators;
+package com.flipkart.validators;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
