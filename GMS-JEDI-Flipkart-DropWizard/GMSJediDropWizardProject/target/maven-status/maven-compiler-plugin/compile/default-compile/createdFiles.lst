@@ -8,6 +8,7 @@ com/flipkart/exceptions/UserInvalidException.class
 com/flipkart/bean/Customer.class
 com/flipkart/business/CustomerService.class
 com/flipkart/bean/User.class
+com/flipkart/utils/InputSlot.class
 com/flipkart/client/GymOwnerClient.class
 com/flipkart/exceptions/UserNotFoundException.class
 com/flipkart/exceptions/WrongCredentialsException.class

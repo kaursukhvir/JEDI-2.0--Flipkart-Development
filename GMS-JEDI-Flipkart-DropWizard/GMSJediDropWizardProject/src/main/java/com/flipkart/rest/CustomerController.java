@@ -1,17 +1,20 @@
 package com.flipkart.rest;
 
-import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerService;
-
 
 import com.flipkart.bean.Customer;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
-
+import com.flipkart.utils.InputSlot;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Path("/customer")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,8 +24,8 @@ public class CustomerController {
 
     //Customer login
     @GET
-    @Path("/{userName}/{password}")
-    public Response customerLogin(@PathParam("userName") String userName, @PathParam("password") String password) {
+    @Path("/login")
+    public Response customerLogin(@QueryParam("userName") String userName, @QueryParam("password") String password) {
         try{
             if (customerService.isUserValid(userName, password)) {
                 System.out.println("Login Successful");
@@ -39,9 +42,9 @@ public class CustomerController {
 
     //View profile
     @GET
-    @Path("/viewprofile/{userName}")
+    @Path("/viewprofile")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCustomerProfile(@PathParam("userName") String userName){
+    public Response getCustomerProfile(@QueryParam("userName") String userName){
         Customer customerProfile = customerService.viewMyProfile(userName);
         try{
             return Response.ok(customerProfile).build();
@@ -50,10 +53,52 @@ public class CustomerController {
         }
     }
 
+    //get centres by City
+    @GET
+    @Path("/getcentres")
+    public Response getCentresByCity(@QueryParam("city") String city){
+        try{
+            List<GymCentre> gymCentreList = customerService.getAllGymCenterDetailsByCity(city);
+            return Response.ok(gymCentreList).build();
+        }catch(Exception exception){
+            exception.printStackTrace();
+            return Response.status(Response.Status.NOT_FOUND).entity(exception.getMessage()).build();
+        }
+    }
+
+
+    //get slots by Centre
+    @GET
+    @Path("/get-slots-by-centre")
+    public Response getSlotsByCity(@QueryParam("centreId") String centreId,@QueryParam("date") String dateStr){
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dateFormat.setLenient(false);
+            Date date = dateFormat.parse(dateStr);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            List<Slot> slots =  customerService.getAvailableSlots(centreId,sqlDate);
+            return Response.ok(slots).build();
+        }catch (Exception exception){
+            return Response.status(Response.Status.BAD_REQUEST).entity(exception.getMessage()).build();
+        }
+    }
+
+    //book a slot
     @POST
+    @Path("/bookslot")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response bookSlot(InputSlot slot){
+        System.out.println("\n\n\n\n"+ slot.getSlotId()+slot.getDate());
+         boolean slotBooked = customerService.bookSlot(slot.getUserID(),slot.getDate(),slot.getSlotId(),slot.getCentreId());
+         if(slotBooked) return Response.ok("Slot Booked Successfully").build();
+         else return Response.ok("Unable to book slot").build();
+    }
+
+    @POST
+    @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response customerRegister(Customer customer){
-        Customer customerProfile =customerService.registerCustomer(customer);
+        Customer customerProfile = customerService.registerCustomer(customer);
         if(customerProfile == null){
             return Response.notModified().build();
         }
