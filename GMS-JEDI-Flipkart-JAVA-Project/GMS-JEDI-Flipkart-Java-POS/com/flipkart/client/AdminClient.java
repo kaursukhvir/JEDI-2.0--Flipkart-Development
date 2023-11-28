@@ -9,6 +9,8 @@ import com.flipkart.business.GymOwnerService;
 import com.flipkart.business.GymOwnerServiceInterface;
 import com.flipkart.utils.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -108,7 +110,10 @@ public class AdminClient {
     }
 
     public void adminClientMainPage(){
-        System.out.println("Welcome To the Admin Interface. Please select a choice: ");
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = currentTime.format(myFormat);
+        System.out.println(YELLOW_COLOR+"WELCOME ADMIN!!\nLogin Time: "+currentTime+RESET_COLOR);
         while(true){
             System.out.println("0. View All Gym Owners\n1. View Pending GymOwner Approval Requests\n2. View Pending GymCenter's Approval Requests\n3. Go Back To Previous Menu");
             int pendingChoice = scanner.nextInt();

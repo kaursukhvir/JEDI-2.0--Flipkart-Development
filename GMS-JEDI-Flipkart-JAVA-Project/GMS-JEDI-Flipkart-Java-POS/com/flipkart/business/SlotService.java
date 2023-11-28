@@ -7,12 +7,6 @@ import java.util.List;
 
 public class SlotService implements SlotServiceInterface {
     private static SlotDAO slotDAO = new SlotDAO();
-
-
-    public void addSlot(Slot slot){
-        slotDAO.addSlot(slot);
-    }
-
     public List<Slot> getAllSlotsByCentre(String centreID) {
         return slotDAO.getSlotByCentreId(centreID);
     }

@@ -22,7 +22,6 @@ public class ScheduleDAO implements ScheduleInterfaceDAO {
             ps.setDate(2, schedule.getDate());
             ps.setString(3, schedule.getSlotID());
             ps.setInt(4, schedule.getAvailability());
-
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

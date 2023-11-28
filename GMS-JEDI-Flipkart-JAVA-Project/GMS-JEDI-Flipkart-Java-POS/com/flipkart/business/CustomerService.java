@@ -6,7 +6,6 @@ import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
-import com.flipkart.exceptions.BookingFailedException;
 import com.flipkart.utils.UserPlan;
 
 import java.sql.Date;
@@ -58,8 +57,6 @@ public class CustomerService implements CustomerServiceInterface {
         bookingService.addBooking(userName, scheduleId);
         return true;
     }
-
-
 
     public void cancelBookingbyID(String bookingID){
         //cancel a booking

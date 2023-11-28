@@ -9,25 +9,30 @@ import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.exceptions.DataEntryException;
 import com.flipkart.utils.UserPlan;
 import com.flipkart.utils.util;
+import com.flipkart.validators.Validators;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
 import static com.flipkart.constant.Constants.*;
 import static com.flipkart.constant.Constants.RESET_COLOR;
 
+
 public class CustomerClient {
     private CustomerServiceInterface customerService  =  new CustomerService();
 
     public boolean customerLogin(String userName, String password) {
+//        Check if credentials are right
         if (customerService.isUserValid(userName, password)) {
-            System.out.println("Successfully logged in");
+            System.out.println(GREEN_COLOR+"Successfully logged in"+RESET_COLOR);
             customerClientMainPage(userName);
         } else {
-            System.out.println("UserName or password doesn't match");
+            System.out.println(RED_COLOR+"UserName or password doesn't match"+RESET_COLOR);
             return false;
         }
         return true;
@@ -82,26 +87,31 @@ public class CustomerClient {
         System.out.print("Choose a gymCentre ID to proceed:");
         String chosenGym = scanner.next();
         //Select Date
+        Date sqlDate = selectDate();
+        //Choose Slot
+        chooseSlot(chosenGym,userName,sqlDate,chosenGym);
+    }
+
+    private Date selectDate(){
+        //Select Date
         System.out.print("Enter Date (dd/MM/yyyy): ");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date date = null;
+        java.util.Date date;
         Date sqlDate = null;
         try {
-            date = sdf.parse(scanner.next());
-            sqlDate = new Date(date.getTime());
+            String dat = scanner.next();
+            if(Validators.isDateValid(dat)){
+                date = sdf.parse(dat);
+                sqlDate = new Date(date.getTime());
+            }
+            else{
+                System.out.println("INVALID DATE FORMAT");
+                sqlDate = selectDate();
+            }
         } catch (ParseException e) {
             throw new DataEntryException();
         }
-        //Choose Slot
-//        System.out.println("Choose from the Below Slots");
-//        List<Slot> availableSlots = customerService.getAvailableSlots(chosenGym,sqlDate);
-//        printSlots(availableSlots);
-//        if(availableSlots.isEmpty()){
-//            System.out.println(RED_COLOR +"There are no available slots in the " + chosenGym + ". Please Select some other gym" + RESET_COLOR);
-//            bookSlotSubMenu(userName);
-//            return;
-//        }
-        chooseSlot(chosenGym,userName,sqlDate,chosenGym);
+        return sqlDate;
     }
 
     private void chooseSlot(String gymCentreId,String userName,Date sqlDate,String centreId){
@@ -173,7 +183,10 @@ public class CustomerClient {
 
 
     public void customerClientMainPage(String userName) {
-        System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\nWhat you what to do"+RESET_COLOR);
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = currentTime.format(myFormat);
+        System.out.println(YELLOW_COLOR+"WELCOME "+userName+" !!\nWhat you what to do\nLogin TIME: "+currentTime+RESET_COLOR);
         while(true){
             System.out.println("1. View My Profile \n2. Book a slot in a Gym \n3. View Bookings\n4. Cancel Bookings\n5. Go Back to previous menu");
             int choice = scanner.nextInt();

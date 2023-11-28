@@ -32,7 +32,7 @@ public class Validators {
         return true;
     }
 
-    public boolean isDateValid(String dateStr) {
+    public static boolean isDateValid(String dateStr) {
         return isValidDate(dateStr) && !isFutureDate(dateStr);
     }
 

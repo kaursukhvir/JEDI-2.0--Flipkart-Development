@@ -6,6 +6,7 @@ import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.business.*;
 import com.flipkart.utils.util;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import java.time.format.DateTimeFormatter;
@@ -19,12 +20,10 @@ public class GymOwnerClient {
 
     GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
     //private List<GymOwner> gymOwnerList = gymOwnerDAO.getGymOwnerList();
-
     private GymOwnerServiceInterface gymOwnerService = new GymOwnerService();
     private SlotServiceInterface slotService = new SlotService();
     private GymCentreServiceInterface gymCentreService = new GymCentreService();
 
-    private static int newGymCentreId = 10;
 
 
 
@@ -62,7 +61,10 @@ public class GymOwnerClient {
 
 
     public void gymOwnerClientMainPage(String gymOwnerId) {
-
+        LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = currentTime.format(myFormat);
+        System.out.println(YELLOW_COLOR+"WELCOME "+gymOwnerId+" !!\nWhat you what to do\nLogin TIME: "+currentTime+RESET_COLOR);
         while(true){
             System.out.println("" +
                     "0. View all my Gym Centres\n" +
@@ -105,7 +107,6 @@ public class GymOwnerClient {
                     System.out.println("Enter price: : ");
                     int price = scanner.nextInt();
 
-                    newGymCentreId++;
                     gymCentreService.addCenter(
                             new GymCentre(
                                     gymId,
