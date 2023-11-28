@@ -14,17 +14,16 @@ import static com.flipkart.constant.SQLConstants.*;
 
 public class CustomerDAO implements CustomerInterfaceDAO {
 
-    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) throws RegistrationFailedException {
+    public Customer registerCustomer(Customer customer) throws RegistrationFailedException {
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
-            stmt.setString(1, userName);
-            stmt.setString(2, userName);
-            stmt.setString(3, password);
-            stmt.setString(4, email);
-            stmt.setString(5, phoneNumber);
-            stmt.setString(6, cardNumber);
-
+            stmt.setString(1, customer.getUserID());
+            stmt.setString(2, customer.getUserName());
+            stmt.setString(3, customer.getPassword());
+            stmt.setString(4, customer.getEmail());
+            stmt.setString(5, customer.getCustomerPhone());
+            stmt.setString(6, customer.getCardDetails());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException exp) {
@@ -32,6 +31,7 @@ public class CustomerDAO implements CustomerInterfaceDAO {
         } catch (Exception e) {
             System.out.println("Oops! An error occurred. Try again later.");
         }
+        return customer;
     }
 
     public boolean isUserValid(String userName, String password) throws UserInvalidException {
