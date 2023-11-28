@@ -37,8 +37,6 @@ public class GymCentreService implements GymCentreServiceInterface{
 
     public GymCentre getGymCentreById(String centreID) {
         GymCentre gymCentre = gymCentreDAO.getGymCentreByCentreId(centreID);
-//        Create Logic for this ---- ARSH
-//        Using Dummy Right now
-        return new GymCentre();
+        return gymCentre;
     }
 }
