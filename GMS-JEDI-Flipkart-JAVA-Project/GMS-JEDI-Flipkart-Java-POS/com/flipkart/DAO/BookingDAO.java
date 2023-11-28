@@ -25,7 +25,7 @@ public class BookingDAO {
 
     public void  addBooking(String userName, String scheduleID) throws BookingFailedException{
         try {
-            System.out.println(userName + scheduleID);
+            //System.out.println(userName + scheduleID);
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_BOOKING);
             stmt.setString(1, userName+scheduleID);

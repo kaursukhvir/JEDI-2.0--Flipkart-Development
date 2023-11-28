@@ -36,15 +36,15 @@ public class MainApplicationClient {
     }
 
     private static void login(){
+        try {
+            System.out.println("Enter your Role");
+            Role role = Role.valueOf(scanner.next().toUpperCase());
 
-        System.out.println("Enter your Role");
-        Role role = Role.valueOf(scanner.next().toUpperCase());
+            System.out.println("Enter your UserName");
+            String userName = scanner.next();
 
-        System.out.println("Enter your UserName");
-        String userName = scanner.next();
-
-        System.out.println("Enter your Passkey");
-        String password = scanner.next();
+            System.out.println("Enter your Passkey");
+            String password = scanner.next();
 
             switch (role){
                 case ADMIN:
@@ -56,29 +56,37 @@ public class MainApplicationClient {
                 case CUSTOMER:
                     customerClient.customerLogin(userName,password);
                     break;
-
+                default:
+                    System.out.println(INVALID_CHOICE_ERROR);
+                    break;
             }
+        }catch (IllegalArgumentException e){
+            System.out.println(INVALID_CHOICE_ERROR);
+        }
     }
     
     private static void registration(){
+        try {
+            System.out.println("Enter your role");
+            Role role = Role.valueOf(scanner.next().toUpperCase());
 
-        System.out.println("Enter your role");
-//        userId++;
-        Role role = Role.valueOf(scanner.next().toUpperCase());
-
-        switch (role){
-            case ADMIN:
-                System.out.println("Admin is already registered");
-                mainPage();
-                break;
-            case CUSTOMER:
-                customerClient.register();
-                break;
-            case GYMOWNER:
-                gymOwnerClient.register();
-                break;
-            default:
-                System.out.println(INVALID_CHOICE_ERROR);
+            switch (role){
+                case ADMIN:
+                    System.out.println("Admin is already registered");
+                    mainPage();
+                    break;
+                case CUSTOMER:
+                    customerClient.register();
+                    break;
+                case GYMOWNER:
+                    gymOwnerClient.register();
+                    break;
+                default:
+                    System.out.println(INVALID_CHOICE_ERROR);
+                    break;
+            }
+        }catch (IllegalArgumentException e){
+            System.out.println(INVALID_CHOICE_ERROR);
         }
     }
 
