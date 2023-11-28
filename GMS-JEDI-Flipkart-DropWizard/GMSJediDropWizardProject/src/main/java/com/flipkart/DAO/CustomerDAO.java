@@ -49,7 +49,7 @@ public class CustomerDAO implements CustomerInterfaceDAO {
         } catch (SQLException exp) {
             throw new UserInvalidException("User is Invalid. Try again.");
         } catch (Exception exp) {
-            System.out.println("Oops! An error occurred. Try again later.");
+            exp.printStackTrace();
         }
         return false;
     }

@@ -1,17 +1,25 @@
 package com.flipkart.rest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import com.flipkart.business.CustomerService;
+import com.flipkart.client.CustomerClient;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/customer")
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomerController {
-
+    CustomerService customerService = new CustomerService();
     @GET
-    public String customerLogin() {
-        return "my customer service";
+    @Path("/{userName}/{password}")
+    public String customerLogin(@PathParam("userName") String userName, @PathParam("password") String password) {
+
+        if(customerService.isUserValid(userName, password)){
+            return "Login Successful";
+        }
+        else{
+            return "Login Failed "+userName+password;
+        }
     }
 
 }
