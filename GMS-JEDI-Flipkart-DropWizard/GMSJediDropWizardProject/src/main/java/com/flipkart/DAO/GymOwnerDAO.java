@@ -18,7 +18,6 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
      */
     private Connection conn = null; /** Connection to the database */
     private PreparedStatement statement = null; /** SQL Query Statement */
-    private List<GymOwner> gymOwnerList = new ArrayList<>();
 
     /**
      * Constructor class
@@ -53,8 +52,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
             e.printStackTrace();
         }
 
-        this.setGymOwnerList(resGymOwnerList);
-        return gymOwnerList;
+        return resGymOwnerList;
     }
 
     /**
@@ -63,7 +61,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
      * @return                  void
      */
     public void setGymOwnerList(List<GymOwner> gymOwnerList) {
-        this.gymOwnerList = gymOwnerList;
+
     }
 
     /**

@@ -2,6 +2,8 @@ package com.flipkart.business;
 
 import com.flipkart.DAO.AdminDAO;
 import com.flipkart.DAO.AdminInterfaceDAO;
+import com.flipkart.DAO.GymOwnerDAO;
+import com.flipkart.DAO.GymOwnerInterfaceDAO;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 
@@ -11,7 +13,7 @@ import java.util.List;
 public class AdminService implements AdminServiceInterface {
 
     AdminInterfaceDAO adminDAO  = new AdminDAO();
-
+    GymOwnerInterfaceDAO gymOwnerDAO = new GymOwnerDAO();
     private List<GymOwner> pendinGymOwnerList = new ArrayList<>();
     private List<GymCentre> pendinGymCentreList = new ArrayList<>();
 

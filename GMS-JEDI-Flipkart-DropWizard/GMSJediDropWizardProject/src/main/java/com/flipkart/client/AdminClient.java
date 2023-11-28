@@ -59,7 +59,7 @@ public class AdminClient {
                 System.out.println(DISAPPROVAL_GYM_OWNER_CONFIRMATION);
             }
 
-            adminService.approveGymOwner(requestGymOwnerId,choice);
+            adminService.approveGymOwner(requestGymOwnerId,choice-1);
             //modify the list
 //            adminClientMainPage();
     }
@@ -76,7 +76,7 @@ public class AdminClient {
             } else if (choice == 2) {
                 System.out.println(DISAPPROVAL_GYM_CENTRE_CONFIRMATION);
             }
-            adminService.approveGymCenter(requestGymCenterId,choice);
+            adminService.approveGymCenter(requestGymCenterId,choice-1);
             //modify the list
 //            adminClientMainPage();
     }
