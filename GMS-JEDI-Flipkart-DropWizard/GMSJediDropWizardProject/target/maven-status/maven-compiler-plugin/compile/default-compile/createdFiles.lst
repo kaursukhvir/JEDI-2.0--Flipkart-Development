@@ -51,6 +51,7 @@ com/flipkart/DAO/GymCentreDAO.class
 com/flipkart/client/AdminClient.class
 com/flipkart/DAO/GymOwnerInterfaceDAO.class
 com/flipkart/bean/GymCentre.class
+com/flipkart/bean/ApprovalRequest.class
 com/flipkart/bean/Slot.class
 com/flipkart/client/MainApplicationClient.class
 com/flipkart/DAO/CustomerDAO.class

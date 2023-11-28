@@ -1,5 +1,7 @@
 package com.flipkart.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class GymOwner extends User {
@@ -19,7 +21,10 @@ public class GymOwner extends User {
         return panNumber;
     }
 
-    public int isApproved() {
+    public int getIsApproved() {
+        return isApproved;
+    }
+    public int isApproved(){
         return isApproved;
     }
 
