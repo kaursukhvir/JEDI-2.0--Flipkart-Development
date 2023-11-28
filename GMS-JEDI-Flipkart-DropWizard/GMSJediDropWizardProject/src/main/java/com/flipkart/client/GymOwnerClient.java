@@ -2,6 +2,7 @@ package com.flipkart.client;
 
 import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.*;
 import com.flipkart.exceptions.LoginFailedException;
@@ -28,7 +29,7 @@ public class GymOwnerClient {
 
 
     public boolean gymOwnerLogin(String userName, String password) {
-        if (gymOwnerService.loginGymOwner(userName,password)) {
+        if (gymOwnerService.loginGymOwner(userName,password)!=null) {
             System.out.println("Successfully logged in");
             gymOwnerClientMainPage(userName);
         } else {
@@ -54,7 +55,8 @@ public class GymOwnerClient {
         System.out.println("Enter your Card Number");
         String cardNumber = scanner.next();
 
-        gymOwnerService.registerGymOwner(userName,userName,password,email,panNumber,cardNumber);
+        GymOwner gymOwner = new GymOwner(userName,userName,password,email,panNumber,cardNumber);
+        gymOwnerService.registerGymOwner(gymOwner);
         gymOwnerClientMainPage(userName);
     }
 

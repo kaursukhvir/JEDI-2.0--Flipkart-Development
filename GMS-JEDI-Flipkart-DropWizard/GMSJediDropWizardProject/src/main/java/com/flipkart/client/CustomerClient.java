@@ -93,8 +93,8 @@ public class CustomerClient {
 
     private Date selectDate(){
         //Select Date
-        System.out.print("Enter Date (dd/MM/yyyy): ");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.print("Enter Date (dd/mm/yyyy): ");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         java.util.Date date;
         Date sqlDate = null;
         try {

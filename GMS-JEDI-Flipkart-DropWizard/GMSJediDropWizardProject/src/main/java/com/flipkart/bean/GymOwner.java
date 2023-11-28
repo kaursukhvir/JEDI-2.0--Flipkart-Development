@@ -1,12 +1,22 @@
 package com.flipkart.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 public class GymOwner extends User {
     private String panNumber;
     private List<String> gymCentreIDs;
     private String cardDetails;
+
+    @JsonProperty("isApproved")
     private int isApproved;
+
+    //Very Important
+    //Code crashes if removed
+    public  GymOwner(){
+        super();
+    }
 
     public GymOwner(String id,String userName, String email, String password, String panNumber, String cardDetails) {
         super(id,userName, email, password, Role.GYMOWNER);
@@ -19,7 +29,7 @@ public class GymOwner extends User {
         return panNumber;
     }
 
-    public int isApproved() {
+    public int getisApproved() {
         return isApproved;
     }
 

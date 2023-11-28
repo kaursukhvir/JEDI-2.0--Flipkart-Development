@@ -11,7 +11,7 @@ public interface GymCentreServiceInterface {
     List<GymCentre> getAllCentresByOwmerId(String gymOwnerId);
     List<GymCentre> getCentresByCity(String city);
     List<Slot> getAvailableSlotsByCentreAndDate(String centreID, Date date);
-    void addCenter(GymCentre gymCentre);
+    GymCentre addCenter(GymCentre gymCentre);
     void requestGymCentreApproval(String gymCentreId);
     GymCentre getGymCentreById(String centreID);
 }

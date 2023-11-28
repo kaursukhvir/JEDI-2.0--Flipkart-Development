@@ -73,7 +73,8 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
      * @param  password     password of the user
      * @return              whether login was successful or not (true/false)
      */
-    public boolean loginGymOwner(String username,String password) {
+    public GymOwner loginGymOwner(String username,String password) {
+        GymOwner gymOwner = null;
         try {
             conn = DBConnection.connect();
             ResultSet result;
@@ -85,19 +86,20 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
                 while (result.next()) {
                     if (username.equals(result.getString("Id")) && password.equals(result.getString("password"))) {
                         System.out.println("Login Success\n");
-                        return true;
+                        gymOwner = new GymOwner(result.getString("Id"),result.getString("name"),result.getString("email"),result.getString("password"),result.getString("panNumber"),result.getString("cardDetails"));
+                        return gymOwner;
                     } else {
-                        return false;
+                        return gymOwner;
                     }
                 }
             } catch (Exception e) {
                 System.out.println("SQL Exception\n");
-                return false;
+                return gymOwner;
             }
         }catch (SQLException e){
             System.out.println("SQL Exception\n");
         }
-            return false;
+            return gymOwner;
     }
 
     /**
@@ -106,7 +108,7 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
      * @param  gymOwner     complete GymOwner object of a new gym owner
      * @return              void
      */
-    public void registerGymOwner(GymOwner gymOwner){
+    public GymOwner registerGymOwner(GymOwner gymOwner){
         try{
             conn  = DBConnection.connect();
             statement = conn.prepareStatement(SQLConstants.REGISTER_GYM_OWNER);
@@ -117,15 +119,16 @@ public class GymOwnerDAO implements GymOwnerInterfaceDAO {
             statement.setString(4,gymOwner.getPassword());
             statement.setString(5,gymOwner.getPanNumber());
             statement.setString(6,gymOwner.getCardDetails());
-            statement.setInt(7,gymOwner.isApproved());
+            statement.setInt(7,gymOwner.getisApproved());
 
             statement.executeUpdate();
             System.out.println("Registration Success\n");
+            return gymOwner;
 
         }catch(SQLException e){
             System.out.println("Try again with a different Username \n");
         }
-
+        return null;
     }
 
 

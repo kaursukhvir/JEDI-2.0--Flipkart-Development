@@ -78,7 +78,7 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
 
     }
 
-    public void addGymCentre(GymCentre centre) {
+    public GymCentre addGymCentre(GymCentre centre) {
         // call to db api
         try {
             conn = DBConnection.connect();
@@ -99,6 +99,7 @@ public class GymCentreDAO implements GymCentreInterfaceDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return centre;
     }
 
     public List<GymCentre> getPendingGymCentreList() {

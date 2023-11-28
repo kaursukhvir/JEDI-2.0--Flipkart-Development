@@ -95,11 +95,11 @@ public class AdminClient {
             System.out.printf("%-8s\t", gymOwner.getUserName());
             System.out.printf("%-8s\t", gymOwner.getEmail());
             System.out.printf("%-8s\t", gymOwner.getPanNumber());
-            if(gymOwner.isApproved()==1)
+            if(gymOwner.getisApproved()==1)
             {
                 System.out.println("Yes\n");
             }
-            else if(gymOwner.isApproved() == 0)
+            else if(gymOwner.getisApproved() == 0)
             {
                 System.out.println("No\n");
             } else {

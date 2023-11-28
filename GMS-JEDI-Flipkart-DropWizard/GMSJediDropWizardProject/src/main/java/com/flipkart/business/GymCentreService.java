@@ -25,9 +25,9 @@ public class GymCentreService implements GymCentreServiceInterface {
         return scheduleService.getAllAvailableSlotsByDate(centreID, date);
     }
 
-    public void addCenter(GymCentre gymCentre) {
+    public GymCentre addCenter(GymCentre gymCentre) {
         //takes gymCenter details
-        gymCentreDAO.addGymCentre(gymCentre);
+        return gymCentreDAO.addGymCentre(gymCentre);
 
     }
 

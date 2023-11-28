@@ -8,7 +8,7 @@ public interface GymOwnerInterfaceDAO {
 
     public List<GymOwner> getGymOwnerList();
     public void setGymOwnerList(List<GymOwner> gymOwnerList);
-    public void registerGymOwner(GymOwner gymOwner);
+    public GymOwner registerGymOwner(GymOwner gymOwner);
     public List<GymOwner> getPendingGymOwnerList();
     public void sendOwnerApprovalRequest(String gymOwnerId);
     public void setPendingGymOwnerList();
