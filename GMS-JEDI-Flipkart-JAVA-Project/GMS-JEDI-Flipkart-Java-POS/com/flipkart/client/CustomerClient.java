@@ -105,7 +105,7 @@ public class CustomerClient {
                 sqlDate = new Date(date.getTime());
             }
             else{
-                System.out.println("INVALID DATE FORMAT");
+                new DataEntryException();
                 sqlDate = selectDate();
             }
         } catch (ParseException e) {

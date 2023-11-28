@@ -7,6 +7,7 @@ import com.flipkart.business.AdminService;
 import com.flipkart.business.AdminServiceInterface;
 import com.flipkart.business.GymOwnerService;
 import com.flipkart.business.GymOwnerServiceInterface;
+import com.flipkart.exceptions.LoginFailedException;
 import com.flipkart.utils.util;
 
 import java.time.LocalDateTime;
@@ -36,7 +37,7 @@ public class AdminClient {
             adminClientMainPage();
         }
         else{
-            System.out.println("UserName or password doesn't match");
+            new LoginFailedException("Admin Login Failed");
             return false;
         }
         return true;

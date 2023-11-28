@@ -4,6 +4,7 @@ import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.GymOwnerDAO;
 import com.flipkart.business.*;
+import com.flipkart.exceptions.LoginFailedException;
 import com.flipkart.utils.util;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class GymOwnerClient {
             System.out.println("Successfully logged in");
             gymOwnerClientMainPage(userName);
         } else {
-            System.out.println("UserName or password doesn't match");
+            new LoginFailedException("Gymowner Login Failed");
             return false;
         }
         return true;
