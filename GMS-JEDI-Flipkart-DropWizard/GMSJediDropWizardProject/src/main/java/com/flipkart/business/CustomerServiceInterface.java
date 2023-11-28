@@ -15,7 +15,7 @@ public interface CustomerServiceInterface {
     List<Booking> getCustomerBookings(String customerId);
     boolean bookSlot(String userID,Date date, String slotId,String centreId);
     void cancelBookingbyID(String bookingID);
-    void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber);
+    Customer registerCustomer(Customer customer);
     Customer viewMyProfile(String userName);
     boolean isUserValid(String userName, String password);
 

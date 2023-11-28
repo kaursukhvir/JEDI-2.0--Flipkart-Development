@@ -38,25 +38,25 @@ public class CustomerClient {
     }
 
 
-    public void register(){
-        System.out.println("Enter your UserName");
-        String userName = scanner.next();
-
-        System.out.println("Enter your Passkey");
-        String password = scanner.next();
-
-        System.out.println("Enter your Email");
-        String email = scanner.next();
-
-        System.out.println("Enter your Phone Number");
-        String phoneNumber = scanner.next();
-
-        System.out.println("Enter your Card Number");
-        String cardNumber = scanner.next();
-
-        customerService.registerCustomer(userName,password,email,phoneNumber,cardNumber);
-        customerClientMainPage(userName);
-    }
+//    public void register(){
+//        System.out.println("Enter your UserName");
+//        String userName = scanner.next();
+//
+//        System.out.println("Enter your Passkey");
+//        String password = scanner.next();
+//
+//        System.out.println("Enter your Email");
+//        String email = scanner.next();
+//
+//        System.out.println("Enter your Phone Number");
+//        String phoneNumber = scanner.next();
+//
+//        System.out.println("Enter your Card Number");
+//        String cardNumber = scanner.next();
+//
+//        customerService.registerCustomer(userName);
+//        customerClientMainPage(userName);
+//    }
 
     private void printSlots(List<Slot> slots){
         System.out.println(DASHED_LINE);

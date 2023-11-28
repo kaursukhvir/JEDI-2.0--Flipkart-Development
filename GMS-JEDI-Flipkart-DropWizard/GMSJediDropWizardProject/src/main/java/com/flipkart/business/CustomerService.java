@@ -66,13 +66,13 @@ public class CustomerService implements CustomerServiceInterface {
         bookingService.cancelBooking(bookingID);
     }
 
-    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) {
+    public Customer registerCustomer(Customer customer) {
         try {
-            customerDAO.registerCustomer(userName,password,email,phoneNumber,cardNumber);
+            return customerDAO.registerCustomer(customer);
         } catch (RegistrationFailedException e) {
             e.getMessage();
         }
-
+        return null;
     }
 
     public Customer viewMyProfile(String userName) {

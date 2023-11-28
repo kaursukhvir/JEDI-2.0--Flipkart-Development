@@ -1,10 +1,13 @@
 package com.flipkart.rest;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.business.CustomerService;
+
 
 import com.flipkart.bean.Customer;
 import com.flipkart.business.CustomerService;
 import com.flipkart.business.CustomerServiceInterface;
+
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +17,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CustomerController {
     CustomerServiceInterface customerService = new CustomerService();
+
 
     //Customer login
     @GET
@@ -44,6 +48,16 @@ public class CustomerController {
         }catch (Exception exception){
             return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response customerRegister(Customer customer){
+        Customer customerProfile =customerService.registerCustomer(customer);
+        if(customerProfile == null){
+            return Response.notModified().build();
+        }
+        return Response.ok(customerProfile).build();
     }
 
 }

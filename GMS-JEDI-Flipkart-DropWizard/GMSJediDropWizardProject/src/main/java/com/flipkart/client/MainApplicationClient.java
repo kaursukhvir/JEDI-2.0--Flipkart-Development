@@ -77,7 +77,7 @@ public class MainApplicationClient {
                     mainPage();
                     break;
                 case CUSTOMER:
-                    customerClient.register();
+//                    customerClient.register();
                     break;
                 case GYMOWNER:
                     gymOwnerClient.register();
