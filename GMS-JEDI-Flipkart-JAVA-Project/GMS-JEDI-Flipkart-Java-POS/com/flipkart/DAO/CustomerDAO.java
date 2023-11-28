@@ -1,6 +1,8 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.exceptions.RegistrationFailedException;
+import com.flipkart.exceptions.UserInvalidException;
 import com.flipkart.utils.DBConnection;
 
 import java.sql.Connection;
@@ -12,7 +14,7 @@ import static com.flipkart.constant.SQLConstants.*;
 
 public class CustomerDAO implements CustomerInterfaceDAO {
 
-    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) {
+    public void registerCustomer(String userName, String password, String email, String phoneNumber, String cardNumber) throws RegistrationFailedException {
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(ADD_NEW_CUSTOMER);
@@ -26,15 +28,13 @@ public class CustomerDAO implements CustomerInterfaceDAO {
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
-        } catch (Exception exp) {
-            exp.printStackTrace();
+            throw new RegistrationFailedException("Failed to register the user. Try again.");
+        } catch (Exception e) {
+            System.out.println("Oops! An error occurred. Try again later.");
         }
-
     }
 
-
-    public boolean isUserValid(String userName, String password) {
+    public boolean isUserValid(String userName, String password) throws UserInvalidException {
         try {
             Connection conn = DBConnection.connect();
             PreparedStatement stmt = conn.prepareStatement(CUSTOMER_LOGIN_QUERY);
@@ -47,9 +47,9 @@ public class CustomerDAO implements CustomerInterfaceDAO {
             }
             stmt.close();
         } catch (SQLException exp) {
-            exp.printStackTrace();
+            throw new UserInvalidException("User is Invalid. Try again.");
         } catch (Exception exp) {
-            exp.printStackTrace();
+            System.out.println("Oops! An error occurred. Try again later.");
         }
         return false;
     }
