@@ -1,88 +1,212 @@
 package com.flipkart.DAO;
 
 import com.flipkart.bean.GymCentre;
-import com.flipkart.bean.GymOwner;
+import com.flipkart.constant.SQLConstants;
+import com.flipkart.utils.DBConnection;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GymCentreDAO implements GymCentreInterfaceDAO {
+import static com.flipkart.constant.SQLConstants.FETCH_GYM_CENTRE_BY_ID;
 
-    private static List<GymCentre>  gymCentreList = new ArrayList<>();
-    private static List<GymCentre>  pendingGymCentreList = new ArrayList<>();
+public class GymCentreDAO implements GymCentreInterfaceDAO {
+    private Connection conn = null;
+    private PreparedStatement statement = null;
 
     public GymCentreDAO() {
-
-        GymCentre gym1 = new GymCentre("gym1","cultfit", "1", "Bangalore", 10);
-        GymCentre gym2 = new GymCentre("gym2","gold's", "1", "Bangalore", 10);
-        GymCentre gym3 = new GymCentre("gym3","jimmy", "2", "Delhi", 12);
-        GymCentre gym4 = new GymCentre("gym4","shimmy", "2", "Delhi", 12);
-        GymCentre gym5 = new GymCentre("gym5","brimmy", "3", "Pune", 15);
-
-        gymCentreList.add(gym1);
-        gymCentreList.add(gym2);
-        gymCentreList.add(gym3);
-        gymCentreList.add(gym4);
-        gymCentreList.add(gym5);
-
     }
 
-    public List<GymCentre> getGymCentreList() {
-        return gymCentreList;
-    }
+    // api call to retrieve all gym centres and status
+    public List<GymCentre> getAllCentresByOwmerId(String gymOwnerId)  {
 
-    public void setGymCentreList(List<GymCentre> gymCentreList) {
-        this.gymCentreList = gymCentreList;
-    }
+        List<GymCentre> allGymCentres = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            statement = conn.prepareStatement(SQLConstants.FETCH_GYM_CENTRES_BY_OWNER_ID);
+            statement.setString(1, gymOwnerId);
 
-    public GymCentre getGymCentre(String gymCentreId) throws Exception {
-        for(GymCentre gym : gymCentreList) {
-            if(gym.getGymCentreID().equals(gymCentreId)) return gym;
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
+                gymCentre.setApproved(rs.getInt("isApproved"));
+                allGymCentres.add(gymCentre);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        throw new Exception("Gym Not Found");
+
+        return allGymCentres;
+    }
+
+
+
+    public GymCentre getGymCentreByCentreId(String gymCentreId){
+        GymCentre gymCentre = new GymCentre();
+        try {
+            Connection conn = DBConnection.connect();
+            PreparedStatement stmt = conn.prepareStatement(FETCH_GYM_CENTRE_BY_ID);
+            stmt.setString(1, gymCentreId);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            gymCentre.setGymCentreID(rs.getString("centreId"));
+            gymCentre.setOwnerID(rs.getString("ownerId"));
+            gymCentre.setGymCenterName(rs.getString("centreName"));
+            gymCentre.setGstin(rs.getString("gstin"));
+            gymCentre.setCity(rs.getString("city"));
+            gymCentre.setCapacity(rs.getInt("capacity"));
+            gymCentre.setPrice(rs.getInt("price"));
+            gymCentre.setApproved(rs.getInt("isApproved"));
+            stmt.close();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+        }
+
+        return gymCentre;
+
     }
 
     public void addGymCentre(GymCentre centre) {
-        this.gymCentreList.add(centre);
+        // call to db api
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Adding gym centre....");
+
+            //    INSERT INTO FlipFit.GymCentre (centreId, ownerId, centreName, gstin, city, capacity, price, isApproved)
+            statement = conn.prepareStatement(SQLConstants.ADD_GYM_CENTRE_QUERY);
+            statement.setString(1,centre.getGymCentreID());
+            statement.setString(2,centre.getOwnerID());
+            statement.setString(3, centre.getGymCenterName());
+            statement.setString(4,centre.getGstin());
+            statement.setString(5, centre.getCity());
+            statement.setInt(6, centre.getCapacity());
+            statement.setInt(7, centre.getPrice());
+            statement.setInt(8, centre.isApproved());
+
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<GymCentre> getPendingGymCentreList() {
-        return pendingGymCentreList;
+        List<GymCentre> pendingList = new ArrayList<>();
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gym centres..");
+
+            statement = conn.prepareStatement(SQLConstants.FETCH_ALL_PENDING_GYM_CENTRES_QUERY);
+
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
+                gymCentre.setApproved(rs.getInt("isApproved"));
+                pendingList.add(gymCentre);
+            }
+            //conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pendingList;
     }
 
-    public void setPendingGymCentreList(List<GymCentre> pendingGymCentreList) {
-        this.pendingGymCentreList = pendingGymCentreList;
-    }
+    public void validateGymCentre(String gymCentreId, int isApproved) {
+//        System.out.println("IN VALIDATE GYM CENTRE");
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gyms centres..");
 
-    public void validateGymCentre(String gymCentreId, boolean isApproved) {
-        for(GymCentre gymCentre : gymCentreList) {
-            if(gymCentre.getGymCentreID().equals(gymCentreId)) {
-                gymCentre.setApproved(isApproved);
-            }
+            statement = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY);
+            statement.setInt(1, isApproved);
+            statement.setString(2, gymCentreId);
+            statement.executeUpdate();
+//            System.out.println("The gym centre has been approved!");
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
         }
-        for(GymCentre gymCentre : pendingGymCentreList) {
-            if(gymCentre.getGymCentreID().equals(gymCentreId)) {
-                pendingGymCentreList.remove(gymCentre);
-            }
-        }
+//        for(GymCentre gymCentre : gymCentreList) {
+//            if(gymCentre.getGymCentreID().equals(gymCentreId)) {
+//                gymCentre.setApproved(isApproved);
+//            }
+//        }
+//        for(GymCentre gymCentre : pendingGymCentreList) {
+//            if(gymCentre.getGymCentreID().equals(gymCentreId)) {
+//                pendingGymCentreList.remove(gymCentre);
+//            }
+//        }
     }
 
     public void sendCentreApprovalRequest(String gymCentreId){
-        for( GymCentre gymCentre : gymCentreList ){
-            if(gymCentre.getGymCentreID().equals(gymCentreId)){
-                pendingGymCentreList.add(gymCentre);
-                break;
-            }
-        }
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Sending gym centre approval request..");
+            // SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY="Update GymCentre Set isApproved=? WHERE centreId=?";
+            statement = conn.prepareStatement(SQLConstants.SQL_APPROVE_GYM_CENTRE_BY_ID_QUERY);
+            statement.setInt(1,2);
+            statement.setString(2, gymCentreId);
+            statement.executeUpdate();
+
+        } catch (SQLException se) { se.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }
     }
 
     public List<GymCentre> getGymCentreListByCity(String city) {
         List<GymCentre> allCentreByCity = new ArrayList<>();
-        for(GymCentre gymCentre: gymCentreList){
-            if(gymCentre.getCity().equals(city)){
+        try {
+            conn = DBConnection.connect();
+            System.out.println("Fetching gyms centres by City..");
+            statement = conn.prepareStatement(SQLConstants.FETCH_GYM_CENTRES_BY_CITY);
+            statement.setString(1, city);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()) {
+                GymCentre gymCentre = new GymCentre(
+                        rs.getString("centreId"),
+                        rs.getString("ownerId"),
+                        rs.getString("centreName"),
+                        rs.getString("gstin"),
+                        rs.getString("city"),
+                        rs.getInt("capacity"),
+                        rs.getInt("price")
+                );
                 allCentreByCity.add(gymCentre);
             }
+            //System.out.println("The gym centre has been approved!");
+        } catch (SQLException se) {
+            // Handle errors for JDBC
+            se.printStackTrace();
+        } catch (Exception e) {
+            // Handle errors for Class.forName
+            e.printStackTrace();
         }
+//        for(GymCentre gymCentre: gymCentreList){
+//            if(gymCentre.getCity().equals(city)){
+//                allCentreByCity.add(gymCentre);
+//            }
+//        }
         return allCentreByCity;
     }
 }
