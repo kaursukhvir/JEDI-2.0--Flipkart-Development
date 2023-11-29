@@ -14,4 +14,5 @@ public interface GymCentreServiceInterface {
     GymCentre addCenter(GymCentre gymCentre);
     void requestGymCentreApproval(String gymCentreId);
     GymCentre getGymCentreById(String centreID);
+    boolean isValdidCentre(String centreID);
 }

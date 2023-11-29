@@ -57,13 +57,13 @@ public class SlotDAO implements SlotInterfaceDAO {
         return slotList;
     }
 
-    public void addSlot(Slot slot){
+    public void addSlot(String slotID, String centreID, LocalTime time){
         try{
             Connection conn = DBConnection.connect();
             PreparedStatement ps = conn.prepareStatement(SQLConstants.ADD_SLOT);
-            ps.setString(1, slot.getSlotId());
-            ps.setString(2, slot.getCentreID());
-            ps.setTime(3, java.sql.Time.valueOf(slot.getTime()));
+            ps.setString(1, slotID);
+            ps.setString(2, centreID);
+            ps.setTime(3, java.sql.Time.valueOf(time));
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

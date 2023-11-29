@@ -31,6 +31,12 @@ public class GymCentreService implements GymCentreServiceInterface {
 
     }
 
+    public boolean isValdidCentre(String centreID){
+        if(getGymCentreById(centreID) == null) return false;
+        return true;
+
+    }
+
     public void requestGymCentreApproval(String gymCentreId){
         gymCentreDAO.sendCentreApprovalRequest(gymCentreId);
     }

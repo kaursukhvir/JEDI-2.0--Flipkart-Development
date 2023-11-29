@@ -7,14 +7,19 @@ import javax.ws.rs.core.Response;
 import com.flipkart.bean.*;
 import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
+import com.flipkart.business.SlotService;
+import com.flipkart.business.SlotServiceInterface;
 import com.flipkart.exceptions.DataEntryException;
+import com.flipkart.utils.addSlotDTO;
 import com.flipkart.validators.Validators;
 import jdk.nashorn.internal.parser.JSONParser;
+import org.eclipse.jetty.http.MetaData;
 
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 
 import static com.flipkart.client.MainApplicationClient.scanner;
@@ -25,6 +30,7 @@ public class GymOwnerController {
 
     GymOwnerService gymOwnerService = new GymOwnerService();
     GymCentreService gymCentreService  = new GymCentreService();
+    SlotServiceInterface slotService = new SlotService();
 
 
     @GET
@@ -96,7 +102,7 @@ public class GymOwnerController {
     }
 
 
-    @Path("getAvailableSlots/{centreId}")
+    @Path("/getAvailableSlots/{centreId}")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getAvailableSlots(@PathParam("centreId") String centreId,@QueryParam("Date") String strdate) {
@@ -114,12 +120,25 @@ public class GymOwnerController {
     }
 
 
-    @Path("getCentresByCity/{cityName}/")
+    @Path("/getCentresByCity/{cityName}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCentreByCity(@PathParam("cityName") String cityName) {
 
         return Response.ok(gymCentreService.getCentresByCity(cityName)).build();
+    }
+
+    @Path("/addSlots")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addSlotsToGym(List<addSlotDTO> slotList){
+        String centreID = slotList.get(0).getCentreID();
+        try {
+            slotService.addSlotListForGym(centreID, slotList);
+        }catch (IllegalArgumentException exp){
+            return Response.notModified().build();
+        }
+        return Response.ok("Added Slots").build();
     }
 
 
