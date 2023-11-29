@@ -1,6 +1,7 @@
 package com.flipkart.rest;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -9,8 +10,10 @@ import com.flipkart.business.GymCentreService;
 import com.flipkart.business.GymOwnerService;
 import com.flipkart.business.SlotService;
 import com.flipkart.business.SlotServiceInterface;
+import com.flipkart.business.*;
 import com.flipkart.exceptions.DataEntryException;
 import com.flipkart.utils.addSlotDTO;
+import com.flipkart.utils.InputSlot;
 import com.flipkart.validators.Validators;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.eclipse.jetty.http.MetaData;
@@ -22,14 +25,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
-import static com.flipkart.client.MainApplicationClient.scanner;
+import static com.flipkart.constant.Constants.RED_COLOR;
 
-@Path("/gymOwner")
+@Path("/gym-owner")
 @Produces(MediaType.APPLICATION_JSON)
 public class GymOwnerController {
 
-    GymOwnerService gymOwnerService = new GymOwnerService();
-    GymCentreService gymCentreService  = new GymCentreService();
+    GymOwnerServiceInterface gymOwnerService = new GymOwnerService();
+    GymCentreServiceInterface gymCentreService  = new GymCentreService();
+
     SlotServiceInterface slotService = new SlotService();
 
 
@@ -40,24 +44,24 @@ public class GymOwnerController {
         return Response.ok(gymOwnerService.viewAllGymOwners()).build();
     }
 
-    @Path("/gymCentres/{gymOwnerId}")
+    @Path("/gym-centres")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCentresByOwnerId(@PathParam("gymOwnerId") String gymOwnerId) {
+    public Response getAllCentresByOwnerId(@QueryParam("gymOwnerId") String gymOwnerId) {
         GymCentreService gymCentreService = new GymCentreService();
         return Response.ok(gymCentreService.getAllCentresByOwmerId(gymOwnerId)).build();
     }
 
     @GET
-    @Path("login/{userName}/{password}")
-    public Response GymOwnerLogin(@PathParam("userName") String userName, @PathParam("password") String password) {
+    @Path("/login")
+    public Response GymOwnerLogin(@QueryParam("userName") String userName, @QueryParam("password") String password) {
         GymOwner gymOwner = gymOwnerService.loginGymOwner(userName, password);
         if(gymOwner==null)
             return Response.notModified().build();
         return Response.ok(gymOwner).build();
     }
     @POST
-    @Path("register")
+    @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response GymOwnerRegister(GymOwner gymOwner) {
         GymOwner registerdGymOwner =  gymOwnerService.registerGymOwner(gymOwner);
@@ -66,46 +70,46 @@ public class GymOwnerController {
         return Response.ok(registerdGymOwner).build();
     }
     @POST
-    @Path("addCentre/{gymOwnerId}")
+    @Path("/add-centre")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addGymCentre(@PathParam("gymOwnerId") String gymOwnerId, GymCentre gymCentre) {
-        gymCentre.setOwnerID(gymOwnerId);
-        System.out.println(gymOwnerId);
-        System.out.println(gymCentre);
+    public Response addGymCentre(GymCentre gymCentre) {
+//            gymCentre.setOwnerID(gymCentre.getOwnerID());
+//        System.out.println(gymOwnerId);
+//        System.out.println(gymCentre);
         GymCentre newGymCentre = gymCentreService.addCenter(gymCentre);
         if(newGymCentre==null)
             return Response.notModified().build();
         return Response.ok(newGymCentre).build();
     }
 
-    @Path("/getApprovalOwner/{gymOwnerId}")
+    @Path("/get-approval-owner")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response requestGymOwnerApproval(@PathParam("gymOwnerId") String gymOwnerId) {
+    public Response requestGymOwnerApproval(@QueryParam("gymOwnerId") String gymOwnerId) {
         gymOwnerService.requestGymOwnerApproval(gymOwnerId);
         return Response.ok("Sent approval request to Admin").build();
     }
 
-    @Path("/getApprovalCentre/{gymCentreId}")
+    @Path("/get-approval-centre")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response requestGymCentreApproval(@PathParam("gymCentreId") String gymCentreId) {
+    public Response requestGymCentreApproval(@QueryParam("gymCentreId") String gymCentreId) {
         gymCentreService.requestGymCentreApproval(gymCentreId);
         return Response.ok("Sent approval request to Admin").build();
     }
-    @Path("/getGymCentre/{gymCentreId}")
+    @Path("/get-gym-centre")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response requestGymCentreById(@PathParam("gymCentreId") String gymCentreId) {
+    public Response requestGymCentreById(@QueryParam("gymCentreId") String gymCentreId) {
 
         return Response.ok(gymCentreService.getGymCentreById(gymCentreId)).build();
     }
 
 
-    @Path("/getAvailableSlots/{centreId}")
+    @Path("/get-available-slots")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getAvailableSlots(@PathParam("centreId") String centreId,@QueryParam("Date") String strdate) {
+    public Response getAvailableSlots(@QueryParam("centreId") String centreId,@QueryParam("Date") String strdate) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         java.util.Date date;
@@ -120,27 +124,25 @@ public class GymOwnerController {
     }
 
 
-    @Path("/getCentresByCity/{cityName}/")
+    @Path("/get-centres-by-city")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCentreByCity(@PathParam("cityName") String cityName) {
+    public Response getCentreByCity(@QueryParam("cityName") String cityName) {
 
         return Response.ok(gymCentreService.getCentresByCity(cityName)).build();
     }
 
-    @Path("/addSlots")
+    @Path("/add-slots")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSlotsToGym(List<addSlotDTO> slotList){
-        String centreID = slotList.get(0).getCentreID();
         try {
+            String centreID = slotList.get(0).getCentreID();
             slotService.addSlotListForGym(centreID, slotList);
         }catch (IllegalArgumentException exp){
+            System.out.println("illegal arg");
             return Response.notModified().build();
         }
         return Response.ok("Added Slots").build();
     }
-
-
-
 }

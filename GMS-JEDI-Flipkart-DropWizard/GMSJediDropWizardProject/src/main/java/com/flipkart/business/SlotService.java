@@ -35,7 +35,7 @@ public class SlotService implements SlotServiceInterface {
 //        }
 //    }
     public void addSlotListForGym(String gymCentreId, List<addSlotDTO> slotList){
-        if(gymCentreService.isValdidCentre(gymCentreId)) throw new IllegalArgumentException();
+//        if(gymCentreService.isValdidCentre(gymCentreId)) throw new IllegalArgumentException();
         System.out.println("Adding all slots to gym: " + gymCentreId);
         for(addSlotDTO slot : slotList) {
             slotDAO.addSlot(slot.getSlotId(),slot.getCentreID(),slot.getTime());

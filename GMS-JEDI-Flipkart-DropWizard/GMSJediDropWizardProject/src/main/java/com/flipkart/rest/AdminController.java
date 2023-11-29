@@ -47,7 +47,7 @@ public class AdminController {
     }
 
     @GET
-    @Path("/gymOwner/pendingList")
+    @Path("/gym-owner/pending-list")
     @Timed
     public Response viewPendingGymOwners() {
         try{
@@ -59,7 +59,7 @@ public class AdminController {
     }
 
     @GET
-    @Path("/gymOwner/all")
+    @Path("/gym-owner/all")
     @Timed
     public Response viewGymOwners(){
         try{
@@ -71,7 +71,7 @@ public class AdminController {
     }
 
     @GET
-    @Path("/gymCentre/pendingList")
+    @Path("/gym-centre/pending-list")
     @Timed
     public Response viewPendingGymCentres(){
         try{
@@ -83,7 +83,7 @@ public class AdminController {
     }
 
     @POST
-    @Path("/gymOwner/handle")
+    @Path("/gym-owner/handle")
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
     public Response handleGymOwner(ApprovalRequest approvalRequest){
@@ -97,7 +97,7 @@ public class AdminController {
     }
 
     @POST
-    @Path("/gymCentre/handle")
+    @Path("/gym-centre/handle")
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
     public Response handleGymCentre(ApprovalRequest approvalRequest){

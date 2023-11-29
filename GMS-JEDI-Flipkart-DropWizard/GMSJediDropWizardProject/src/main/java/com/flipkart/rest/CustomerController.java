@@ -119,7 +119,7 @@ public class CustomerController {
     }
 
     @GET
-    @Path("booking/get-my-booking")
+    @Path("/booking/get-my-booking")
     public Response getCustomerBookings(@QueryParam("customerId") String customerId){
         try {
             CustomerServiceInterface customerService = new CustomerService();
