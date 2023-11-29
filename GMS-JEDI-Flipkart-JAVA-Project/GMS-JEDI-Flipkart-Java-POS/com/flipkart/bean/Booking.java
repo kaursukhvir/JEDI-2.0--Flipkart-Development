@@ -11,6 +11,12 @@ public class Booking {
         this.userID = userID;
         this.scheduleID = scheduleID;
     }
+    public Booking(String bookingID,String userID, String scheduleID) {
+        this.bookingID = bookingID;
+        this.userID = userID;
+        this.scheduleID = scheduleID;
+    }
+
 
     public String getBookingID() {
         return bookingID;

@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface GymCentreInterfaceDAO {
 
-    public List<GymCentre> getGymCentreList();
-    public void setGymCentreList(List<GymCentre> gymCentreList);
-    public GymCentre getGymCentre(String gymCentreId) throws Exception;
-    public void addGymCentre(GymCentre centre);
+    List<GymCentre> getAllCentresByOwmerId(String gymOwnerId);
+    GymCentre getGymCentreByCentreId(String gymCentreId);
+    void addGymCentre(GymCentre centre);
     public List<GymCentre> getPendingGymCentreList();
-    public void setPendingGymCentreList(List<GymCentre> pendingGymCentreList);
-    public void validateGymCentre(String gymCentreId, boolean isApproved);
+    public void validateGymCentre(String gymCentreId, int isApproved);
     public void sendCentreApprovalRequest(String gymCentreId);
     public List<GymCentre> getGymCentreListByCity(String city);
 }
