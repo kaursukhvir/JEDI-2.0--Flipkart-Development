@@ -36,6 +36,7 @@
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/business/SlotServiceInterface.java
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/business/ScheduleServiceInterface.java
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/rest/GymOwnerController.java
+/Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/bean/ApprovalRequest.java
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/client/CustomerClient.java
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/bean/Schedule.java
 /Users/sukhvir.kaur/JEDI-2.0-Flipkart-Development/GMS-JEDI-Flipkart-DropWizard/GMSJediDropWizardProject/src/main/java/com/flipkart/business/BookingService.java

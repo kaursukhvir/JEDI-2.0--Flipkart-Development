@@ -42,7 +42,7 @@ public class CustomerController {
 
     //View profile
     @GET
-    @Path("/viewprofile")
+    @Path("/view-profile")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCustomerProfile(@QueryParam("userName") String userName){
         Customer customerProfile = customerService.viewMyProfile(userName);
@@ -53,9 +53,21 @@ public class CustomerController {
         }
     }
 
+    @POST
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response customerRegister(Customer customer){
+        Customer customerProfile = customerService.registerCustomer(customer);
+        if(customerProfile == null){
+            return Response.notModified().build();
+        }
+        return Response.ok(customerProfile).build();
+    }
+
+
     //get centres by City
     @GET
-    @Path("/getcentres")
+    @Path("/booking/get-centres")
     public Response getCentresByCity(@QueryParam("city") String city){
         try{
             List<GymCentre> gymCentreList = customerService.getAllGymCenterDetailsByCity(city);
@@ -69,7 +81,7 @@ public class CustomerController {
 
     //get slots by Centre
     @GET
-    @Path("/get-slots-by-centre")
+    @Path("/booking/get-slots-by-centre")
     public Response getSlotsByCity(@QueryParam("centreId") String centreId,@QueryParam("date") String dateStr){
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -85,24 +97,35 @@ public class CustomerController {
 
     //book a slot
     @POST
-    @Path("/bookslot")
+    @Path("/booking/slot")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response bookSlot(InputSlot slot){
         System.out.println("\n\n\n\n"+ slot.getSlotId()+slot.getDate());
-         boolean slotBooked = customerService.bookSlot(slot.getUserID(),slot.getDate(),slot.getSlotId(),slot.getCentreId());
-         if(slotBooked) return Response.ok("Slot Booked Successfully").build();
-         else return Response.ok("Unable to book slot").build();
+        boolean slotBooked = customerService.bookSlot(slot.getUserID(),slot.getDate(),slot.getSlotId(),slot.getCentreId());
+        if(slotBooked) return Response.ok("Slot Booked Successfully").build();
+        else return Response.ok("Unable to book slot. Either there is no availability or you have an existing booking at same time").build();
     }
 
-    @POST
-    @Path("/register")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response customerRegister(Customer customer){
-        Customer customerProfile = customerService.registerCustomer(customer);
-        if(customerProfile == null){
-            return Response.notModified().build();
+    @DELETE
+    @Path("/booking")
+    public Response cancelBooking(@QueryParam("bookingId") String bookingId){
+        try {
+            CustomerServiceInterface customerService = new CustomerService();
+            customerService.cancelBookingbyID(bookingId);
+            return Response.ok("Booking Cancelled Successfully").build();
+        }catch (Exception exception){
+            return Response.status(400).entity("Something Went Wrong!").build();
         }
-        return Response.ok(customerProfile).build();
     }
 
+    @GET
+    @Path("booking/get-my-booking")
+    public Response getCustomerBookings(@QueryParam("customerId") String customerId){
+        try {
+            CustomerServiceInterface customerService = new CustomerService();
+            return Response.ok(customerService.getCustomerPlan(customerId)).build();
+        }catch (Exception exception){
+            return Response.status(400).entity("Something Went Wrong!").build();
+        }
+    }
 }
