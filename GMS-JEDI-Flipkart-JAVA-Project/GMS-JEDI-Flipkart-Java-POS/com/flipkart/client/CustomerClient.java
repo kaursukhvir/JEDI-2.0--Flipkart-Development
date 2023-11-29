@@ -100,14 +100,16 @@ public class CustomerClient {
         Date sqlDate = null;
         try {
             String dat = scanner.next();
-            if(Validators.isDateValid(dat)){
+//            if(Validators.isDateValid(dat)){
+//                date = sdf.parse(dat);
+//                sqlDate = new Date(date.getTime());
+//            }
+//            else{
+//                new DataEntryException();
+//                sqlDate = selectDate();
+//            }
                 date = sdf.parse(dat);
                 sqlDate = new Date(date.getTime());
-            }
-            else{
-                new DataEntryException();
-                sqlDate = selectDate();
-            }
         } catch (ParseException e) {
             throw new DataEntryException();
         }
@@ -132,11 +134,12 @@ public class CustomerClient {
     private void printUserPlan(String userName){
         System.out.println("Bookings : ");
         List<UserPlan> allUserPlan= customerService.getCustomerPlan(userName);
+        List<Booking> bookingList = customerService.getCustomerBookings(userName);
         System.out.println(DASHED_LINE);
         System.out.printf(YELLOW_COLOR + "%-8s\t", "Centre-ID");
         System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-ID");
         System.out.printf(YELLOW_COLOR + "%-8s\t", "DATE");
-        System.out.printf(YELLOW_COLOR + "%-8s\t", "SLOT-TIME");
+        System.out.printf(YELLOW_COLOR + "%8s\t", "SLOT-TIME");
         System.out.printf("%-8s\t\n", "SCHEDULE_ID" + RESET_COLOR);
         System.out.println(DASHED_LINE);
         for(UserPlan userPlan: allUserPlan) {
